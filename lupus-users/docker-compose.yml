@@ -1,0 +1,17 @@
+version: '2'
+services:
+    lupus-users:
+        build: .
+        ports:
+            - "3000:3000"
+        volumes:
+            - .:/app
+        depends_on:
+            - mongo
+            - redis
+
+    mongo:
+        image: mongo
+
+    redis:
+        image: redis
