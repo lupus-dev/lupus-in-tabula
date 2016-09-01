@@ -1,7 +1,10 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var debug = require('debug')('lupus-users:app');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://mongo/test');
 
 var index = require('./routes/index');
 

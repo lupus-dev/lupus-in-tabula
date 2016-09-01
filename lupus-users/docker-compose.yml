@@ -6,6 +6,8 @@ services:
             - "3000:3000"
         volumes:
             - .:/app
+        environment:
+            DEBUG: lupus-users:*
         depends_on:
             - mongo
             - redis
