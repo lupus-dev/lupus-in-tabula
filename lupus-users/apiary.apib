@@ -37,8 +37,34 @@ A signup page has to use this API to create a new user. Anyone can create a new 
     + Attributes (Error)
 
 
-## Sessions [/users/sessions]
+## Sessions [/users/session]
 
+### Login the user [POST]
+
+The login API to generate a new session token to use the APIs.
+
++ Request (application/json)
+    + Attributes (LoginUser)
+    
++ Response 200 (application/json)
+    + Attributes (LoggedInUser)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+### Logout the user [DELETE]
+
+The user can also logout destroying the session token
+
++ Request (application/json)
+    + Headers
+            Authorization: token SESSIONTOKEN
+            
++ Response 200
+    + Body
+
++ Response 400 (application/json)
+    + Attriibutes (Error)
             
 ## Current user [/users/me]
 
@@ -122,6 +148,14 @@ Get the information about some users at once.
 
 ### UpdateUser
 + fullname: Edoardo Morassutto (string) - The full name to update
+
+### LoginUser
++ username: edomora97 (string, required) - The username of the user
++ password: P@$$W0rd (string, required) - The password of the user in plain text
+
+### LoggedInUser
++ token: SESSIONTOKEN (string, required) - The new generated token for the user
++ expiration: `2016-09-01T17:11:20.123Z` (string, required) - The token expiration date
 
 ### Error
 + error: There was an error (string, required) - The error message
