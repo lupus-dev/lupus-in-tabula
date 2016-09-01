@@ -4,7 +4,9 @@ var logger = require('morgan');
 var debug = require('debug')('lupus-users:app');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://mongo/test');
+	mongoose.connect('mongodb://mongo/test');
+var redis = require('redis'),
+	redisClient = redis.createClient({ host: 'redis' });
 
 var index = require('./routes/index');
 
