@@ -1,80 +1,127 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://api-users.lupus.com/
 
 # lupus-users
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+The users microservice of Lupus in Tabula. This manages all the information about the users and the sessions.
 
-## Questions Collection [/questions]
+The users information are:
+ - user_id
+ - username
+ - password_hash \*
+ - fullname
+ - level
+ - achievements
+ - friends
+ - created_by_ip \*
+ - created_at \*
+ - updated_at \*
+ 
+_\* this field is private and never sent_
 
-### List All Questions [GET]
+## Users Collection [/users]
 
-+ Response 200 (application/json)
+### Create a New User [POST]
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+A signup page has to use this API to create a new user. Anyone can create a new user, even if he is not logged in.
 
 + Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+    + Attributes (SignupUser)
 
 + Response 201 (application/json)
-
     + Headers
+            Location: /users/USERID
+    + Attributes (User)
+            
++ Response 400 (application/json)
+    + Attributes (Error)
 
-            Location: /questions/2
 
-    + Body
+## Sessions [/users/sessions]
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+            
+## Current user [/users/me]
+
+### GET the current user [GET]
+
+Fetch the information about the current logged user
+
++ Request (application/json)
+    + Headers
+            Authorization: token SESSIONTOKEN
+            
++ Response 200 (application/json)
+    + Attributes (User)
+            
++ Response 400 (application/json)
+    + Attributes (Error)
+            
+### Update the user [PUT]
+
+The user could decide to update its information. The user must be logged in to do that.
+
+The information the user can update are:
+- fullname
+
+
++ Request (application/json)
+    + Headers
+            Authorization: token SESSIONTOKEN
+    + Attributes (UpdateUser)
+        
++ Response 200 (application/json)
+    + Headers
+            Location: /users/USERID
+    + Attributes (User)
+            
++ Response 400 (application/json)
+    + Attributes (Error)
+
+
+## Generic user [/users/{user_ids}]
+
++ Parameters
+    + user_ids (string) - Comma separated user ids
+
+### GET some users information [GET]
+
+Get the information about some users at once.
+
++ Request
+    + Headers
+            Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
+    + Attributes (array[UserShort])
+
+## Data Structures
+
+### User
++ user_id: USERID (string, required)
++ username: edomora97 (string, required)
++ fullname: Edoardo Morassutto (string, required)
++ level: 5 (number, required)
++ achievements (array[Achievement], required)
++ friends (array[UserShort], required)
+
+### UserShort
++ user_id: USERID (string, required)
++ username: edomora97 (string, required)
++ fullname: Edoardo Morassutto (string, required)
++ level: 5 (number, required)
+
+### Achievement
++ achievement_id: ACHIEVEMENTID (string, required)
++ name: La tua prima partita (string),
++ description: Gioca la tua prima partita (string)
+
+### SignupUser
++ username: edomora97 (string, required) - The username of the user
++ password: P@$$W0rd (string, required) - The user's password in plain text
++ fullname: Edoardo Morassutto (string, required) - The name of the user
+
+### UpdateUser
++ fullname: Edoardo Morassutto (string) - The full name to update
+
+### Error
++ error: There was an error (string, required) - The error message
