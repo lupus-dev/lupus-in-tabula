@@ -8,6 +8,8 @@ services:
             - .:/app
         environment:
             DEBUG: lupus-users:*
+        stdin_open: true
+        tty: true
         depends_on:
             - mongo
             - redis
