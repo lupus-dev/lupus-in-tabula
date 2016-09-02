@@ -1,0 +1,116 @@
+FORMAT: 1A
+HOST: https://api-history.lupus.com/
+
+# lupus-history
+
+The history microservice of Lupus in Tabula. This manages all the information about the games.
+
+## History Collection [/history]
+
+### Fetch all the games [GET]
+
+Fetch all the games in the database. Anyone can fetch this information but the view is filtered.
+
++ Request (application/json)
+    + Headers
+            Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
+    + Attributes (array[Game])
+
+### Create a New Game [POST]
+
+Create a new game. By default the game enters in the draft status and only the owner can change the status.
+
++ Request (application/json)
+    + Headers 
+            Authorization: token SESSIONTOKEN
+    + Attributes (NewGame)
+
++ Response 201 (application/json)
+    + Attributes (Game)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+## Generic Games [/history/{game_ids}]
+
++ Parameters
+    + game_ids (string) - A comma separated list of game ids
+
+### GET games informations [GET]
+
+Fetch the information about a list of games.
+
++ Request
+    + Headers
+            Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
+    + Attributes (array[Game])
+
+### Update game information [PUT]
+
+Update game information by using this API. Only single game update are supported, so `game_ids` must not contains any commas.
+
++ Request (application/json)
+    + Headers
+            Authorization: token SESSIONTOKEN
+    + Attributes (NewGame)
+
++ Response 200 (application/json)
+    + Attributes (Game)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+### Delete a game [DELETE]
+
+Remove a game from the database. This operation cannot be undone. Only the game owner can remove the game.
+
++ Request (application/json)
+    + Headers
+            Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
+    + Attributes (Game)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+## Data Structures
+### Game
++ game_id: GAMEID (string, required) - The id of the game
++ owner_id: USERID (string, required) - The id of the user that created the game
++ name: Wonderful unicorn (string, required) - The name of the game
++ members: (array[string], required) - The list of the users that are watching the game
++ state: (GameState) - The state of the game. It may be omitted if the user doesn't have the permission to see
++ gen_info: (GenInfo) - The information to generate the game
+
+### GameState
++ day: 5 (number, required) - The day the game is in
++ status: 7 (number, required) - The state the game is in
++ players: (array[GamePlayer], required) - The list of the users that are playing
++ votes: (array[Vote], required) - The list of the votes of the game
+
+### GamePlayer
++ user_id: USERID (string, required) - The id of the user
++ role: Lupus (string, required) - The name of the player role
++ alive: true (boolean, required) - If the player is still alive
++ data: (object) - Some data the player has to carry on
+
+### Vote
++ user_id: USERID (string, required) - The id of the user
++ vote: USERID (string, required) - The vote of the user
++ day: 5 (number, required) - When the player has voted
+
+### GenInfo
++ min_players: 7 (number, required) - The minumum number of players in the game
++ max_players: 15 (number, required) - The maximum number of players in the game
++ roles: (object) - The information to generate the roles
+
+### NewGame
++ name: Wonderful unicorn (string) - The name of the game, could be omitted
+
+### Error
++ error: There was an error (string, required) - The error message
