@@ -1,0 +1,21 @@
+version: '2'
+services:
+    lupus-users:
+        build: ./lupus-users
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./lupus-users:/app
+        environment:
+            DEBUG: lupus-users:*
+        stdin_open: true
+        tty: true
+        depends_on:
+            - mongo
+            - redis
+
+    mongo:
+        image: mongo
+
+    redis:
+        image: redis
