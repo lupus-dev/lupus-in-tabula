@@ -1,0 +1,28 @@
+FORMAT: 1A
+HOST: https://api-game.lupus.com/
+
+# lupus-game
+
+The game microservice of Lupus in Tabula. This manages all the actions for the game.
+
+## Game logic [/game/{game_id}/socket]
+
++ Parameters
+    + game_id (string) - The id of the game where play
+
+### Require the socket [GET]
+
+Require a connection to a new websocket where all the requests are made
+
++ Request
+    + Headers
+            Authorization: token SESSIONTOKEN
+
++ Response 101
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+## Data Structures
+### Error
++ error: There was an error (string, required) - The error message
