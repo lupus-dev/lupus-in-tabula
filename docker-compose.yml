@@ -2,8 +2,6 @@ version: '2'
 services:
     lupus-users:
         build: ./lupus-users
-        ports:
-            - "3000:3000"
         volumes:
             - ./lupus-users:/app
         environment:
@@ -13,6 +11,13 @@ services:
         depends_on:
             - mongo
             - redis
+
+    proxy:
+        build: ./lupus-proxy
+        ports:
+            - "3000:80"
+        depends_on:
+            - lupus-users
 
     mongo:
         image: mongo
