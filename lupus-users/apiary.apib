@@ -9,14 +9,15 @@ The users information are:
  - user_id
  - username
  - password_hash \*
- - fullname
+ - name
+ - surname
  - level
  - achievements
  - friends
  - created_by_ip \*
  - created_at \*
  - updated_at \*
- 
+
 _\* this field is private and never sent_
 
 ## Users Collection [/users]
@@ -32,7 +33,7 @@ A signup page has to use this API to create a new user. Anyone can create a new 
     + Headers
             Location: /users/USERID
     + Attributes (User)
-            
+
 + Response 400 (application/json)
     + Attributes (Error)
 
@@ -45,7 +46,7 @@ The login API to generate a new session token to use the APIs.
 
 + Request (application/json)
     + Attributes (LoginUser)
-    
+
 + Response 200 (application/json)
     + Attributes (LoggedInUser)
 
@@ -59,13 +60,13 @@ The user can also logout destroying the session token
 + Request (application/json)
     + Headers
             Authorization: token SESSIONTOKEN
-            
+
 + Response 200
     + Body
 
 + Response 400 (application/json)
     + Attributes (Error)
-            
+
 ## Current user [/users/me]
 
 ### GET the current user [GET]
@@ -75,31 +76,32 @@ Fetch the information about the current logged user
 + Request (application/json)
     + Headers
             Authorization: token SESSIONTOKEN
-            
+
 + Response 200 (application/json)
     + Attributes (User)
-            
+
 + Response 400 (application/json)
     + Attributes (Error)
-            
+
 ### Update the user [PUT]
 
 The user could decide to update its information. The user must be logged in to do that.
 
 The information the user can update are:
-- fullname
+- name
+- surname
 
 
 + Request (application/json)
     + Headers
             Authorization: token SESSIONTOKEN
     + Attributes (UpdateUser)
-        
+
 + Response 200 (application/json)
     + Headers
             Location: /users/USERID
     + Attributes (User)
-            
+
 + Response 400 (application/json)
     + Attributes (Error)
 
@@ -125,7 +127,8 @@ Get the information about some users at once.
 ### User
 + user_id: USERID (string, required)
 + username: edomora97 (string, required)
-+ fullname: Edoardo Morassutto (string, required)
++ name: Edoardo (string, required)
++ surname: Morassutto (string, required)
 + level: 5 (number, required)
 + achievements (array[Achievement], required)
 + friends (array[UserShort], required)
@@ -133,7 +136,8 @@ Get the information about some users at once.
 ### UserShort
 + user_id: USERID (string, required)
 + username: edomora97 (string, required)
-+ fullname: Edoardo Morassutto (string, required)
++ name: Edoardo (string, required)
++ surname: Morassutto (string, required)
 + level: 5 (number, required)
 
 ### Achievement
@@ -144,10 +148,12 @@ Get the information about some users at once.
 ### SignupUser
 + username: edomora97 (string, required) - The username of the user
 + password: P@$$W0rd (string, required) - The user's password in plain text
-+ fullname: Edoardo Morassutto (string, required) - The name of the user
++ name: Edoardo (string, required) - The name of the user
++ surname: Morassutto (string, required) - The surname of the user
 
 ### UpdateUser
-+ fullname: Edoardo Morassutto (string) - The full name to update
++ name: Edoardo (string) - The name to update
++ surname: Morassutto (string) - The surname to update
 
 ### LoginUser
 + username: edomora97 (string, required) - The username of the user
