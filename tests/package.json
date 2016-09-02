@@ -2,7 +2,7 @@
   "name": "tests",
   "version": "1.0.0",
   "scripts": {
-    "test": "docker run --link lupus_proxy_1:proxy --link lupus_mongo_1:mongo --network lupus_default -v $(pwd):/app lupus-tests"
+    "test": "docker run --rm --link lupus_proxy_1:proxy --link lupus_mongo_1:mongo --network lupus_default -v $(pwd)/..:/app lupus-tests"
   },
   "license": "MIT",
   "dependencies": {

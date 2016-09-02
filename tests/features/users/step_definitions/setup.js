@@ -1,6 +1,5 @@
 var apickli = require('apickli');
 var mongoose = require('mongoose');
-	mongoose.connect('mongodb://mongo/lupus-users');
 
 module.exports = function() {
 	// cleanup before every scenario
@@ -10,8 +9,17 @@ module.exports = function() {
 	});
 
 	this.Before({ tags: ['@clean'] }, function(scenario, callback) {
-		for (var i in mongoose.connection.collections)
-			mongoose.connection.collections[i].remove(function() {});
-		callback();
+		var doCleaning = function() {
+			mongoose.connection.db.dropDatabase();
+			callback();
+		}
+
+		if (mongoose.connection.readyState != 1) {
+			mongoose.connection.once('open', () => {
+				doCleaning();
+			})
+		} else {
+			doCleaning();
+		}
 	});
 };

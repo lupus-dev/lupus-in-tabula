@@ -1,8 +1,5 @@
 FROM node:6.5.0
 
-ADD . /app
-WORKDIR /app
+WORKDIR /app/tests
 
-RUN npm install
-
-ENTRYPOINT node node_modules/.bin/cucumber-js
+ENTRYPOINT ["node", "node_modules/.bin/cucumber-js"]
