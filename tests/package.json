@@ -2,13 +2,15 @@
   "name": "tests",
   "version": "1.0.0",
   "scripts": {
-    "test": "docker run --rm --link lupus_proxy_1:proxy --link lupus_mongo_1:mongo --network lupus_default -v $(pwd)/..:/app lupus-tests"
+    "build": "docker build -t lupus-tests .",
+    "prepare": "docker run --rm -v $(pwd):/app/tests --entrypoint npm lupus-tests install",
+    "test": "docker run --rm --link lupus_proxy_1:proxy --link lupus_mongo_1:mongo --link lupus_redis_1:redis --network lupus_default -v $(pwd)/..:/app lupus-tests"
   },
   "license": "MIT",
   "dependencies": {
     "apickli": "^1.7.0",
-    "bcrypt": "^0.8.7",
     "cucumber": "^1.2.2",
-    "mongoose": "^4.5.10"
+    "mongoose": "^4.5.10",
+    "redis": "^2.6.2"
   }
 }

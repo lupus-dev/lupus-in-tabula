@@ -6,10 +6,10 @@ var bodyParser = require('body-parser');
 
 // Storage
 var mongoose = require('mongoose');
-	mongoose.Promise = global.Promise;
-	mongoose.connect('mongodb://mongo/lupus-users');
-var redis = require('redis'),
-	redisClient = redis.createClient({ host: 'redis' });
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://mongo/lupus-users');
+var redis = require('redis');
+global.redisClient = redis.createClient({ host: 'redis' });
 
 // Models
 var Achievement = require('./models/Achievement');

@@ -63,10 +63,22 @@ UserSchema.methods.toClientShort = function() {
 	};
 };
 
+UserSchema.methods.isValidPassword = function(password) {
+	return bcrypt.compareSync(password, this.password_hash);
+}
+
 UserSchema.virtual('password').set(function(password) {
 	var hash = bcrypt.hashSync(password, SALT_ROUNDS);
 	this.password_hash = hash;
 });
+
+UserSchema.virtual('user_id')
+	.get(function() {
+		return this._id;
+	})
+	.set(function(user_id) {
+		this._id = user_id;
+	});
 
 var User = mongoose.model('User', UserSchema);
 

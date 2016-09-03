@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prepare": "docker run --rm -v $(pwd):/app --entrypoint npm -it lupus_lupus-users install",
     "start": "node ./bin/www"
   },
   "dependencies": {

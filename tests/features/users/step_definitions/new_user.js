@@ -1,29 +1,11 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
 
 module.exports = function () {
 	this.Given(/^There was a registered user ?(.*)$/, function (name, table, callback) {
-		var user = new this.User({
-			username: 'edomora97',
-			password: 'SecretPassword',
-			name: 'Edoardo',
-			surname: 'Morassutto',
-			level: 5,
-			achievements: [],
-			friends: [],
-			created_by_ip: '1.2.3.4'
-		});
-
-		var props = table.raw();
-		for (let i in props)
-			user[props[i][0]] = JSON.parse(props[i][1]);
-
 		var $this = this;
-
-		// beacause of a bug of mongoose (?) $__save is called instead of save
-		user.$__save({}, function(err, doc) {
+		this.save_user(table.rowsHash(), (user) => {
 			if (name)
-				$this.apickli.storeValueInScenarioScope(name, doc._id);
+				$this.apickli.storeValueInScenarioScope(name, user._id);
 			callback();
 		});
 	});
@@ -76,7 +58,7 @@ module.exports = function () {
 
 	this.Then(/^The user's password should be (.+)$/, function (password, callback) {
 		var user = this.apickli.scenarioVariables.new_user;
-		if (bcrypt.compareSync(password, user.password_hash))
+		if (user.isValidPassword(password))
 			callback();
 		else
 			callback(new Error('The password stored in database is invalid'));
