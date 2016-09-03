@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 module.exports = function () {
 	this.Given(/^There was a registered user$/, function (table, callback) {
@@ -67,5 +68,13 @@ module.exports = function () {
 		}
 
 		callback();
+	});
+
+	this.Then(/^The user's password should be (.+)$/, function (password, callback) {
+		var user = this.apickli.scenarioVariables.new_user;
+		if (bcrypt.compareSync(password, user.password_hash))
+			callback();
+		else
+			callback(new Error('The password stored in database is invalid'));
 	});
 };

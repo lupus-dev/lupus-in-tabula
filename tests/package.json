@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "apickli": "^1.7.0",
+    "bcrypt": "^0.8.7",
     "cucumber": "^1.2.2",
     "mongoose": "^4.5.10"
   }

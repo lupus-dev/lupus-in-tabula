@@ -26,6 +26,7 @@ Feature:
 		| level        | 0              |
 		| achievements | []             |
 		| friends      | []             |
+		And  The user's password should be SecretPassword
 
 
 	@clean

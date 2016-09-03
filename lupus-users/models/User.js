@@ -1,7 +1,10 @@
 var _ = require('underscore');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 var Achievement = require('./Achievement');
+
+const SALT_ROUNDS = 10;
 
 var UserSchema = Schema({
 	username: { type: String, index: true, required: true,
@@ -48,6 +51,11 @@ UserSchema.methods.toClient = function() {
 		friends: this.friends
 	};
 };
+
+UserSchema.virtual('password').set(function(password) {
+	var hash = bcrypt.hashSync(password, SALT_ROUNDS);
+	this.password_hash = hash;
+});
 
 var User = mongoose.model('User', UserSchema);
 

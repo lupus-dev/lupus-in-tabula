@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var passwordHash = require('password-hash');
 var User = require('../models/User');
 var clientIp = require('../utils/client-ip');
 
@@ -8,7 +7,6 @@ module.exports = function(req, res, next) {
 
 	var user = new User(body);
 
-	user.password_hash = passwordHash.generate(body.password);
 	user.created_by_ip = clientIp(req);
 
 	user.save()

@@ -7,13 +7,13 @@
   },
   "dependencies": {
     "apickli": "^1.7.0",
+    "bcrypt": "^0.8.7",
     "body-parser": "~1.15.1",
     "cucumber": "^1.2.2",
     "debug": "~2.2.0",
     "express": "~4.13.4",
     "mongoose": "^4.5.10",
     "morgan": "~1.7.0",
-    "password-hash": "^1.2.2",
     "redis": "^2.6.2",
     "underscore": "^1.8.3"
   },
