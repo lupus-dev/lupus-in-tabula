@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 module.exports = function () {
-	this.Given(/^There was a registered user$/, function (table, callback) {
+	this.Given(/^There was a registered user ?(.*)$/, function (name, table, callback) {
 		var user = new this.User({
 			username: 'edomora97',
 			password: 'SecretPassword',
@@ -18,8 +18,12 @@ module.exports = function () {
 		for (let i in props)
 			user[props[i][0]] = JSON.parse(props[i][1]);
 
+		var $this = this;
+
 		// beacause of a bug of mongoose (?) $__save is called instead of save
 		user.$__save({}, function(err, doc) {
+			if (name)
+				$this.apickli.storeValueInScenarioScope(name, doc._id);
 			callback();
 		});
 	});

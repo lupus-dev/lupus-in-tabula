@@ -1,16 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+var ping_controller = require('../controllers/ping');
 var new_user_controller = require('../controllers/new_user');
+var generic_user_controller = require('../controllers/generic_user');
 
-router.get('/', function(req, res, next) {
-  res.json({
-    status: 'Lupus in Tabula users microservice!'
-  });
-});
+router.get('/', ping_controller);
+router.post('/', new_user_controller);
 
-router.post('/', function(req, res, next) {
-	return new_user_controller(req, res, next);
-})
+router.get('/:user_ids', generic_user_controller);
 
 module.exports = router;

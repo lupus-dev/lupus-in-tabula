@@ -12,8 +12,9 @@ var UserSchema = Schema({
 			(username, callback) => {
 				User.findOne({ username: username }, (err, doc) => {
 					if (err) return callback(false);
-					if (!_.isEmpty(doc)) return callback(false)
-					return callback(true);
+					if (_.isEmpty(doc)) return callback(true)
+					if (this._id == doc._id) return callback(true);
+					return callback(false);
 				});
 			},
 			'Username already taken'
@@ -49,6 +50,16 @@ UserSchema.methods.toClient = function() {
 		level: this.level,
 		achievements: this.achievements,
 		friends: this.friends
+	};
+};
+
+UserSchema.methods.toClientShort = function() {
+	return {
+		user_id: this._id,
+		username: this.username,
+		name: this.name,
+		surname: this.surname,
+		level: this.level
 	};
 };
 
