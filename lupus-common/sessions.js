@@ -41,9 +41,12 @@ module.exports = function(redis) {
 			});
 		},
 		renewSession: function(session) {
-			session.expire_date = genExpireDate();
+			session.expire_date = this.genExpireDate();
 			redis.hset('session:'+session.token, 'expire_date', session.expire_date);
 			return session;
+		},
+		removeSession: function(session) {
+			redis.del('session:'+session.token);
 		}
 	};
 };

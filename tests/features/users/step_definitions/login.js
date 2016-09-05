@@ -11,6 +11,7 @@ module.exports = function() {
 			var username = JSON.parse(user_info.username);
 			var password = JSON.parse(user_info.password);
 			$this.login_user(username, password, (res) => {
+				$this.apickli.storeValueInScenarioScope('logged_token', res.session.token);
 				$this.apickli.storeValueInScenarioScope('logged_session', res.session);
 				$this.apickli.storeValueInScenarioScope('logged_user', res.user);
 

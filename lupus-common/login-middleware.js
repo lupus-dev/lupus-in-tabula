@@ -25,7 +25,7 @@ module.exports = function(redis) {
 				// extend the token period
 				sessions.renewSession(session);
 				res.set('X-User-Id', session.user_id);
-				res.session = session;
+				req.session = session;
 			}
 			next();
 		});
