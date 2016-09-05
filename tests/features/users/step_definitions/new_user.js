@@ -1,22 +1,6 @@
 var mongoose = require('mongoose');
 
 module.exports = function () {
-	this.Given(/^There was a registered user ?(.*)$/, function (name, table, callback) {
-		var $this = this;
-		this.save_user(table.rowsHash(), (user) => {
-			if (name)
-				$this.apickli.storeValueInScenarioScope(name, user._id);
-			callback();
-		});
-	});
-
-
-	this.Given(/^I set JSON body to$/, function (jsonBody, callback) {
-		this.apickli.addRequestHeader('Content-Type', 'application/json');
-		this.apickli.setRequestBody(jsonBody);
-		callback();
-	});
-
 	this.Then(/^The new user should be created$/, function (callback) {
 		var user_id = this.apickli.scenarioVariables.user_id;
 
