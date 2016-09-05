@@ -4,5 +4,5 @@ Todo list for lupus-users microservice:
 [x] Login
 [x] Get users
 [x] Logout
-[ ] Get current user
+[x] Get current user
 [ ] Update current user
