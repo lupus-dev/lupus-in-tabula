@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var User = require('../models/User');
-var clientIp = require('../utils/client-ip');
+var clientIp = require('../common/client-ip');
 
 module.exports = function(req, res, next) {
 	var body = req.body;
