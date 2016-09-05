@@ -21,6 +21,7 @@ var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(require('./common/login-middleware')(redisClient));
 
 // Routes
 app.use('/users', require('./routes/index'));

@@ -28,13 +28,22 @@ module.exports = function(redis) {
 		},
 		getSession: function(token, callback) {
 			redis.hgetall('session:'+token, (err, obj) => {
-				var session = {
-					token: token,
-					user_id: obj.user_id,
-					expire_date: JSON.parse(obj.expire_date)
+				if (obj == null)
+					callback(err, null);
+				else {
+					var session = {
+						token: token,
+						user_id: obj.user_id,
+						expire_date: JSON.parse(obj.expire_date)
+					}
+					callback(err, session);
 				}
-				callback(err, session);
 			});
+		},
+		renewSession: function(session) {
+			session.expire_date = genExpireDate();
+			redis.hset('session:'+session.token, 'expire_date', session.expire_date);
+			return session;
 		}
 	};
 };

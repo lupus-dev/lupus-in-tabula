@@ -16,13 +16,11 @@ Feature:
 		}
 		"""
 		When I POST to /users/session
-		Then I print the response
 		Then response code should be 201
 		And  response body should be valid json
 		And  response body path session.token should not be undefined
 
-	@clear
-	@current
+	@clean
 	Scenario: The logged user has a valid session token
 		Given I am logged as
 		| username | "edomora97" |
