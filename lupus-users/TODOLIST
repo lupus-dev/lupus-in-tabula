@@ -1,0 +1,8 @@
+Todo list for lupus-users microservice:
+[x] Basic structure
+[x] New user
+[x] Login
+[x] Get users
+[ ] Logout
+[ ] Get current user
+[ ] Update current user
