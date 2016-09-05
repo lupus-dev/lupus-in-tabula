@@ -12,6 +12,7 @@ var redis = require('redis');
 global.redisClient = redis.createClient({ host: 'redis' });
 
 // Models
+var Game = require('./models/Game');
 
 var app = express();
 
