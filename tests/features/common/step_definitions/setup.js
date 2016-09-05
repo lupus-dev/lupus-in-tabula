@@ -19,11 +19,11 @@ module.exports = function() {
 			if (remaining == 0) callback();
 		}
 
-		for (let i = 0, l = mongoose.connections.length; i < l; i++) {
+		for (let i = 1, l = mongoose.connections.length; i < l; i++) {
 			if (mongoose.connections[i].readyState != 1) {
 				mongoose.connections[i].once('open', () => {
 					doCleaning(i);
-				})
+				});
 			} else {
 				doCleaning(i);
 			}

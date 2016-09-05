@@ -44,7 +44,7 @@ Feature:
 		And  response body should contain surname
 
 
-	@clear
+	@clean
 	Scenario: Using a unaviable username
 		Given There was a registered user
 		| username | "edomora97" |

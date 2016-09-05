@@ -3,7 +3,7 @@ Feature:
 
 	An anonymous user can ask for some users data
 
-	@clear
+	@clean
 	Scenario: Fetch the information about a single user
 		Given There was a registered user reg_user_id
 		| username | "edomora97"  |
@@ -19,7 +19,7 @@ Feature:
 		| surname  | "Morassutto" |
 		| level    | 42           |
 
-	@clear
+	@clean
 	Scenario: Fetch the information about 2 users
 		Given There was a registered user reg_user_id_1
 		| username | "edomora97"  |
@@ -45,7 +45,7 @@ Feature:
 		| surname  | "Oanca"      |
 		| level    | 12           |
 
-	@clear
+	@clean
 	Scenario: Return 200 if part of the users were found
 		Given There was a registered user reg_user_id
 		| username | "edomora97"  |
@@ -62,7 +62,7 @@ Feature:
 		| level    | 42           |
 		And  response body path 123aaabbbccc should be undefined
 
-	@clear
+	@clean
 	Scenario: Return 404 if no users were found
 		When I GET /users/123aaabbbccc
 		Then response code should be 404
