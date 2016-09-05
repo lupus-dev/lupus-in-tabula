@@ -1,7 +1,9 @@
 module.exports = function() {
-	require('./step_definitions/setup').call(this);
-	require('./step_definitions/login').call(this);
-	require('./step_definitions/registered_user').call(this);
-	require('./step_definitions/set_json_body').call(this);
-	require('./step_definitions/print_response').call(this);
+	var $this = this;
+	require('fs').readdirSync(__dirname + '/step_definitions/').forEach(function(file) {
+		if (file.match(/\.js$/) !== null) {
+			var name = file.replace('.js', '');
+			require('./step_definitions/' + name).call($this);
+		}
+	});
 };
