@@ -13,12 +13,26 @@ services:
             - mongo
             - redis
 
+    lupus-history:
+        build: ./lupus-history
+        volumes:
+            - ./lupus-history:/app
+            - ./lupus-common:/app/common
+        environment:
+            DEBUG: lupus-history:*
+        stdin_open: true
+        tty: true
+        depends_on:
+            - mongo
+            - redis
+
     proxy:
         build: ./lupus-proxy
         ports:
             - "3000:80"
         depends_on:
             - lupus-users
+            - lupus-history
 
     mongo:
         image: mongo
