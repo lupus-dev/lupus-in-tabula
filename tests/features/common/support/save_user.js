@@ -7,7 +7,10 @@ module.exports = function(user_info, callback) {
 		level: 5,
 		achievements: [],
 		friends: [],
-		created_by_ip: '1.2.3.4'
+		created_by_ip: '1.2.3.4',
+		// beacause $__save mess up with timestamps
+		created_at: new Date(),
+		updated_at: new Date()
 	});
 
 	for (let i in user_info)

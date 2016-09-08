@@ -19,7 +19,7 @@ Feature:
 			}
 		}
 		"""
-		And  I POST to /history
+		And  I POST to /history/games
 		Then response code should be 201
 		And  response body should be valid json
 		And  I store the value of body path game_id as game_id in scenario scope
@@ -45,5 +45,5 @@ Feature:
 			}
 		}
 		"""
-		And  I POST to /history
+		And  I POST to /history/games
 		Then response code should be 401

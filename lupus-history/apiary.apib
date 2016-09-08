@@ -5,7 +5,7 @@ HOST: https://api-history.lupus.com/
 
 The history microservice of Lupus in Tabula. This manages all the information about the games.
 
-## History Collection [/history]
+## History Collection [/history/games]
 
 ### Fetch all the games [GET]
 
@@ -33,7 +33,7 @@ Create a new game. By default the game enters in the draft status and only the o
 + Response 400 (application/json)
     + Attributes (Error)
 
-## Generic Games [/history/{game_ids}]
+## Generic Games [/history/games/{game_ids}]
 
 + Parameters
     + game_ids (string) - A comma separated list of game ids
