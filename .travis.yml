@@ -1,0 +1,18 @@
+sudo: required
+
+language: nodejs
+
+services:
+    - docker
+
+before_install:
+    - docker-compose build
+    - cd tests && npm run build && cd ..
+    - for srv in lupus-users lupus-history tests; do echo "Installing $srv" && cd $srv && npm run prepare && cd ..; done
+    - docker-compose up -d
+
+script:
+    - cd tests && npm test
+
+after_failure:
+    - docker-compose logs --tail=500

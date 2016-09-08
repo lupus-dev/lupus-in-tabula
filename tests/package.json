@@ -4,7 +4,7 @@
   "scripts": {
     "build": "docker build -t lupus-tests .",
     "prepare": "docker run --rm -v $(pwd):/app/tests -v $(pwd)/../lupus-common:/app/lupus-common --entrypoint npm lupus-tests install",
-    "test": "docker run --rm --link lupus_proxy_1:proxy --link lupus_mongo_1:mongo --link lupus_redis_1:redis --network lupus_default -v $(pwd)/..:/app lupus-tests"
+    "test": "docker run --rm --link lupusintabula_proxy_1:proxy --link lupusintabula_mongo_1:mongo --link lupusintabula_redis_1:redis --network lupusintabula_default -v $(pwd)/..:/app lupus-tests"
   },
   "license": "MIT",
   "dependencies": {
