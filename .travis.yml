@@ -15,4 +15,4 @@ script:
     - cd tests && npm test
 
 after_failure:
-    - docker-compose logs --tail=500
+    - docker-compose logs lupus-users lupus-history proxy
