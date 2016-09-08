@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('../models/User');
-var check_login = require('../common/check-login');
+var check_login = require('lupus-common').check_login;
 
 module.exports = function(req, res, next) {
 	if (!check_login(req, res)) return;

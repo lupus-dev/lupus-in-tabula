@@ -1,6 +1,6 @@
 var User = require('../models/User');
 var redisClient = global.redisClient;
-var sessions = require('../common/sessions.js')(redisClient);
+var sessions = require('lupus-common').sessions(redisClient);
 
 module.exports = function(req, res, next) {
 	var username = req.body.username;

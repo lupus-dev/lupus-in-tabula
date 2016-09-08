@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var Game = require('../models/Game');
-var check_login = require('../common/check-login');
+var check_login = require('lupus-common').check_login;
 
 module.exports = function(req, res, next) {
 	if (!check_login(req, res)) return;

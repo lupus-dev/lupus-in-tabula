@@ -20,7 +20,7 @@ var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(require('./common/login-middleware')(redisClient));
+app.use(require('lupus-common').login_middleware(redisClient));
 
 // Routes
 app.use('/history', require('./routes/index'));

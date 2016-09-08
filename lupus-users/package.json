@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prepare": "docker run --rm -v $(pwd):/app --entrypoint npm -it lupus_lupus-users install",
+    "prepare": "docker run --rm -v $(pwd):/app -v $(pwd)/../lupus-common:/lupus-common --entrypoint npm -it lupus_lupus-users install",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "mongoose": "^4.5.10",
     "morgan": "~1.7.0",
     "redis": "^2.6.2",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+	"lupus-common": "../lupus-common"
   },
   "devDependencies": {
     "nodemon": "^1.10.2"

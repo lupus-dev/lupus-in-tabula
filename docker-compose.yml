@@ -4,7 +4,6 @@ services:
         build: ./lupus-users
         volumes:
             - ./lupus-users:/app
-            - ./lupus-common:/app/common
         environment:
             DEBUG: lupus-users:*
         stdin_open: true
@@ -17,7 +16,6 @@ services:
         build: ./lupus-history
         volumes:
             - ./lupus-history:/app
-            - ./lupus-common:/app/common
         environment:
             DEBUG: lupus-history:*
         stdin_open: true
