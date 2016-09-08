@@ -1,5 +1,3 @@
-var JSONPath = require('jsonpath-plus');
-
 module.exports = function(game_info, callback) {
 	var game = new this.Game({
 		owner_id: '123aaabbbccc',
