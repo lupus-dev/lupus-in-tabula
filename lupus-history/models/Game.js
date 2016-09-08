@@ -37,6 +37,30 @@ var GameSchema = Schema({
 	}
 });
 
+GameSchema.methods.toClient = function() {
+	return {
+		game_id: this._id,
+		owner_id: this.owner_id,
+		name: this.name,
+		members: this.members,
+		state: this.state,
+		gen_info: this.gen_info
+	};
+}
+
+GameSchema.methods.toClientProtected = function() {
+	return {
+		game_id: this._id,
+		owner_id: this.owner_id,
+		name: this.name,
+		members: this.members,
+		state: {
+			status: this.state.status
+		},
+		gen_info: this.gen_info
+	};
+}
+
 var Game = mongoose.model('Game', GameSchema);
 
 module.exports = Game;

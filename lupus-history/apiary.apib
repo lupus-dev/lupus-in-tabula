@@ -23,12 +23,12 @@ Fetch all the games in the database. Anyone can fetch this information but the v
 Create a new game. By default the game enters in the draft status and only the owner can change the status.
 
 + Request (application/json)
-    + Headers 
+    + Headers
             Authorization: token SESSIONTOKEN
     + Attributes (NewGame)
 
 + Response 201 (application/json)
-    + Attributes (Game)
+    + Attributes (GameProtected)
 
 + Response 400 (application/json)
     + Attributes (Error)
@@ -110,7 +110,19 @@ Remove a game from the database. This operation cannot be undone. Only the game 
 + roles: (object) - The information to generate the roles
 
 ### NewGame
-+ name: Wonderful unicorn (string) - The name of the game, could be omitted
++ name: Wonderful unicorn (string, required) - The name of the game, could be omitted
++ gen_info: (GenInfo, required) - The informations to generate the game
+
+### GameProtected
++ game_id: GAMEID (string, required) - The id of the game
++ owner_id: USERID (string, required) - The id of the user that created the game
++ name: Wonderful unicorn (string, required) - The name of the game
++ members: (array[string], required) - The list of the users that are watching the game
++ state: (GameStateProtected) - The state of the game. It may be omitted if the user doesn't have the permission to see
++ gen_info: (GenInfo) - The information to generate the game
+
+### GameStateProtected
++ status: 0 (number, required) - The status of the game
 
 ### Error
 + error: There was an error (string, required) - The error message

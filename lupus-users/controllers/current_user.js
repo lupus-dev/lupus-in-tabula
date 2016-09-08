@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var User = require('../models/User');
+var check_login = require('../common/check-login');
 
 module.exports = function(req, res, next) {
-	if (!req.session)
-		return res.status(401).json({ error: "You have to provide a correct token to do this" });
+	if (!check_login(req, res)) return;
 
 	User.findOne({ '_id': req.session.user_id })
 		.exec()
