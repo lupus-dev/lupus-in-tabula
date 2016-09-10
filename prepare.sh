@@ -8,7 +8,11 @@ cd tests && npm run build && cd ..
 for srv in $(find . -maxdepth 2 -type f -name '*package.json' | sed -r 's|/[^/]+$||'); do
 	echo "Installing $srv"
 	cd $srv
-	npm run prepare
+	npm run prepare 2> /tmp/prepare.log >/dev/null
+	exitstatus=$?
+	if [[ $exitstatus -gt 0 ]]; then
+		cat /tmp/prepare.log
+	fi
 	cd ..
 done
 

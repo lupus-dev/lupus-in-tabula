@@ -1,11 +1,14 @@
 {
-  "name": "lupus-common",
-  "version": "1.0.2",
-  "description": "Common utilities for lupus",
-  "main": "index.js",
-  "author": "Edoardo Morassutto <edoardo.morassutto@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-	  "underscore": "^1.8.3"
-  }
+	"name": "lupus-common",
+	"version": "1.0.2",
+	"description": "Common utilities for lupus",
+	"main": "index.js",
+	"author": "Edoardo Morassutto <edoardo.morassutto@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"prepare": "echo 'Nothing to do here!'"
+	},
+	"dependencies": {
+		"underscore": "^1.8.3"
+	}
 }
