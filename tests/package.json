@@ -1,17 +1,17 @@
 {
-  "name": "tests",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "docker build -t lupus-tests .",
-    "prepare": "docker run --rm -v $(pwd):/app/tests -v $(pwd)/../lupus-common:/app/lupus-common --entrypoint npm lupus-tests install",
-    "test": "docker run --rm --link lupusintabula_proxy_1:proxy --link lupusintabula_mongo_1:mongo --link lupusintabula_redis_1:redis --network lupusintabula_default -v $(pwd)/..:/app lupus-tests"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "apickli": "^1.7.0",
-    "cucumber": "^1.2.2",
-    "mongoose": "^4.5.10",
-    "redis": "^2.6.2",
-	"lupus-common": "../lupus-common"
-  }
+	"name": "tests",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "docker build -t lupus-tests .",
+		"prepare": "docker run --rm -v $(pwd):/app/tests -v $(pwd)/../lupus-common:/app/lupus-common --entrypoint npm lupus-tests install",
+		"test": "docker run --rm --link lupusintabula_proxy_1:proxy --link lupusintabula_mongo_1:mongo --link lupusintabula_redis_1:redis --network lupusintabula_default -v $(pwd)/..:/app lupus-tests"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"apickli": "^1.7.0",
+		"cucumber": "^1.2.2",
+		"mongoose": "^4.5.10",
+		"redis": "^2.6.2",
+		"lupus-common": "../lupus-common"
+	}
 }
