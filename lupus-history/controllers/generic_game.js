@@ -15,5 +15,5 @@ module.exports = function(req, res, next) {
 					return obj;
 				}, {}));
 		})
-		.catch(handle_error(res));
+		.catch(handle_error(res).get);
 };

@@ -1,6 +1,6 @@
-var _ = require('underscore');
 var User = require('../models/User');
 var clientIp = require('lupus-common').client_ip;
+var handle_error = require('lupus-common').handle_error;
 
 module.exports = function(req, res, next) {
 	var body = req.body;
@@ -13,10 +13,5 @@ module.exports = function(req, res, next) {
 		.then((user) => {
 			res.status(201).json(user.toClient());
 		})
-		.catch((err) => {
-			var errors = _.map(_.values(err.errors), (val) => {
-				return val.message;
-			});
-			res.status(400).json({ error: errors.join('; ') });
-		});
+		.catch(handle_error(res).save);
 };
