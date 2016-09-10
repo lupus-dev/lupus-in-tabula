@@ -11,10 +11,10 @@ module.exports = function(redis) {
 	return function(req, res, next) {
 		var token = null;
 
-		if (req.headers['authorization'])
+		if (req.headers && req.headers['authorization'])
 			token = getTokenFromHeader(req.headers['authorization']);
 
-		if (req.query.token)
+		if (req.query && req.query.token)
 			token = req.query.token;
 
 		if (!token)
