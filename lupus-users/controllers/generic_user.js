@@ -1,6 +1,5 @@
-var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
 var User = require('../models/User');
+var handle_error = require('lupus-common').handle_error;
 
 module.exports = function(req, res, next) {
 	var user_ids = req.params.user_ids.split(',');
@@ -16,10 +15,5 @@ module.exports = function(req, res, next) {
 					return obj;
 				}, {}));
 		})
-		.catch((error) => {
-			if (error.name == 'CastError')
-				res.status(400).json({ error: 'Invalid format of input' });
-			else
-				res.status(400).json(error);
-		});
+		.catch(handle_error(res));
 };
