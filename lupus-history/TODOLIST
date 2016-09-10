@@ -4,3 +4,4 @@ Todo list for lupus-history microservice:
 [x] get some games
 [ ] update a game
 [ ] delete a game
+[ ] add check if user ids are correct

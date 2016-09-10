@@ -24,6 +24,18 @@ services:
             - mongo
             - redis
 
+    lupus-game:
+        build: ./lupus-game
+        volumes:
+            - ./lupus-game:/app
+        environment:
+            DEBUG: lupus-game:*
+        stdin_open: true
+        tty: true
+        depends_on:
+            - mongo
+            - redis
+
     proxy:
         build: ./lupus-proxy
         ports:
@@ -31,6 +43,7 @@ services:
         depends_on:
             - lupus-users
             - lupus-history
+            - lupus-game
 
     mongo:
         image: mongo
