@@ -36,6 +36,15 @@ services:
             - mongo
             - redis
 
+    lupus-frontend:
+        build: ./lupus-frontend
+        volumes:
+            - ./lupus-frontend:/app
+        ports:
+            - "3001:3001"
+        stdin_open: true
+        tty: true
+
     proxy:
         build: ./lupus-proxy
         ports:
@@ -44,6 +53,7 @@ services:
             - lupus-users
             - lupus-history
             - lupus-game
+            - lupus-frontend
 
     mongo:
         image: mongo
