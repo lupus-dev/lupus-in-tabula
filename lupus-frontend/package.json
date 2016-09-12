@@ -2,9 +2,9 @@
 	"name": "lupus-frontend",
 	"version": "0.0.0",
 	"scripts": {
-		"start": "docker run --rm -v $(pwd):/app lupus-frontend",
-		"build": "docker build -t lupus-frontend .",
-		"prepare": "docker run --rm -v $(pwd):/app --entrypoint npm lupus-frontend install",
+		"start": "docker run --rm -v $(pwd):/app lupusintabula_lupus-frontend",
+		"build": "docker build -t lupusintabula_lupus-frontend .",
+		"prepare": "docker run --rm -v $(pwd):/app --entrypoint npm lupusintabula_lupus-frontend install",
 		"postinstall": "typings install",
 		"typings": "typings"
 	},
