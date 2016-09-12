@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Session } from './session.model';
@@ -7,9 +8,11 @@ import { HttpClient } from './http-client.service';
 @Injectable()
 export class SessionService {
 	constructor(private cookieService: CookieService,
-				private http: HttpClient) {
+				private http: HttpClient,
+				private router: Router) {
 		this.getSession();
-		this.loadUser()
+		if (this.session)
+			this.loadUser();
 	}
 
 	session: Session;
@@ -31,6 +34,14 @@ export class SessionService {
 		this.cookieService.putObject('session', data['session']);
 		this.session = data['session'];
 		this.user = data['user'];
+		this.http.setToken(this.session.token);
+	}
+
+	removeSession() {
+		this.cookieService.remove('session');
+		this.session = null;
+		this.user = null;
+		this.http.setToken(null);
 	}
 
 	loadUser() {

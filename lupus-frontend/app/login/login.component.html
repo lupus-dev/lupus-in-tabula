@@ -1,6 +1,10 @@
 <h1>Login</h1>
 <div class="row">
 	<div class="col-md-4">
+		<div *ngIf="error" class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+			{{error}}
+		</div>
 		<form (submit)="onLogin($event)">
 			<div class="form-group">
 				<label for="login-username">Username</label>

@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 
 import { HttpClient } from './shared/http-client.service';
 import { SessionService } from './shared/session.service';
+import { LogoutService } from './shared/logout.service';
 import { AuthGuard } from './shared/auth-guard.service';
 
 import { routing } from './app.routing';
@@ -34,6 +35,7 @@ import { routing } from './app.routing';
 		CookieService,
 		HttpClient,
 		SessionService,
+		LogoutService,
 		AuthGuard
 	],
 	bootstrap:    [ AppComponent ]
