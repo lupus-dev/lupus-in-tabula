@@ -6,6 +6,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { SlimLoadingBarService, SlimLoadingBarComponent } from 'ng2-slim-loading-bar';
 
 import { AppComponent }   from './app.component';
+import { NotFoundComponent } from './shared/not-found.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoggedUserComponent } from './shared/logged-user/logged-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -30,6 +31,7 @@ import { routing } from './app.routing';
 	declarations: [
 		AppComponent,
 		SlimLoadingBarComponent,
+		NotFoundComponent,
 		NavbarComponent,
 		LoggedUserComponent,
 		DashboardComponent,

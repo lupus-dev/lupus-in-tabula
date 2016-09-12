@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './shared/auth-guard.service';
 
+import { NotFoundComponent } from './shared/not-found.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
@@ -34,6 +35,14 @@ const appRoutes: Routes = [
 		component: DashboardComponent,
 		pathMatch: 'full',
 		canActivate: [AuthGuard]
+	},
+	{
+		path: '404',
+		component: NotFoundComponent
+	},
+	{
+		path: '**',
+		redirectTo: '/404'
 	}
 ];
 

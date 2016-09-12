@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from './user.service';
 import { SessionService } from '../shared/session.service';
@@ -13,6 +13,7 @@ import { User } from './user.model';
 })
 export class UserComponent implements OnInit {
 	constructor(private sessionService: SessionService,
+				private router: Router,
 				private route: ActivatedRoute,
 				private userService: UserService) { }
 
@@ -27,7 +28,7 @@ export class UserComponent implements OnInit {
 
 				this.userService.getUsers([user_id])
 					.then(user => this.user = user[user_id])
-					.catch(error => console.error(error));
+					.catch(error => this.router.navigate(['/404']));
 			}
 		})
 	}
