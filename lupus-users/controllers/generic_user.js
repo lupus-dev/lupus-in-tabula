@@ -7,7 +7,7 @@ module.exports = function(req, res, next) {
 	User.find({ '_id': { $in: user_ids } })
 		.exec()
 		.then((users) => {
-			if (users.length == 0)
+			if (users.length === 0)
 				res.status(404).json({ error: 'No users found' });
 			else
 				res.json(users.reduce((obj, user) => {

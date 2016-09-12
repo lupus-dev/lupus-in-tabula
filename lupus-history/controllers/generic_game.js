@@ -7,7 +7,7 @@ module.exports = function(req, res, next) {
 	Game.find({ '_id': { $in: game_ids } })
 		.exec()
 		.then((games) => {
-			if (games.length == 0)
+			if (games.length === 0)
 				res.status(404).json({ error: 'No games found' });
 			else
 				res.json(games.reduce((obj, game) => {

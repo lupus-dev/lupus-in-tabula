@@ -1,9 +1,11 @@
+var sessions = require('./sessions');
+
 module.exports = function(redis) {
-	var sessions = require('./sessions')(redis);
+	var sessions = sessions(redis);
 
 	var getTokenFromHeader = function(header) {
 		var authorization = header.split(' ');
-		if (authorization[0] != 'token')
+		if (authorization[0] !== 'token')
 			return null;
 		return authorization[1];
 	};
@@ -21,6 +23,7 @@ module.exports = function(redis) {
 			return next();
 
 		sessions.getSession(token, (err, session) => {
+			if (err) next();
 			if (session) {
 				// extend the token period
 				sessions.renewSession(session);

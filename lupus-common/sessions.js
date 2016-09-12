@@ -1,3 +1,4 @@
+var crypto = require('crypto');
 const TOKEN_DURATION = 6*60*60*1000;
 
 module.exports = function(redis) {
@@ -12,7 +13,6 @@ module.exports = function(redis) {
 			return session;
 		},
 		genToken: function() {
-			var crypto = require('crypto');
 			return crypto.randomBytes(24).toString('hex');
 		},
 		genExpireDate: function() {
@@ -28,16 +28,13 @@ module.exports = function(redis) {
 		},
 		getSession: function(token, callback) {
 			redis.hgetall('session:'+token, (err, obj) => {
-				if (obj == null)
-					callback(err, null);
-				else {
-					var session = {
-						token: token,
-						user_id: obj.user_id,
-						expire_date: JSON.parse(obj.expire_date)
-					}
-					callback(err, session);
+				if (!obj) return callback(err, null);
+				var session = {
+					token: token,
+					user_id: obj.user_id,
+					expire_date: JSON.parse(obj.expire_date)
 				}
+				return callback(err, session);
 			});
 		},
 		renewSession: function(session) {

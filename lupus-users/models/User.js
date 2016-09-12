@@ -13,7 +13,7 @@ var UserSchema = Schema({
 				User.findOne({ username: username }, (err, doc) => {
 					if (err) return callback(false);
 					if (_.isEmpty(doc)) return callback(true)
-					if (this._id == doc._id) return callback(true);
+					if (this._id === doc._id) return callback(true);
 					return callback(false);
 				});
 			},
