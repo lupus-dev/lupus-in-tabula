@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Game = require('../models/Game');
 var check_login = require('lupus-common').check_login;
-var handle_error = require('lupus-common').handle_error;
+var do_save = require('lupus-common').do_save;
 
 module.exports = function(req, res, next) {
 	if (!check_login(req, res)) return;
@@ -18,9 +18,5 @@ module.exports = function(req, res, next) {
 		}
 	});
 
-	game.save()
-		.then((game) => {
-			res.status(201).json(game.toClientProtected());
-		})
-		.catch(handle_error(res).save);
+	do_save(game, res, 'toClientProtected');
 };

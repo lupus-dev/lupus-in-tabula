@@ -1,7 +1,7 @@
-var sessions = require('./sessions');
+var _sessions = require('./sessions');
 
 module.exports = function(redis) {
-	var sessions = sessions(redis);
+	var sessions = _sessions(redis);
 
 	var getTokenFromHeader = function(header) {
 		var authorization = header.split(' ');
