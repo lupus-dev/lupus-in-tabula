@@ -11,9 +11,10 @@ export class AuthGuard implements CanActivate {
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 		let isLoggedIn = !!this.sessionService.session;
-		if (state.url === '/login') {
+		if (state.url === '/login' || state.url === '/signup') {
 			if (isLoggedIn) {
 				this.router.navigate(['/']);
+				console.error('Not allowed because already logged in!');
 				return false;
 			}
 			return true;
@@ -21,6 +22,7 @@ export class AuthGuard implements CanActivate {
 
 		if (!isLoggedIn) {
 			this.router.navigate(['/login']);
+			console.error('Not allowed because not logged in!');
 			return false;
 		}
 		return true;

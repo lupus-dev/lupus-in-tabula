@@ -1,0 +1,37 @@
+<h1>Signup</h1>
+<div class="row">
+	<div class="col-md-4">
+		<div *ngIf="error" class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+			{{error}}
+		</div>
+		<form (submit)="onSignup($event)">
+			<div class="form-group">
+				<label for="signup-username">Username</label>
+				<input type="text" class="form-control" id="signup-username" placeholder="Username"
+					name="username" [(ngModel)]="user.username" required>
+			</div>
+			<div class="form-group">
+				<label for="signup-password">Password</label>
+				<input type="password" class="form-control" id="signup-password" placeholder="Password"
+					name="password" [(ngModel)]="user.password" required>
+			</div>
+			<div class="form-group">
+				<label for="signup-password-2">Repeat password</label>
+				<input type="password" class="form-control" id="signup-password-2" placeholder="Repeat password"
+					name="password-2" [(ngModel)]="user.password2" required>
+			</div>
+			<div class="form-group">
+				<label for="signup-name">Name</label>
+				<input type="text" class="form-control" id="signup-name" placeholder="Name"
+					name="name" [(ngModel)]="user.name" required>
+			</div>
+			<div class="form-group">
+				<label for="signup-surname">Surname</label>
+				<input type="text" class="form-control" id="signup-surname" placeholder="Surname"
+					name="surname" [(ngModel)]="user.surname" required>
+			</div>
+			<button type="submit" class="btn btn-default">Signup</button>
+		</form>
+	</div>
+</div>

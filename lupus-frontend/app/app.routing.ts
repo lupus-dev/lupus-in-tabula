@@ -6,11 +6,17 @@ import { AuthGuard } from './shared/auth-guard.service';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { SignupComponent } from './signup/signup.component';
 
 const appRoutes: Routes = [
 	{
 		path: 'login',
 		component: LoginComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'signup',
+		component: SignupComponent,
 		canActivate: [AuthGuard]
 	},
 	{
