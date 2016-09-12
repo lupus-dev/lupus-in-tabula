@@ -12,7 +12,7 @@ export class LogoutService {
 
 	logout() {
 		this.http.delete('/users/session')
-			.forEach(response => {
+			.then(() => {
 				this.sessionService.removeSession();
 				this.router.navigate(['/login']);
 			})

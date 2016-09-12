@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Session } from './session.model';
+import { User } from '../user/user.model';
 import { HttpClient } from './http-client.service';
 
 @Injectable()
@@ -16,7 +17,7 @@ export class SessionService {
 	}
 
 	session: Session;
-	user: Object;
+	user: User;
 
 	getSession(): Session {
 		let cookie = this.cookieService.getObject('session');
@@ -46,7 +47,7 @@ export class SessionService {
 
 	loadUser() {
 		this.http.get('/users/me')
-			.forEach(response => this.user = response.json())
+			.then(user => this.user = user)
 			.catch(error => console.error(error));
 	}
 }

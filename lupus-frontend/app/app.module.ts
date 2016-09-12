@@ -9,6 +9,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoggedUserComponent } from './shared/logged-user/logged-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
 
 import { HttpClient } from './shared/http-client.service';
 import { SessionService } from './shared/session.service';
@@ -29,7 +30,8 @@ import { routing } from './app.routing';
 		NavbarComponent,
 		LoggedUserComponent,
 		DashboardComponent,
-		LoginComponent
+		LoginComponent,
+		UserComponent
 	],
 	providers: [
 		CookieService,

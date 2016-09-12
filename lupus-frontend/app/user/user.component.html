@@ -1,0 +1,7 @@
+<span *ngIf="!user"><em>Loading...</em></span>
+<div *ngIf="user">
+
+<h1>{{user.username}} <small>{{user.name}} {{user.surname}}</small></h1>
+<h2>Level: {{user.level}}</h2>
+
+</div>

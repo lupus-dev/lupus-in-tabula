@@ -2,7 +2,9 @@
 <div *ngIf="sessionService.session">
 	<span *ngIf="!sessionService.user" class="navbar-text">Loading...</span>
 	<span *ngIf="sessionService.user" class="navbar-text">
-		Welcome {{sessionService.user.username}}
-		<a href (click)="logout($event)">Logout</a>
+		Welcome <a routerLink="/user">{{sessionService.user.username}}</a>
 	</span>
+	<button class="btn btn-sm btn-warning navbar-btn" (click)="logout($event)">
+		Logout
+	</button>
 </div>

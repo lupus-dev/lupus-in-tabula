@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+
 @Injectable()
 export class HttpClient {
 	constructor(private http: Http) { }
@@ -20,18 +23,26 @@ export class HttpClient {
 	}
 
 	get(url) {
-		return this.http.get(url, { headers: this.getHeaders() });
+		return this.http.get(url, { headers: this.getHeaders() })
+			.map(res => res.json())
+			.toPromise();
 	}
 
 	post(url, data) {
-		return this.http.post(url, JSON.stringify(data), { headers: this.getHeaders() });
+		return this.http.post(url, JSON.stringify(data), { headers: this.getHeaders() })
+			.map(res => res.json())
+			.toPromise();
 	}
 
 	put(url, data) {
-		return this.http.put(url, JSON.stringify(data), { headers: this.getHeaders() });
+		return this.http.put(url, JSON.stringify(data), { headers: this.getHeaders() })
+			.map(res => res.json())
+			.toPromise();
 	}
 
 	delete(url) {
-		return this.http.delete(url, { headers: this.getHeaders() });
+		return this.http.delete(url, { headers: this.getHeaders() })
+			.map(res => res.json())
+			.toPromise();
 	}
 }

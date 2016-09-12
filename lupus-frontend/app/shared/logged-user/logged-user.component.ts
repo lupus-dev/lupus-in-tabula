@@ -7,7 +7,8 @@ import { Session } from '../session.model';
 
 @Component({
 	selector: '[lupus-logged-user]',
-	templateUrl: 'app/shared/logged-user/logged-user.component.html'
+	templateUrl: 'app/shared/logged-user/logged-user.component.html',
+	styles: [ '.navbar-btn { margin-top: 10px; margin-bottom: 10px; }' ]
 })
 export class LoggedUserComponent {
 	constructor(private sessionService: SessionService,
