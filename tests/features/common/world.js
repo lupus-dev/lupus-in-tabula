@@ -9,6 +9,8 @@ var mongooseHistory = mongoose.createConnection('mongodb://mongo/lupus-history')
 var User = mongooseUsers.model('User', require('../../../lupus-users/models/User').schema);
 var Game = mongooseHistory.model('Game', require('../../../lupus-history/models/Game').schema);
 
+global.mongooseConnections = [mongooseUsers, mongooseHistory];
+
 module.exports = function($this) {
 	$this.redis = redisClient;
 
