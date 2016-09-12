@@ -14,7 +14,7 @@ Feature:
 			"surname": "Morassutto"
 		}
 		"""
-		When I POST to /users
+		When I POST to /api/users
 		Then response code should be 201
 		And  response body should be valid json
 		And  I store the value of body path user_id as user_id in scenario scope
@@ -39,7 +39,7 @@ Feature:
 			"name": "Edoardo"
 		}
 		"""
-		When I POST to /users
+		When I POST to /api/users
 		Then response code should be 400
 		And  response body should contain surname
 
@@ -57,7 +57,7 @@ Feature:
 			"surname": "Morassutto"
 		}
 		"""
-		When I POST to /users
-		Then I POST to /users
+		When I POST to /api/users
+		Then I POST to /api/users
 		Then response code should be 400
 		And  response body should contain already taken

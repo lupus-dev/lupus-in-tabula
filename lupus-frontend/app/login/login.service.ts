@@ -11,8 +11,8 @@ export class LoginService {
 				private sessionService : SessionService) { }
 
 	login(credential: Credential) {
-		return this.http.post('/users/session', credential)
+		return this.http.post('/api/users/session', credential)
 			.then(res => this.sessionService.saveSession(res))
-			.catch(err => Promise.reject(err['error']));
+			.catch(err => Promise.reject(err.json()['error']));
 	}
 }

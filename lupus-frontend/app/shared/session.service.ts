@@ -46,7 +46,7 @@ export class SessionService {
 	}
 
 	loadUser() {
-		this.http.get('/users/me')
+		this.http.get('/api/users/me')
 			.then(user => this.user = user)
 			.catch(error => console.error(error));
 	}

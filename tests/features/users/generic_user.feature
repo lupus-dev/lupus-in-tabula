@@ -10,7 +10,7 @@ Feature:
 		| name     | "Edoardo"    |
 		| surname  | "Morassutto" |
 		| level    | 42           |
-		When I GET /users/`reg_user_id`
+		When I GET /api/users/`reg_user_id`
 		Then response code should be 200
 		And  response body should be valid json
 		And  The user at index `reg_user_id` should be
@@ -31,7 +31,7 @@ Feature:
 		| name     | "Andrei"     |
 		| surname  | "Oanca"      |
 		| level    | 12           |
-		When I GET /users/`reg_user_id_1`,`reg_user_id_2`
+		When I GET /api/users/`reg_user_id_1`,`reg_user_id_2`
 		Then response code should be 200
 		And  response body should be valid json
 		And  The user at index `reg_user_id_1` should be
@@ -52,7 +52,7 @@ Feature:
 		| name     | "Edoardo"    |
 		| surname  | "Morassutto" |
 		| level    | 42           |
-		When I GET /users/123aaabbbccc,`reg_user_id`
+		When I GET /api/users/123aaabbbccc,`reg_user_id`
 		Then response code should be 200
 		And  response body should be valid json
 		And  The user at index `reg_user_id` should be
@@ -64,6 +64,6 @@ Feature:
 
 	@clean
 	Scenario: Return 404 if no users were found
-		When I GET /users/123aaabbbccc
+		When I GET /api/users/123aaabbbccc
 		Then response code should be 404
 		And  response body should be valid json

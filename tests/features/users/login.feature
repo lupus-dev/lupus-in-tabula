@@ -15,7 +15,7 @@ Feature:
 			"password": "SuperSecret"
 		}
 		"""
-		When I POST to /users/session
+		When I POST to /api/users/session
 		Then response code should be 201
 		And  response body should be valid json
 		And  response body path session.token should not be undefined
@@ -38,7 +38,7 @@ Feature:
 			"password": "Wrong password"
 		}
 		"""
-		When I POST to /users/session
+		When I POST to /api/users/session
 		Then response code should be 401
 		And  response body should be valid json
 		And  response body should contain Wrong username or password
@@ -52,7 +52,7 @@ Feature:
 			"password": "SuperSecret"
 		}
 		"""
-		When I POST to /users/session
+		When I POST to /api/users/session
 		Then response code should be 401
 		And  response body should be valid json
 		And  response body should contain Wrong username or password

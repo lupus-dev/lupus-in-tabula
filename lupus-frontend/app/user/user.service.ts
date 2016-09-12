@@ -10,10 +10,10 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	getUsers(user_ids: string[]) : Promise<User> {
-		return this.http.get('/users/' + user_ids.join(','));
+		return this.http.get('/api/users/' + user_ids.join(','));
 	}
 
 	signupUser(user: Signup) {
-		return this.http.post('/users', user);
+		return this.http.post('/api/users', user);
 	}
 }

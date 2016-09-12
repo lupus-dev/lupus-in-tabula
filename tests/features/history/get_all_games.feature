@@ -7,7 +7,7 @@ Feature:
 	Scenario: There is only one game
 		Given There was a game in the database
 		| name           | "Yo! Yo!"     |
-		When I GET /history/games
+		When I GET /api/history/games
 		Then response code should be 200
 		And  response body should be valid json
 		And  The game at index 0 should be
@@ -20,7 +20,7 @@ Feature:
 		| name           | "Yo! Yo! Old"     |
 		Given There was a game in the database
 		| name           | "Yo! Yo! New"     |
-		When I GET /history/games
+		When I GET /api/history/games
 		Then response code should be 200
 		And  response body should be valid json
 		And  The game at index 0 should be

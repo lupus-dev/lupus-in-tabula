@@ -11,7 +11,7 @@ export class LogoutService {
 				private router: Router) { }
 
 	logout() {
-		this.http.delete('/users/session')
+		this.http.delete('/api/users/session')
 			.then(() => {
 				this.sessionService.removeSession();
 				this.router.navigate(['/login']);
