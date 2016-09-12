@@ -1,0 +1,18 @@
+<h1>Login</h1>
+<div class="row">
+	<div class="col-md-4">
+		<form (submit)="onLogin($event)">
+			<div class="form-group">
+				<label for="login-username">Username</label>
+				<input type="text" class="form-control" id="login-username" placeholder="Username"
+					name="username" [(ngModel)]="credentials.username">
+			</div>
+			<div class="form-group">
+				<label for="login-password">Password</label>
+				<input type="password" class="form-control" id="login-username" placeholder="Password"
+					name="password" [(ngModel)]="credentials.password">
+			</div>
+			<button type="submit" class="btn btn-default">Login</button>
+		</form>
+	</div>
+</div>

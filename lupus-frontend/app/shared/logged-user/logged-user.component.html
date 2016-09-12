@@ -1,0 +1,5 @@
+<a *ngIf="!sessionService.session" routerLink="/login">Login</a>
+<div *ngIf="sessionService.session">
+	<span *ngIf="!sessionService.user" class="navbar-text">Loading...</span>
+	<span *ngIf="sessionService.user" class="navbar-text">Welcome {{sessionService.user.username}}</span>
+</div>
