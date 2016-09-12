@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { SlimLoadingBarService, SlimLoadingBarComponent } from 'ng2-slim-loading-bar';
 
 import { AppComponent }   from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -28,6 +29,7 @@ import { routing } from './app.routing';
 	],
 	declarations: [
 		AppComponent,
+		SlimLoadingBarComponent,
 		NavbarComponent,
 		LoggedUserComponent,
 		DashboardComponent,
@@ -36,6 +38,7 @@ import { routing } from './app.routing';
 		SignupComponent
 	],
 	providers: [
+		SlimLoadingBarService,
 		CookieService,
 		HttpClient,
 		SessionService,

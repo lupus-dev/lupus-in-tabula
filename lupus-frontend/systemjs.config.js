@@ -19,7 +19,8 @@
 			'@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 			// other libraries
 			'rxjs':                       'npm:rxjs',
-			'angular2-cookie':            'npm:angular2-cookie'
+			'angular2-cookie':            'npm:angular2-cookie',
+			'ng2-slim-loading-bar':       'npm:ng2-slim-loading-bar'
 		},
 		// packages tells the System loader how to load when no filename and/or no extension
 		packages: {
@@ -32,6 +33,10 @@
 			},
 			'angular2-cookie': {
 				main: './core.js',
+				defaultExtension: 'js'
+			},
+			'ng2-slim-loading-bar': {
+				main: 'index.js',
 				defaultExtension: 'js'
 			}
 		}
