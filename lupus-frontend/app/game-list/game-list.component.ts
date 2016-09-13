@@ -18,7 +18,7 @@ export class GameListComponent implements OnInit {
 				private userService: UserService,
 				private slimLoadingBarService: SlimLoadingBarService) { }
 
-	games: Game[] = [];
+	games: Game[];
 
 	ngOnInit() {
 		this.slimLoadingBarService.start();
@@ -42,6 +42,7 @@ export class GameListComponent implements OnInit {
 	}
 
 	private bindUsers(games, users) {
+		this.games = [];
 		for (let _game of games) {
 			let game: Game = _game;
 			game.owner = users[game.owner_id];

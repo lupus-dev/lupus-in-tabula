@@ -9,6 +9,7 @@ import { User } from '../../user/user.model';
 })
 export class UserBadgeComponent {
 	@Input() user: User;
+	@Input() currentUser: boolean = false;
 
 	labelClass() {
 		if (this.user.level <= 2)

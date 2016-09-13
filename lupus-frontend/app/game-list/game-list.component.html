@@ -1,5 +1,7 @@
-<div class="row">
+<lupus-loading *ngIf="!games"></lupus-loading>
+<div *ngIf="!!games" class="row">
 	<div class="col-md-6" *ngFor="let game of games">
 		<lupus-game-list-element [game]="game"></lupus-game-list-element>
 	</div>
+	<span *ngIf="games.length === 0"><em>No games found</em></span>
 </div>

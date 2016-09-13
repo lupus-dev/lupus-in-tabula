@@ -2,7 +2,7 @@
 <div *ngIf="sessionService.session">
 	<span *ngIf="!sessionService.user" class="navbar-text">Loading...</span>
 	<span *ngIf="sessionService.user" class="navbar-text">
-		Welcome <a routerLink="/user">{{sessionService.user.username}}</a>
+		Welcome <lupus-user-badge [user]="sessionService.user" [currentUser]="true"></lupus-user-badge>
 	</span>
 	<button class="btn btn-sm btn-warning navbar-btn" (click)="logout($event)">
 		Logout
