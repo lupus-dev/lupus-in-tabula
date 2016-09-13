@@ -4,10 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/auth-guard.service';
 
 import { NotFoundComponent } from './shared/not-found.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { SignupComponent } from './signup/signup.component';
+import { GameComponent } from './game/game.component';
 
 const appRoutes: Routes = [
 	{
@@ -28,6 +29,11 @@ const appRoutes: Routes = [
 	{
 		path: 'user',
 		component: UserComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'game/:game_id',
+		component: GameComponent,
 		canActivate: [AuthGuard]
 	},
 	{

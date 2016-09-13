@@ -1,0 +1,11 @@
+<lupus-loading *ngIf="!game"></lupus-loading>
+<div *ngIf="game">
+	<h1>
+		{{game.name}}
+		<small>by <lupus-user-badge [user]="game.owner"></lupus-user-badge></small>
+	</h1>
+	<h2>In the game</h2>
+	<span *ngFor="let member of game.members">
+		<lupus-user-badge [user]="member"></lupus-user-badge>
+	</span>
+</div>

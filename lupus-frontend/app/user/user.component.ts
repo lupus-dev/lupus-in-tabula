@@ -34,6 +34,6 @@ export class UserComponent implements OnInit {
 					.then(() => this.slimLoadingBarService.complete())
 					.catch(error => this.router.navigate(['/404']))
 			}
-		})
+		});
 	}
 }
