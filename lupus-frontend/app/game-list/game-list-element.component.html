@@ -1,12 +1,14 @@
-<div class="panel panel-default">
+<div class="panel {{gameLabel()}}">
 	<div class="panel-heading">
-		<strong>{{game.name}}</strong>
-		by <lupus-user-badge [user]="game.owner"></lupus-user-badge>
+		<div class="panel-title">
+			<div class="badge pull-right">
+				{{game.state.status.code}}
+			</div>
+			<a [routerLink]="['/game', game.game_id]"><strong>{{game.name}}</strong></a>
+			by <lupus-user-badge [user]="game.owner"></lupus-user-badge>
+		</div>
 	</div>
 	<div class="panel-body">
-		<p>
-			Game status: {{game.state.status}}
-		</p>
 		<p>
 			In the game:
 			<span *ngFor="let member of game.members">
