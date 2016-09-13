@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { UserService } from './user.service';
 import { SessionService } from '../shared/session.service';
@@ -15,7 +16,8 @@ export class UserComponent implements OnInit {
 	constructor(private sessionService: SessionService,
 				private router: Router,
 				private route: ActivatedRoute,
-				private userService: UserService) { }
+				private userService: UserService,
+				private slimLoadingBarService: SlimLoadingBarService) { }
 
 	user: User;
 
@@ -24,11 +26,13 @@ export class UserComponent implements OnInit {
 			if (!params['user_id'] && this.sessionService.user)
 				this.user = this.sessionService.user;
 			else {
+				this.slimLoadingBarService.start();
 				let user_id = params['user_id'] || this.sessionService.session.user_id;
 
 				this.userService.getUsers([user_id])
 					.then(user => this.user = user[user_id])
-					.catch(error => this.router.navigate(['/404']));
+					.then(() => this.slimLoadingBarService.complete())
+					.catch(error => this.router.navigate(['/404']))
 			}
 		})
 	}

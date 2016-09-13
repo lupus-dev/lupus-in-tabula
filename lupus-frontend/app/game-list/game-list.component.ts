@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { GameService } from './game.service';
 import { UserService } from '../user/user.service';
@@ -14,13 +15,16 @@ import { User } from '../user/user.model';
 export class GameListComponent implements OnInit {
 
 	constructor(private gameService: GameService,
-				private userService: UserService) { }
+				private userService: UserService,
+				private slimLoadingBarService: SlimLoadingBarService) { }
 
 	games: Game[] = [];
 
 	ngOnInit() {
+		this.slimLoadingBarService.start();
 		this.gameService.getAllGames()
 			.then(games => this.processGames(games))
+			.then(() => this.slimLoadingBarService.progress = 50)
 			.catch(error => console.error(error));
 	}
 
@@ -44,5 +48,6 @@ export class GameListComponent implements OnInit {
 			game.members = (game.members as string[]).map(u => users[u] as User);
 			this.games.push(game);
 		}
+		this.slimLoadingBarService.complete();
 	}
 }
