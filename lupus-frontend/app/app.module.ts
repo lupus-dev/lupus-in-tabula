@@ -13,6 +13,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { SignupComponent } from './signup/signup.component';
+import { GameListComponent } from './game-list/game-list.component';
+import { GameListElementComponent } from './game-list/game-list-element.component';
+import { UserBadgeComponent } from './shared/user-badge/user-badge.component';
 
 import { HttpClient } from './shared/http-client.service';
 import { AuthGuard } from './shared/auth-guard.service';
@@ -37,7 +40,10 @@ import { routing } from './app.routing';
 		DashboardComponent,
 		LoginComponent,
 		UserComponent,
-		SignupComponent
+		SignupComponent,
+		GameListComponent,
+		GameListElementComponent,
+		UserBadgeComponent
 	],
 	providers: [
 		SlimLoadingBarService,

@@ -9,7 +9,7 @@ import { Signup } from '../signup/signup.model';
 export class UserService {
 	constructor(private http: HttpClient) { }
 
-	getUsers(user_ids: string[]) : Promise<User> {
+	getUsers(user_ids: string[]) : Promise<any> {
 		return this.http.get('/api/users/' + user_ids.join(','));
 	}
 

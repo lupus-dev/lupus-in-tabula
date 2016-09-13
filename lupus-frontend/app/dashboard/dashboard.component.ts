@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 
+import { GameListComponent } from '../game-list/game-list.component';
+
 @Component({
 	selector: 'lupus-dashboard',
-	template: '<h1>Dashboard</h1>'
+	templateUrl: 'app/dashboard/dashboard.component.html'
 })
 export class DashboardComponent { }

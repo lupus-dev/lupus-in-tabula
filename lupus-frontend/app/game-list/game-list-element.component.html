@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>{{game.name}}</strong>
+		by <lupus-user-badge [user]="game.owner"></lupus-user-badge>
+	</div>
+	<div class="panel-body">
+		<p>
+			Game status: {{game.state.status}}
+		</p>
+		<p>
+			In the game:
+			<span *ngFor="let member of game.members">
+				<lupus-user-badge [user]="member"></lupus-user-badge>
+			</span>
+		</p>
+	</div>
+</div>
