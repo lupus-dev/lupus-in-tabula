@@ -11,7 +11,11 @@ module.exports = function(req, res, next) {
 		owner_id: req.session.user_id,
 		name: body.name,
 		members: body.members,
-		state: { status: 0 },
+		state: {
+			status: {
+				code: 'draft'
+			}
+		},
 		gen_info: {
 			min_players: body.gen_info.min_players,
 			max_players: body.gen_info.max_players

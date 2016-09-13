@@ -8,7 +8,11 @@ var GameSchema = Schema({
 	members: { type: [ObjectId], required: true },
 	state: {
 		day: Number,
-		status: Number,
+		status: {
+			code: { type: String, required: true },
+			winner: String,
+			message: String
+		},
 		players: [
 			{
 				user_id: { type: ObjectId, required: true },

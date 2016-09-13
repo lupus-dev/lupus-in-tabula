@@ -27,7 +27,7 @@ Feature:
 		And  response body path name should be Very good game
 		And  response body path members should be ["`logged_user_id`"]
 		And  response body path state.day should be undefined
-		And  response body path state.status should be 0
+		And  response body path state.status.code should be draft
 		And  response body path state.players should be undefined
 		And  response body path state.votes should be undefined
 		And  response body path gen_info.min_players should be 7

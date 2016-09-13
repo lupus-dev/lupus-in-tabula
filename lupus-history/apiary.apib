@@ -90,9 +90,14 @@ Remove a game from the database. This operation cannot be undone. Only the game 
 
 ### GameState
 + day: 5 (number, required) - The day the game is in
-+ status: 7 (number, required) - The state the game is in
++ status: (GameStatus, required) - The state the game is in
 + players: (array[GamePlayer], required) - The list of the users that are playing
 + votes: (array[Vote], required) - The list of the votes of the game
+
+### GameStatus
++ code: running (string, required) - The code of the game status
++ winner: Lupus (string) - The name of the winner team
++ message: (string) - A message from the admin
 
 ### GamePlayer
 + user_id: USERID (string, required) - The id of the user
