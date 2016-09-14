@@ -20,7 +20,7 @@ function print_help() {
 	echo "Valid options:"
 	echo "   -b  Don't build the containers"
 	echo "   -n  Don't run 'npm install' in the containers"
-	echo "   -t  Build also the test suite"
+	echo "   -t  Build and install also the test suite"
 	echo "   -v  Log everything to the console"
 	echo "   -h  Show this help and exit"
 }
@@ -52,11 +52,11 @@ function run_with_verbose() {
 	if [ $is_verbose == "true" ]; then
 		$command
 	else
-		$command >&2 2>/tmp/log-$service.txt
+		$command >/tmp/log-$service.txt 2>&1
 		code=$?
 
 		if [ $code != 0 ]; then
-			red "Installation of $service failed with code $code"
+			red "Command failed with code $code"
 			red "Command was $command"
 			cat /tmp/log-$service.txt
 
@@ -94,17 +94,17 @@ done
 
 if [ $do_build == "true" ]; then
 	green "Building the containers using docker-compose"
-	docker-compose build
+	run_with_verbose docker-compose build
 fi
 
 if [ $do_tests == "true" ]; then
 	cd tests
 
 	green "Building the lupus-tests container"
-	docker build -t lupusintabula_lupus-tests .
+	run_with_verbose docker build -t lupusintabula_lupus-tests .
 
 	green "Installing npm dependencies in tests"
-	run_with_verbose run_in_container "lupusintabula_lupus-tests" npm install
+	run_with_verbose run_with_verbose run_in_container "lupusintabula_lupus-tests" npm install
 
 	cd ..
 fi
