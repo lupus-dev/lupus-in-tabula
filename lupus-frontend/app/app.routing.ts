@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { SignupComponent } from './signup/signup.component';
 import { GameComponent } from './game/game.component';
+import { NewGameComponent } from './new-game/new-game.component';
 
 const appRoutes: Routes = [
 	{
@@ -29,6 +30,11 @@ const appRoutes: Routes = [
 	{
 		path: 'user',
 		component: UserComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'game/new',
+		component: NewGameComponent,
 		canActivate: [AuthGuard]
 	},
 	{

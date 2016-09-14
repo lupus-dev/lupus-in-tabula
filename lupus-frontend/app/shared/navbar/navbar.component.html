@@ -14,6 +14,9 @@
 				<li *ngIf="isLoggedIn()" [class.active]="isActiveRoute('/')">
 					<a routerLink="/">Home</a>
 				</li>
+				<li *ngIf="isLoggedIn()" [class.active]="isActiveRoute('/game/new')">
+					<a routerLink="/game/new">New game</a>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li *ngIf="!isLoggedIn()" [class.active]="isActiveRoute('/signup')">

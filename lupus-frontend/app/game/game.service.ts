@@ -20,6 +20,10 @@ export class GameService {
 		return this.http.get('/api/history/games/' + game_ids.join(','));
 	}
 
+	saveGame(game_data: Object) {
+		return this.http.post('/api/history/games', game_data);
+	}
+
 	fillUsers(games: Game[]): Promise<Game[]> {
 		return new Promise<Game[]>((resolve, reject) => {
 			let user_ids = {};

@@ -10,7 +10,7 @@ module.exports = function(req, res, next) {
 	var game = new Game({
 		owner_id: req.session.user_id,
 		name: body.name,
-		members: body.members,
+		members: [req.session.user_id],
 		state: {
 			status: {
 				code: 'draft'

@@ -1,3 +1,5 @@
-<a [routerLink]="['/user', currentUser ? '' : user.user_id]">
+<span *ngIf="!user" class="label label-default"><em>deleted user</em></span>
+
+<a *ngIf="user" [routerLink]="['/user', currentUser ? '' : user.user_id]">
 	<span class="label {{labelClass()}}">{{user.username}}</span>
 </a>

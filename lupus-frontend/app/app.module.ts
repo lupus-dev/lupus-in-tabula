@@ -18,6 +18,7 @@ import { GameListComponent } from './game-list/game-list.component';
 import { GameListElementComponent } from './game-list/game-list-element.component';
 import { UserBadgeComponent } from './shared/user-badge/user-badge.component';
 import { GameComponent } from './game/game.component';
+import { NewGameComponent } from './new-game/new-game.component';
 
 import { HttpClient } from './shared/http-client.service';
 import { AuthGuard } from './shared/auth-guard.service';
@@ -47,7 +48,8 @@ import { routing } from './app.routing';
 		GameListComponent,
 		GameListElementComponent,
 		UserBadgeComponent,
-		GameComponent
+		GameComponent,
+		NewGameComponent
 	],
 	providers: [
 		SlimLoadingBarService,
