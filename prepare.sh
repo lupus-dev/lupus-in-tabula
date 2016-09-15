@@ -38,10 +38,11 @@ function run_in_container() {
 		return
 	fi
 
+	volumes="-v $(pwd)/../lupus-common:/lupus-common"
 	if [ $container == "lupusintabula_lupus-tests" ]; then
-		volumes="-v $(pwd):/app/tests -v $(pwd)/../lupus-common:/app/lupus-common"
+		volumes="$volumes -v $(pwd):/app/tests"
 	else
-		volumes="-v $(pwd):/app -v $(pwd)/../lupus-common:/lupus-common"
+		volumes="$volumes -v $(pwd):/app"
 	fi
 
 	docker run --rm $volumes --entrypoint $entrypoint $container $command
