@@ -8,8 +8,9 @@ module.exports = function(index, table, name, callback) {
 	var props = table.rowsHash();
 
 	for (let key in props) {
+		key = this.apickli.replaceVariables(key);
 		var val = JSON.stringify(this.get_deep(obj, key));
-		var exp = props[key];
+		var exp = this.apickli.replaceVariables(props[key]);
 		if (val != exp)
 			return callback(new Error(`The ${name} with index ${index} has an error:
 				key: ${key}

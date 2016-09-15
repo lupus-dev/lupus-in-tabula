@@ -6,7 +6,7 @@ var get_deep = function(obj, path) {
         var p = path.shift();
         if (obj[p] == null || typeof obj[p] !== 'object')
              return undefined;
-        return set_deep(obj[p], path);
+        return get_deep(obj[p], path);
     } else
         return obj[path[0]];
 };

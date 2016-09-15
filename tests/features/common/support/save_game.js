@@ -3,7 +3,11 @@ module.exports = function(game_info, callback) {
 		owner_id: '123aaabbbccc',
 		name: 'Funny game',
 		members: [ '123aaabbbccc' ],
-		state: { status: 0 },
+		state: {
+			status: {
+				code: 'open'
+			}
+		},
 		gen_info: {
 			min_players: 7,
 			max_players: 15
@@ -13,8 +17,11 @@ module.exports = function(game_info, callback) {
 		updated_at: new Date()
 	});
 
-	for (let i in game_info)
+	for (let i in game_info) {
+		i = this.apickli.replaceVariables(i);
+		game_info[i] = this.apickli.replaceVariables(game_info[i]);
 		this.set_deep(game, i, JSON.parse(game_info[i]));
+	}
 
 	var $this = this;
 

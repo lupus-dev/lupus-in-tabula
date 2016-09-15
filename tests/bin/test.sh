@@ -7,4 +7,4 @@ docker run --rm \
 	--network lupusintabula_default \
 	-v $(pwd)/..:/app \
 	-v $(pwd)/../lupus-common:/app/lupus-common \
-	lupusintabula_lupus-tests
+	lupusintabula_lupus-tests $@

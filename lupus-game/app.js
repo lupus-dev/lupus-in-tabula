@@ -6,15 +6,17 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var socketio = require('socket.io');
 var socketioauth = require('socketio-auth');
+var models = require('lupus-common').models;
 
 // Storage
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://mongo/lupus-game');
+var mongooseHistory = mongoose.createConnection('mongodb://mongo/lupus-history');
 var redis = require('redis');
 global.redisClient = redis.createClient({ host: 'redis' });
 
 // Models
+global.Game = models.Game(mongoose, mongooseHistory);
 
 var app = express();
 var server = http.createServer(app);
