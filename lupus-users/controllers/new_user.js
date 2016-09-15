@@ -1,4 +1,4 @@
-var User = require('../models/User');
+var User = global.User;
 var clientIp = require('lupus-common').client_ip;
 var do_save = require('lupus-common').do_save;
 

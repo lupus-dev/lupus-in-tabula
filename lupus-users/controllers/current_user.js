@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var User = require('../models/User');
+var User = global.User;
 var check_login = require('lupus-common').check_login;
 
 module.exports = function(req, res, next) {

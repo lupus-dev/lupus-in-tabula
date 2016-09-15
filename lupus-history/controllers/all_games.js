@@ -1,4 +1,4 @@
-var Game = require('../models/Game');
+var Game = global.Game;
 
 module.exports = function(req, res, next) {
 	Game.find()

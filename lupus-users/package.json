@@ -1,24 +1,22 @@
 {
-  "name": "lupus-users",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "prepare": "./bin/prepare.sh",
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "bcrypt": "^0.8.7",
-    "body-parser": "~1.15.1",
-    "cucumber": "^1.2.2",
-    "debug": "~2.2.0",
-    "express": "~4.13.4",
-    "mongoose": "^4.5.10",
-    "morgan": "~1.7.0",
-    "redis": "^2.6.2",
-    "underscore": "^1.8.3",
-	"lupus-common": "../lupus-common"
-  },
-  "devDependencies": {
-    "nodemon": "^1.10.2"
-  }
+	"name": "lupus-users",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"prepare": "./bin/prepare.sh",
+		"start": "node ./bin/www"
+	},
+	"dependencies": {
+		"body-parser": "~1.15.1",
+		"debug": "~2.2.0",
+		"express": "~4.13.4",
+		"mongoose": "^4.5.10",
+		"morgan": "~1.7.0",
+		"redis": "^2.6.2",
+		"underscore": "^1.8.3",
+		"lupus-common": "/lupus-common"
+	},
+	"devDependencies": {
+		"nodemon": "^1.10.2"
+	}
 }

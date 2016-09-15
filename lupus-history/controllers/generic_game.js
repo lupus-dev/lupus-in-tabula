@@ -1,4 +1,4 @@
-var Game = require('../models/Game');
+var Game = global.Game;
 var generic_get = require('lupus-common').generic_get;
 
 module.exports = function(req, res, next) {

@@ -12,8 +12,8 @@ var redis = require('redis');
 global.redisClient = redis.createClient({ host: 'redis' });
 
 // Models
-var Achievement = require('./models/Achievement');
-var User = require('./models/User');
+global.Achievement = require('lupus-common').models.Achievement(mongoose);
+global.User = require('lupus-common').models.User(mongoose);
 
 var app = express();
 

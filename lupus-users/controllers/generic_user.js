@@ -1,4 +1,4 @@
-var User = require('../models/User');
+var User = global.User;
 var generic_get = require('lupus-common').generic_get;
 
 module.exports = function(req, res, next) {

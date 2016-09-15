@@ -12,7 +12,7 @@ var redis = require('redis');
 global.redisClient = redis.createClient({ host: 'redis' });
 
 // Models
-var Game = require('./models/Game');
+global.Game = require('lupus-common').models.Game(mongoose);
 
 var app = express();
 

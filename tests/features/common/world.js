@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var models = require('lupus-common').models;
 var redis = require('redis');
 var redisClient = redis.createClient({ host: 'redis' });
 
@@ -6,8 +7,8 @@ mongoose.Promise = global.Promise;
 var mongooseUsers = mongoose.createConnection('mongodb://mongo/lupus-users');
 var mongooseHistory = mongoose.createConnection('mongodb://mongo/lupus-history');
 
-var User = mongooseUsers.model('User', require('../../../lupus-users/models/User').schema);
-var Game = mongooseHistory.model('Game', require('../../../lupus-history/models/Game').schema);
+var User = models.User(mongoose, mongooseUsers);
+var Game = models.Game(mongoose, mongooseHistory);
 
 global.mongooseConnections = [mongooseUsers, mongooseHistory];
 

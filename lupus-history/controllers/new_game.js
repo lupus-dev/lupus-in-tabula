@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var Game = require('../models/Game');
+var Game = global.Game;
 var check_login = require('lupus-common').check_login;
 var do_save = require('lupus-common').do_save;
 

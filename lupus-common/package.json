@@ -9,6 +9,7 @@
 		"prepare": "echo 'Nothing to do here!'"
 	},
 	"dependencies": {
+		"bcrypt": "^0.8.7",
 		"underscore": "^1.8.3"
 	}
 }

@@ -1,4 +1,4 @@
-var User = require('../models/User');
+var User = global.User;
 var redisClient = global.redisClient;
 var sessions = require('lupus-common').sessions(redisClient);
 
