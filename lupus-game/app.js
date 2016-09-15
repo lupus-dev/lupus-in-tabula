@@ -18,7 +18,6 @@ global.redisClient = redis.createClient({ host: 'redis' });
 // Models
 global.Game = models.Game(mongoose, mongooseHistory);
 
-// global.Game.changeEvent().on('game:update', delta => console.log(delta));
 
 var app = express();
 var server = http.createServer(app);
@@ -36,6 +35,9 @@ socketioauth(global.socket, {
 
 // Routes
 app.use('/game', require('./routes/index'));
+
+// Bootstrap the game
+require('./game-logic/bootstrap')();
 
 app.http = server;
 module.exports = app;
