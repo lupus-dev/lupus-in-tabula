@@ -5,6 +5,61 @@ HOST: https://api-game.lupus.com/
 
 The game microservice of Lupus in Tabula. This manages all the actions for the game.
 
+## Join a game [/game/{game_id}/join]
+
++ Parameters
+	+ game_id (string) - The game_id of the game to join
+
+### Join a game [POST]
+
+Request to join the specified game.
+
++ Request
+	+ Headers
+			Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
++ Response 400 (application/json)
+	+ Attributes (Error)
+
+
+
+## Leave a game [/game/{game_id}/leave]
+
++ Parameters
+	+ game_id (string) - The game_id of the game to leave
+
+### Leave a game [DELETE]
+
+Request to leave from a game where the user was in.
+
++ Request
+	+ Headers
+			Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
++ Response 400 (application/json)
+	+ Attributes (Error)
+
+
+
+## Votation [/game/{game_id}/vote]
+
++ Parameters
+	+ game_id (string) - The game_id of the game where vote
+
+### Vote a user [POST]
+
++ Request
+	+ Headers
+			Authorization: token SESSIONTOKEN
+	+ Attributes (VoteUser)
+
++ Response 200 (application/json)
++ Response 400 (application/json)
+	+ Attributes (Error)
+
+
 ## Game logic [/game/socket.io/]
 
 ### Require the socket [GET]
@@ -16,6 +71,12 @@ Require a connection to a new websocket where all the requests are made
 + Response 400 (application/json)
     + Attributes (Error)
 
+
+
 ## Data Structures
+
+### VoteUser
++ vote: USERID (string, required) - The votation of the user, it could be a user_id or something else
+
 ### Error
 + error: There was an error (string, required) - The error message
