@@ -1,7 +1,11 @@
+var EventEmitter = require('events');
+
 module.exports = function(mongoose, connection) {
 	if (mongoose.models.Game) return mongoose.models.Game;
 
 	if (!connection) connection = mongoose;
+
+	const changeEvent = new EventEmitter();
 
 	var Schema = mongoose.Schema;
 	var ObjectId = Schema.Types.ObjectId;
@@ -68,6 +72,16 @@ module.exports = function(mongoose, connection) {
 			gen_info: this.gen_info
 		};
 	}
+
+	GameSchema.statics.changeEvent = function() {
+		return changeEvent;
+	}
+
+	GameSchema.pre('save', function(next) {
+		// ok, using a private property is not very good but yolo
+		changeEvent.emit('game:update', this.$__delta());
+		next();
+	});
 
 	return connection.model('Game', GameSchema);
 }

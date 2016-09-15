@@ -18,6 +18,8 @@ global.redisClient = redis.createClient({ host: 'redis' });
 // Models
 global.Game = models.Game(mongoose, mongooseHistory);
 
+// global.Game.changeEvent().on('game:update', delta => console.log(delta));
+
 var app = express();
 var server = http.createServer(app);
 global.socket = socketio(server, { path: '/game/socket.io' });
