@@ -1,4 +1,4 @@
-# lupus in tabula [![Build Status](https://travis-ci.org/lupus-dev/lupus-in-tabula.svg?branch=master)](https://travis-ci.org/lupus-dev/lupus-in-tabula) [![Code Climate](https://codeclimate.com/github/lupus-dev/lupus-in-tabula/badges/gpa.svg)](https://codeclimate.com/github/lupus-dev/lupus-in-tabula)
+# lupus in tabula [![Build Status](https://travis-ci.org/lupus-dev/lupus-in-tabula.svg?branch=master)](https://travis-ci.org/lupus-dev/lupus-in-tabula) [![Code Climate](https://codeclimate.com/github/lupus-dev/lupus-in-tabula/badges/gpa.svg)](https://codeclimate.com/github/lupus-dev/lupus-in-tabula) [![Coverage Status](https://coveralls.io/repos/github/lupus-dev/lupus-in-tabula/badge.svg?branch=master)](https://coveralls.io/github/lupus-dev/lupus-in-tabula?branch=master)
 
 This is the main repository of Lupus in Tabula!
 

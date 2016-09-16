@@ -12,5 +12,8 @@ before_install:
 script:
     - cd tests && npm test && cd ..
 
+after_success:
+    - ./build-coverage.sh --send
+
 after_failure:
     - docker-compose logs

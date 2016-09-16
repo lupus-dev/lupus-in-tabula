@@ -9,7 +9,11 @@
 	"license": "MIT",
 	"dependencies": {
 		"apickli": "^1.7.0",
+		"codeclimate-test-reporter": "^0.3.3",
+		"coveralls": "^2.11.13",
 		"cucumber": "^1.2.2",
+		"istanbul": "^0.4.5",
+		"lcov-result-merger": "^1.2.0",
 		"lupus-common": "/lupus-common",
 		"mongoose": "^4.5.10",
 		"redis": "^2.6.2",

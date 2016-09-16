@@ -2,9 +2,11 @@
 	"name": "lupus-game",
 	"version": "0.0.0",
 	"private": true,
+	"main": "./bin/www",
 	"scripts": {
 		"prepare": "./bin/prepare.sh",
-		"start": "node ./bin/www"
+		"start-coverage": "node ./node_modules/istanbul/lib/cli cover --handle-sigint ./bin/www",
+		"start": "node node_modules/nodemon/bin/nodemon.js -L"
 	},
 	"dependencies": {
 		"body-parser": "~1.15.1",
@@ -19,6 +21,8 @@
 		"underscore": "^1.8.3"
 	},
 	"devDependencies": {
+		"babel-cli": "^6.14.0",
+		"istanbul": "^0.4.5",
 		"nodemon": "^1.10.2"
 	}
 }
