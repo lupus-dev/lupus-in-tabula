@@ -52,7 +52,7 @@ Feature:
 		| name     | "Edoardo"    |
 		| surname  | "Morassutto" |
 		| level    | 42           |
-		When I GET /api/users/123aaabbbccc,`reg_user_id`
+		When I GET /api/users/`FAKEID`,`reg_user_id`
 		Then response code should be 200
 		And  response body should be valid json
 		And  The user at index `reg_user_id` should be
@@ -60,10 +60,10 @@ Feature:
 		| name     | "Edoardo"    |
 		| surname  | "Morassutto" |
 		| level    | 42           |
-		And  response body path 123aaabbbccc should be undefined
+		And  response body path `FAKEID` should be undefined
 
 	@clean
 	Scenario: Return 404 if no users were found
-		When I GET /api/users/123aaabbbccc
+		When I GET /api/users/`FAKEID`
 		Then response code should be 404
 		And  response body should be valid json

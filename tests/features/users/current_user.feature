@@ -14,6 +14,6 @@ Feature:
 
 	@clean
 	Scenario: The user provides an invalid token
-		When I set Authorization header to token 123aaabbbccc
+		When I set Authorization header to token `FAKEID`
 		And  I GET /api/users/me
 		Then response code should be 401

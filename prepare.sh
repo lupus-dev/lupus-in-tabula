@@ -95,7 +95,7 @@ done
 
 if [ $do_build == "true" ]; then
 	green "Building the containers using docker-compose"
-	run_with_verbose docker-compose build
+	run_with_verbose docker-compose -f docker-compose.tests.yml build
 fi
 
 if [ $do_tests == "true" ]; then

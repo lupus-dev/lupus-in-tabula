@@ -31,7 +31,7 @@ Feature:
 	Scenario: Return 200 if part of the games were found
 		Given There was a game in the database game_id
 		| name           | "Yo! Yo!"     |
-		When I GET /api/history/games/`game_id`,123aaabbbccc
+		When I GET /api/history/games/`game_id`,`FAKEID`
 		Then response code should be 200
 		And  response body should be valid json
 		And  The game at index `game_id` should be
@@ -39,6 +39,6 @@ Feature:
 
 	@clean
 	Scenario: Return 404 if no games were found
-		When I GET /api/history/games/123aaabbbccc
+		When I GET /api/history/games/`FAKEID`
 		Then response code should be 404
 		And  response body should be valid json

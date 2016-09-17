@@ -2,9 +2,11 @@ var apickli = require('apickli');
 var mongoose = require('mongoose');
 
 module.exports = function() {
+	global.FAKEID = '0123456789aabbccddeeff00';
 	// cleanup before every scenario
 	this.Before(function(scenario, callback) {
 		this.apickli = new apickli.Apickli('http', 'proxy');
+		this.apickli.storeValueInScenarioScope('FAKEID', global.FAKEID);
 		callback();
 	});
 

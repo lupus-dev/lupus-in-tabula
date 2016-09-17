@@ -1,8 +1,8 @@
 module.exports = function(game_info, callback) {
 	var game = new this.Game({
-		owner_id: '123aaabbbccc',
+		owner_id: global.FAKEID,
 		name: 'Funny game',
-		members: [ '123aaabbbccc' ],
+		members: [ global.FAKEID ],
 		state: {
 			status: {
 				code: 'open'

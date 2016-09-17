@@ -34,7 +34,7 @@ Feature:
 		And  response body path gen_info.max_players should be 15
 
 	Scenario: The user is not logged in
-		When I set Authorization header to token 123aaabbbccc
+		When I set Authorization header to token `FAKEID`
 		And  I set JSON body to
 		"""
 		{

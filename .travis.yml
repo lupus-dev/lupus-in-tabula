@@ -7,7 +7,7 @@ services:
 
 before_install:
     - ./prepare.sh -t
-    - docker-compose up -d
+    - docker-compose -f docker-compose.tests.yml up -d
 
 script:
     - cd tests && npm test && cd ..
