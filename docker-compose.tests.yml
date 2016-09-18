@@ -4,10 +4,6 @@ services:
         build: ./lupus-users
         volumes:
             - ./lupus-users:/app
-        environment:
-            DEBUG: lupus-users:*
-        stdin_open: true
-        tty: true
         command: npm run start-coverage
         depends_on:
             - mongo
@@ -17,10 +13,6 @@ services:
         build: ./lupus-history
         volumes:
             - ./lupus-history:/app
-        environment:
-            DEBUG: lupus-history:*
-        stdin_open: true
-        tty: true
         command: npm run start-coverage
         depends_on:
             - mongo
@@ -30,33 +22,21 @@ services:
         build: ./lupus-game
         volumes:
             - ./lupus-game:/app
-        environment:
-            DEBUG: lupus-game:*
-        stdin_open: true
-        tty: true
         command: npm run start-coverage
         depends_on:
             - mongo
             - redis
 
-    lupus-frontend:
-        build: ./lupus-frontend
-        volumes:
-            - ./lupus-frontend:/app
-        ports:
-            - "3001:3001"
-        stdin_open: true
-        tty: true
-
     proxy:
         build: ./lupus-proxy
+        volumes:
+            - ./lupus-frontend:/app
         ports:
             - "3000:80"
         depends_on:
             - lupus-users
             - lupus-history
             - lupus-game
-            - lupus-frontend
 
     mongo:
         image: mongo

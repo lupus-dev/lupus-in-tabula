@@ -9,4 +9,4 @@ USER runner
 
 ENV PATH=$PATH:/app/node_modules/.bin
 
-CMD lite-server
+CMD npm production

@@ -48,6 +48,10 @@ export class SessionService {
 	loadUser() {
 		this.http.get('/api/users/me')
 			.then(user => this.user = user)
-			.catch(error => console.error(error));
+			.catch(error => {
+				// the session has expired
+				this.session = this.user = null;
+				this.router.navigate(['/login']);
+			});
 	}
 }

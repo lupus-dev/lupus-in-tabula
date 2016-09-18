@@ -24,14 +24,18 @@ export class GameListComponent implements OnInit {
 		this.slimLoadingBarService.start();
 		this.gameService.getAllGames()
 			.then(games => {
-				this.slimLoadingBarService.progress = 50;
-				this.gameService.fillUsers(games)
-					.then(games => {
-						console.log(games);
-						this.games = games;
-					})
-					.then(() => this.slimLoadingBarService.complete())
-					.catch(error => console.error(error));
+				if (games.length > 0) {
+					this.slimLoadingBarService.progress = 50;
+					this.gameService.fillUsers(games)
+						.then(games => {
+							this.games = games;
+							this.slimLoadingBarService.complete();
+						})
+						.catch(error => console.error(error));
+				} else {
+					this.games = [];
+					this.slimLoadingBarService.complete();
+				}
 			})
 			.catch(error => console.error(error));
 	}
