@@ -4,16 +4,18 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { GameService } from './game.service';
 import { UserService } from '../user/user.service';
+import { SocketService } from '../shared/socket.service';
 
 import { Game } from './game.model';
 
 @Component({
 	selector: 'lupus-game',
 	templateUrl: 'app/game/game.component.html',
-	providers: [GameService, UserService]
+	providers: [GameService, UserService, SocketService]
 })
 export class GameComponent implements OnInit {
 	constructor(private gameService: GameService,
+				private socketService: SocketService,
 				private router: Router,
 				private route: ActivatedRoute,
 				private slimLoadingBarService: SlimLoadingBarService) { }
@@ -22,17 +24,28 @@ export class GameComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
-			this.slimLoadingBarService.start();
-			let game_id = params['game_id'];
+			this.loadGame(params['game_id']);
+		});
+	}
 
-			this.gameService.getGames([game_id])
-				.then(games => {
-					this.slimLoadingBarService.progress = 50;
-					this.gameService.fillUsers([games[game_id]])
-						.then(games => this.game = games[0])
-						.then(() => this.slimLoadingBarService.complete())
-				})
-				.catch(error => this.router.navigate(['/404']));
-		})
+	loadGame(game_id: string) {
+		this.slimLoadingBarService.start();
+		this.gameService.getGames([game_id])
+			.then(games => {
+				this.slimLoadingBarService.progress = 50;
+				this.gameService.fillUsers([games[game_id]])
+					.then(games => {
+						this.game = games[0];
+						this.slimLoadingBarService.complete()
+						this.connectToSocket();
+					});
+			})
+			.catch(error => this.router.navigate(['/404']));
+	}
+
+	connectToSocket() {
+		this.socketService.connect('game')
+			.then((socket) => console.log(socket))
+			.catch((err) => console.error(err));
 	}
 }

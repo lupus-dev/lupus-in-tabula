@@ -20,7 +20,8 @@
 			// other libraries
 			'rxjs':                       'npm:rxjs',
 			'angular2-cookie':            'npm:angular2-cookie',
-			'ng2-slim-loading-bar':       'npm:ng2-slim-loading-bar'
+			'ng2-slim-loading-bar':       'npm:ng2-slim-loading-bar',
+			'socket.io-client':           'npm:socket.io-client'
 		},
 		// packages tells the System loader how to load when no filename and/or no extension
 		packages: {
@@ -37,6 +38,10 @@
 			},
 			'ng2-slim-loading-bar': {
 				main: 'index.js',
+				defaultExtension: 'js'
+			},
+			'socket.io-client': {
+				main: 'socket.io.js',
 				defaultExtension: 'js'
 			}
 		}
