@@ -7,6 +7,7 @@
 		"prepare": "docker run --rm -v $(pwd):/app --entrypoint npm lupusintabula_lupus-frontend install",
 		"postinstall": "typings install",
 		"typings": "typings",
+		"tsc": "node node_modules/.bin/tsc",
 		"production": "echo 'Nothing yet...'"
 	},
 	"license": "MIT",

@@ -3,6 +3,7 @@
 do_tests="false"
 do_build="true"
 do_npm="true"
+do_tsc="true"
 is_verbose="false"
 
 function red() {
@@ -21,6 +22,7 @@ function print_help() {
 	echo "   -b  Don't build the containers"
 	echo "   -n  Don't run 'npm install' in the containers"
 	echo "   -t  Build and install also the test suite"
+	echo "   -j  Don't compile the TypeScript in Javascript"
 	echo "   -v  Log everything to the console"
 	echo "   -h  Show this help and exit"
 }
@@ -67,7 +69,7 @@ function run_with_verbose() {
 	fi
 }
 
-while getopts ":bntvh" opt; do
+while getopts ":bntjvh" opt; do
 	case $opt in
 		b)
 			do_build="false"
@@ -77,6 +79,9 @@ while getopts ":bntvh" opt; do
 			;;
 		t)
 			do_tests="true"
+			;;
+		j)
+			do_tsc="false"
 			;;
 		v)
 			is_verbose="true"
@@ -96,6 +101,9 @@ done
 if [ $do_build == "true" ]; then
 	green "Building the containers using docker-compose"
 	run_with_verbose docker-compose -f docker-compose.tests.yml build
+
+	green "Building the lupus-frontend container"
+	run_with_verbose docker build lupus-frontend -t lupusintabula_lupus-frontend
 fi
 
 if [ $do_tests == "true" ]; then
@@ -131,4 +139,11 @@ if [ $do_npm == "true" ]; then
 
 		cd ..
 	done
+fi
+
+if [ $do_tsc == "true" ]; then
+	green "Compiling the TypeScript in Javascript"
+	cd lupus-frontend
+	run_with_verbose run_in_container lupusintabula_lupus-frontend npm run tsc
+	cd ..
 fi
