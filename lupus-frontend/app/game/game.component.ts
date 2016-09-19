@@ -21,6 +21,7 @@ export class GameComponent implements OnInit {
 				private slimLoadingBarService: SlimLoadingBarService) { }
 
 	game: Game;
+	socket: any;
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
@@ -45,7 +46,12 @@ export class GameComponent implements OnInit {
 
 	connectToSocket() {
 		this.socketService.connect('game')
-			.then((socket) => console.log(socket))
+			.then((socket) => {
+				this.socket = socket;
+				socket.emit('game:select', { game_id: this.game.game_id }, (res) => {
+					console.log(res);
+				});
+			})
 			.catch((err) => console.error(err));
 	}
 }

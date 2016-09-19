@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('lupus-common').login_middleware(redisClient));
 socketioauth(global.socket, {
 	authenticate: require('./middlewares/socket-auth'),
+	postAuthenticate: require('./game-logic/setup-socket'),
 	timeout: 1000
 });
 

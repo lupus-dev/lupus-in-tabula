@@ -6,7 +6,6 @@ The server sends to the client (or the clients) some information because the gam
 
 The information sent are:
 - `game` The complete game data as seen by the user. The client should rely on this object because it's the last snapshot of the game for the server.
-- `changes` This object has the same structure of the `game` but all the untouched properties are removed.
 - `update_type` This attribute is a string that identify which update has made. The value that it can assume is:
     - `GAME_STATUS_CHANGED` The status of the game (draft, running...) has changed
 	- `ADDED_MEMBER` A new member has joined the game
@@ -14,3 +13,15 @@ The information sent are:
 	- `NEXT_DAY` The game day has gone forward, maybe some players are dead
 	- `DEATH_BY_OTHER` A player was killed by something odd like a kick, a ban or by the admin
 	- `PUBLIC_VOTE` A public votation has been done
+
+## -game:select
+
+The client, after connecting, ask the server to select a specific game, if it accept the request then the game instance is sent back to the client. All the game specific initialization is done in this phase.
+
+The information sent are:
+- `game_id` The id of the selected game
+
+The information received are:
+- `status` This property is set to `true` if the request has completed correctly, `false` otherwise
+- `error` In case of an error this property is set
+- `game` In case of success the game property is set
