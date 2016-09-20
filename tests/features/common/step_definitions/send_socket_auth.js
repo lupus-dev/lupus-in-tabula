@@ -4,11 +4,13 @@ module.exports = function() {
 
 		token = this.apickli.replaceVariables(token);
 
-		var _this = this;
 		socket.emit('authentication', { token: token });
-		socket.on('authenticated', function() {
-			_this.apickli.storeValueInScenarioScope('socket_authenticated', true);
+		socket.on('authenticated', () => {
+			this.apickli.storeValueInScenarioScope('socket_authenticated', true);
 		});
+		socket.on('unauthorized', () => {
+			this.apickli.storeValueInScenarioScope('socket_authenticated', false);
+		})
 		callback();
 	});
 
@@ -20,6 +22,20 @@ module.exports = function() {
 		setTimeout(function () {
 			if (!_this.apickli.scenarioVariables.socket_authenticated)
 				callback(new Error('Authentication failed by timeout'));
+			else
+				callback();
+		}, 200);
+	});
+
+	this.Then(/^I should not be authenticated$/, function (callback) {
+		if (this.apickli.scenarioVariables.socket_authenticated)
+			callback(new Error('The user was authenticated'));
+		if (this.apickli.scenarioVariables.socket_authenticated === false)
+			callback();
+		// allow 200ms timeout
+		setTimeout(() => {
+			if (this.apickli.scenarioVariables.socket_authenticated)
+				callback(new Error('The user was authenticated'));
 			else
 				callback();
 		}, 200);

@@ -10,3 +10,9 @@ Feature:
 		When I connect to game socket
 		And  I send authorization token `logged_token`
 		Then I should be authenticated
+
+	@clean
+	Scenario: The user authenticates with an invalid token
+		When I connect to game socket
+		And  I send authorization token `FAKEID`
+		Then I should not be authenticated
