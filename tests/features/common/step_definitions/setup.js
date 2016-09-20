@@ -11,14 +11,22 @@ module.exports = function() {
 	});
 
 	this.Before({ tags: ['@clean'] }, function(scenario, callback) {
-		// -1 because connections[0] is invalid
 		var remaining = global.mongooseConnections.length;
 		if (remaining == 0) callback();
 
 		var doCleaning = function(i) {
-			global.mongooseConnections[i].db.dropDatabase();
-			remaining--;
-			if (remaining == 0) callback();
+			let conn = global.mongooseConnections[i];
+
+			let modelsCount = Object.keys(conn.models).length;
+			if (modelsCount == 0) { console.error("ERRORE"); process.exit(1); }
+
+			for (let model in conn.models) {
+				conn.models[model].remove({}, () => {
+					if (--modelsCount == 0)
+						if (--remaining == 0)
+							callback();
+				});
+			}
 		}
 
 		for (let i = 0, l = global.mongooseConnections.length; i < l; i++) {
