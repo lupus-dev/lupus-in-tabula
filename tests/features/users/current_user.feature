@@ -17,3 +17,12 @@ Feature:
 		When I set Authorization header to token `FAKEID`
 		And  I GET /api/users/me
 		Then response code should be 401
+
+	@clean
+	Scenario: The user was deleted
+		Given I am logged as
+		| username | "edomora97" |
+		And  The user `logged_user_id` was removed
+		When I set Authorization header to token `logged_token`
+		And  I GET /api/users/me
+		Then response code should be 404
