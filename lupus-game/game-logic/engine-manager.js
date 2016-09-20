@@ -11,8 +11,10 @@ module.exports = class EngineManager {
 	getEngine(game_id) {
 		return new Promise((resolve, reject) => {
 			// if the engine is cached
-			if (this.engines[game_id])
+			if (this.engines[game_id]) {
+				debug(`Engine for game ${game_id} cached`);
 				return resolve(this.engines[game_id]);
+			}
 
 			var engine = new Engine();
 			engine.init(game_id)
