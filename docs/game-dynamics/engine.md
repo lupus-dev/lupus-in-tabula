@@ -18,7 +18,7 @@ All the game updates are stored in an Update Queue that will be flushed sending 
 
 The APIs that this class exposes are:
 
-- `init(game_id)` returns a `Promise<void>`
+- `init(game_id)` returns a `Promise<void>` and prepare all the necessary things for the engine
 - `checkProgess()` returns a `Promise<?>`
 - `events` is an EventEmitter that allows the application to interact with the game:
 	- Each call to `emit` on this EventEmitter has to specify the following data:
@@ -32,5 +32,5 @@ The APIs that this class exposes are:
 
 ### Engine events
 
-- `game:add_member { user_id }` add the user to the game members
-- `game:remove_member { user_id }` remove the user from the game members
+- `game:join { user_id }` add the user to the game members
+- `game:leave { user_id }` remove the user from the game members

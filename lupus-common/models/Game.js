@@ -69,5 +69,13 @@ module.exports = function(mongoose, connection) {
 		};
 	}
 
+	GameSchema.virtual('game_id')
+		.get(function() {
+			return this._id;
+		})
+		.set(function(game_id) {
+			this._id = game_id;
+		});
+
 	return connection.model('Game', GameSchema);
 }
