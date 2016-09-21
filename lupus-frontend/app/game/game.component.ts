@@ -38,9 +38,8 @@ export class GameComponent implements OnInit, OnDestroy {
 		this.gameService.getGames([game_id])
 			.then(games => {
 				this.slimLoadingBarService.progress = 50;
-				this.gameService.fillUsers([games[game_id]])
-					.then(games => {
-						this.game = games[0];
+				this.fillGame(games[game_id])
+					.then(game => {
 						this.slimLoadingBarService.complete()
 						this.connectToSocket();
 					});
@@ -52,17 +51,25 @@ export class GameComponent implements OnInit, OnDestroy {
 		this.socketService.connect('game')
 			.then((socket) => {
 				this.socket = socket;
-				console.log('Bound game:update');
 				socket.on('game:update', data => this.gameUpdate(data));
-				socket.emit('game:select', { game_id: this.game.game_id }, (res) => {
-					console.log(res);
-				});
+				socket.emit('game:select',
+					{ game_id: this.game.game_id },
+					(res) => this.fillGame(res.game));
 			})
 			.catch((err) => console.error(err));
 	}
 
 	gameUpdate(data) {
-		this.gameService.fillUsers([data.game])
-			.then(games => this.game = games[0]);
+		this.fillGame(data.game);
+	}
+
+	fillGame(game) {
+		return new Promise<Game>((resolve, reject) => {
+			this.gameService.fillUsers([game])
+				.then(games => {
+					this.game = games[0];
+					resolve(this.game);
+				});
+		});
 	}
 }
