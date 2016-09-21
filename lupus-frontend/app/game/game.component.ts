@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
@@ -13,7 +13,7 @@ import { Game } from './game.model';
 	templateUrl: 'app/game/game.component.html',
 	providers: [GameService, UserService, SocketService]
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 	constructor(private gameService: GameService,
 				private socketService: SocketService,
 				private router: Router,
@@ -27,6 +27,10 @@ export class GameComponent implements OnInit {
 		this.route.params.subscribe(params => {
 			this.loadGame(params['game_id']);
 		});
+	}
+
+	ngOnDestroy() {
+		this.socketService.disconnect('game');
 	}
 
 	loadGame(game_id: string) {
@@ -48,10 +52,17 @@ export class GameComponent implements OnInit {
 		this.socketService.connect('game')
 			.then((socket) => {
 				this.socket = socket;
+				console.log('Bound game:update');
+				socket.on('game:update', data => this.gameUpdate(data));
 				socket.emit('game:select', { game_id: this.game.game_id }, (res) => {
 					console.log(res);
 				});
 			})
 			.catch((err) => console.error(err));
+	}
+
+	gameUpdate(data) {
+		this.gameService.fillUsers([data.game])
+			.then(games => this.game = games[0]);
 	}
 }

@@ -4,7 +4,7 @@ module.exports = function(data, callback) {
 	if (!callback) callback = function(){};
 
 	var event_data = {
-		game: this.game,
+		game: this.game.toClientProtected(),
 		data: data.data,
 		type: data.type
 	};

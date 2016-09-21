@@ -17,19 +17,26 @@ export class SocketService {
 			socket.emit('authentication', { token: this.sessionService.session.token });
 
 			socket.on('connect', () => console.log('Connected to ' + service + ' socket'));
-			socket.on('disconnect', (err) => console.error('Disconnected from ' + service + ' socket', err));
+			socket.on('disconnect', (err) => console.log('Disconnected from ' + service + ' socket:', err));
 
 			socket.on('authenticated', () => {
 				this.sockets[service] = socket;
+				console.log('Authenticated on ' + service + ' socket');
 				resolve(socket);
 			});
 
 			socket.on('unauthorized', (error) => {
-				console.error(error);
+				console.error('Authentication failed on ' + service + ' socket', error);
 				reject(error);
 			});
 		});
 
 		return promise;
+	}
+
+	disconnect(service: string) {
+		if (!this.sockets[service]) return;
+		this.sockets[service].disconnect();
+		this.sockets[service] = null;
 	}
 }
