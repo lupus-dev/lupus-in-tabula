@@ -33,6 +33,7 @@ module.exports = class EngineManager {
 				.then(engine => {
 					this.sockets[game_id] = this.sockets[game_id] || 0;
 					this.sockets[game_id]++;
+					engine.registerSocket(socket);
 					socket.on('disconnect', () => this.sockets[game_id]--);
 					resolve(engine);
 				})

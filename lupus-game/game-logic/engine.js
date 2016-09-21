@@ -1,6 +1,7 @@
 var debug = require('debug')('lupus-game:engine');
 var EventEmitter = require('events');
 var fs = require('fs');
+var UpdateQueue = require('./update-queue');
 
 var Game = global.Game;
 
@@ -16,6 +17,8 @@ module.exports = class Engine {
 					this.game = game;
 					this.events = new EventEmitter();
 					this._bindEvents();
+					this.updateQueue = new UpdateQueue(this);
+					this.sockets = {};
 					debug(`Engine for game ${game_id} ready`);
 					resolve();
 				});
@@ -27,7 +30,9 @@ module.exports = class Engine {
 	}
 
 	registerSocket(socket) {
-		return null;
+		this.sockets[socket.session.user_id] = socket;
+		socket.join(this.game.game_id);
+		socket.on('disconnect', () => debug('Socket ' + socket.id + ' disconnected'));
 	}
 
 	_bindEvents() {

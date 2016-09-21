@@ -1,6 +1,7 @@
 var debug = require('debug')('lupus-game:engine_game_leave');
 
 module.exports = function(data, callback) {
+	if (!callback) callback = function(){};
 	var game = this.game;
 
 	var index = game.members.indexOf(data.user_id);

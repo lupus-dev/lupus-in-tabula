@@ -6,10 +6,11 @@ The server sends to the client (or the clients) some information because the gam
 
 The information sent are:
 - `game` The complete game data as seen by the user. The client should rely on this object because it's the last snapshot of the game for the server.
-- `update_type` This attribute is a string that identify which update has made. The value that it can assume is:
+- `data` The data associated with the event
+- `type` This attribute is a string that identify which update has made. The value that it can assume is:
     - `GAME_STATUS_CHANGED` The status of the game (draft, running...) has changed
-	- `ADDED_MEMBER` A new member has joined the game
-	- `REMOVED_MEMBER` A member of the game has left
+	- `JOIN_MEMBER` A new member has joined the game
+	- `LEAVE_MEMBER` A member of the game has left
 	- `NEXT_DAY` The game day has gone forward, maybe some players are dead
 	- `DEATH_BY_OTHER` A player was killed by something odd like a kick, a ban or by the admin
 	- `PUBLIC_VOTE` A public votation has been done
