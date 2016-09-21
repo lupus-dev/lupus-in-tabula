@@ -14,9 +14,12 @@ export class SocketService {
 	connect(service: string): Promise<any> {
 		var promise = new Promise((resolve, reject) => {
 			var socket = io.connect('', { path: '/api/' + service + '/socket.io' });
-			socket.emit('authentication', { token: this.sessionService.session.token });
 
-			socket.on('connect', () => console.log('Connected to ' + service + ' socket'));
+			socket.on('connect', () => {
+				console.log('Connected to ' + service + ' socket');
+				socket.emit('authentication', { token: this.sessionService.session.token });
+			});
+
 			socket.on('disconnect', (err) => console.log('Disconnected from ' + service + ' socket:', err));
 
 			socket.on('authenticated', () => {

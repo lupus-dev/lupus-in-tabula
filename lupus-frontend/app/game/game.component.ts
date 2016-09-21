@@ -5,6 +5,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { GameService } from './game.service';
 import { UserService } from '../user/user.service';
 import { SocketService } from '../shared/socket.service';
+import { SessionService } from '../shared/session.service';
 
 import { Game } from './game.model';
 
@@ -16,11 +17,13 @@ import { Game } from './game.model';
 export class GameComponent implements OnInit, OnDestroy {
 	constructor(private gameService: GameService,
 				private socketService: SocketService,
+				private sessionService: SessionService,
 				private router: Router,
 				private route: ActivatedRoute,
 				private slimLoadingBarService: SlimLoadingBarService) { }
 
 	game: Game;
+	isAdmin: boolean = false;
 	socket: any;
 
 	ngOnInit() {
@@ -48,6 +51,7 @@ export class GameComponent implements OnInit, OnDestroy {
 	}
 
 	connectToSocket() {
+		// TODO when the socket reconnects resend the game:select event
 		this.socketService.connect('game')
 			.then((socket) => {
 				this.socket = socket;
@@ -68,6 +72,7 @@ export class GameComponent implements OnInit, OnDestroy {
 			this.gameService.fillUsers([game])
 				.then(games => {
 					this.game = games[0];
+					this.isAdmin = this.game.owner_id == this.sessionService.user.user_id;
 					resolve(this.game);
 				});
 		});

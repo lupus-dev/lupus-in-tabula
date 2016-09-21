@@ -8,4 +8,9 @@
 	<span *ngFor="let member of game.members">
 		<lupus-user-badge [user]="member"></lupus-user-badge>
 	</span>
+
+	<lupus-game-state-draft *ngIf="game.state.status.code == 'draft'"
+		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-draft>
+	<lupus-game-state-open *ngIf="game.state.status.code == 'open'"
+		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-open>
 </div>
