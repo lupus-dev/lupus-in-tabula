@@ -2,15 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 var ping_controller = require('../controllers/ping');
-var join_controller = require('../controllers/join');
-var leave_controller = require('../controllers/leave');
-var open_controller = require('../controllers/open');
-var close_controller = require('../controllers/close');
+var engine_controller_factory = require('../controllers/shared/engine_controller_factory');
 
 router.get('/', ping_controller);
-router.post('/:game_id/join', join_controller);
-router.delete('/:game_id/leave', leave_controller);
-router.post('/:game_id/open', open_controller);
-router.post('/:game_id/close', close_controller);
+router.post('/:game_id/join', engine_controller_factory('game:join'));
+router.delete('/:game_id/leave', engine_controller_factory('game:leave'));
+router.post('/:game_id/open', engine_controller_factory('game:open'));
+router.post('/:game_id/close', engine_controller_factory('game:close'));
 
 module.exports = router;
