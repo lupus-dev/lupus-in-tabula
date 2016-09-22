@@ -24,8 +24,10 @@ assume only these values:
 	happened.
 
 The allowed state changes are:
-- `draft` &rightarrow; `open`
-- `open` &rightarrow; `closed`, `full`, `running`
-- `closed` &rightarrow; `open`, `running`
-- `full` &rightarrow; `open`, `running`
-- `running` &rightarrow; `ended`, `stopped`
+- **`draft`** &rightarrow; `open`
+- `draft`, `closed`, `full` &rightarrow; **`open`** &rightarrow; `closed`, `full`, `running`
+- `open` &rightarrow; **`closed`** &rightarrow; `open`, `running`
+- `open` &rightarrow; **`full`** &rightarrow; `open`, `running`
+- `open`, `closed`, `full` &rightarrow; **`running`** &rightarrow; `ended`, `stopped`
+- `running` &rightarrow; **`ended`**
+- `running` &rightarrow; **`stopped`**

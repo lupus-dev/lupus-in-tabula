@@ -43,6 +43,38 @@ Request to leave from a game where the user was in.
 
 
 
+## Open [/game/{game_id}/open]
+
++ Parameters
+	+ game_id (string) - The game_id of the game to open
+
+### Open the game [POST]
++ Request
+	+ Headers
+			Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
++ Response 400 (application/json)
+	+ Attributes (Error)
+
+
+
+## Close [/game/{game_id}/close]
+
++ Parameters
+	+ game_id (string) - The game_id of the game to close
+
+### Close the game [POST]
++ Request
+	+ Headers
+			Authorization: token SESSIONTOKEN
+
++ Response 200 (application/json)
++ Response 400 (application/json)
+	+ Attributes (Error)
+
+
+
 ## Votation [/game/{game_id}/vote]
 
 + Parameters
@@ -58,6 +90,7 @@ Request to leave from a game where the user was in.
 + Response 200 (application/json)
 + Response 400 (application/json)
 	+ Attributes (Error)
+
 
 
 ## Game logic [/game/socket.io/]
