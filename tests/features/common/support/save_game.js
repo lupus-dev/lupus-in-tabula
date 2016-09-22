@@ -23,8 +23,6 @@ module.exports = function(game_info, callback) {
 		this.set_deep(game, i, JSON.parse(game_info[i]));
 	}
 
-	var $this = this;
-
 	// beacause of a bug of mongoose (?) $__save is called instead of save
 	game.$__save({}, function(err, doc) {
 		callback(doc);
