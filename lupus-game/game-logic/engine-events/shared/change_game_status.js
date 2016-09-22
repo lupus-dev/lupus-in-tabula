@@ -21,10 +21,7 @@ module.exports = function(debug, data, status, callback) {
 
 	game.state.status.code = status;
 	debug(`The game ${game.game_id} status has been changed to ${status}`);
-	this.updateQueue.enqueueBroadcast(
-		UPDATE_TYPES['GAME_STATUS_CHANGED'],
-		{ status: { code: status } }
-	);
+	this.updateQueue.enqueueStatusChange({ code: status });
 
 	game.save()
 		.then(game => {

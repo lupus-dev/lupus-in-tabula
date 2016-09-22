@@ -19,19 +19,13 @@ module.exports = function(data, callback) {
 		debug(`Game ${game.game_id} auto-changed state to open`);
 		game.state.status.code = 'open';
 		game.save().then(() => {
-			this.updateQueue.enqueueBroadcast(
-				UPDATE_TYPES['GAME_STATUS_CHANGED'],
-				{ status: { code: 'open' } }
-			);
+			this.updateQueue.enqueueStatusChange({ code: 'open' });
 		});
 	}
 
 	game.members.splice(index, 1);
 	debug(`The user ${data.user_id} left the game ${game.game_id}`);
-	this.updateQueue.enqueueBroadcast(
-		UPDATE_TYPES['LEAVE_MEMBER'],
-		{ user_id: data.user_id }
-	);
+	this.updateQueue.enqueueLeaveMember(data.user_id);
 
 	game.save()
 		.then(game => {

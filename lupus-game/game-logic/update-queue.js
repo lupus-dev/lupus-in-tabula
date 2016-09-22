@@ -21,6 +21,18 @@ class UpdateQueue {
 		this._enqueue('user', targets, type, data);
 	}
 
+	enqueueStatusChange(status) {
+		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['GAME_STATUS_CHANGED'], { status: status });
+	}
+
+	enqueueJoinMember(user_id) {
+		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['JOIN_MEMBER'], { user_id: user_id });
+	}
+
+	enqueueLeaveMember(user_id) {
+		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['LEAVE_MEMBER'], { user_id: user_id });
+	}
+
 	_enqueue(level, targets, type, data) {
 		debug(`New update in queue ${level} ${targets} ${type} ${JSON.stringify(data)}`);
 		var update = {

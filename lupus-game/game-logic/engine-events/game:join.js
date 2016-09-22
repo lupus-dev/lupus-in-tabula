@@ -17,11 +17,7 @@ module.exports = function(data, callback) {
 
 		game.state.status.code = 'full';
 		game.save().then(() => {
-			this.updateQueue.enqueueBroadcast(
-				UPDATE_TYPES['GAME_STATUS_CHANGED'],
-				{ status: { code: 'full' } }
-			);
-
+			this.updateQueue.enqueueStatusChange({ code: 'full' });
 			callback({ error: 'Sorry, the game is full!', code: 400 });
 		});
 		return;
@@ -29,17 +25,11 @@ module.exports = function(data, callback) {
 
 	game.members.push(data.user_id);
 	debug(`The user ${data.user_id} joined the game ${game.game_id}`);
-	this.updateQueue.enqueueBroadcast(
-		UPDATE_TYPES['JOIN_MEMBER'],
-		{ user_id: data.user_id }
-	);
+	this.updateQueue.enqueueJoinMember(data.user_id);
 
 	if (game.members.length >= game.gen_info.max_players) {
 		debug('The game ' + game.game_id + ' became full');
-		this.updateQueue.enqueueBroadcast(
-			UPDATE_TYPES['GAME_STATUS_CHANGED'],
-			{ status: { code: 'full' } }
-		);
+		this.updateQueue.enqueueStatusChange({ code: 'full' });
 		game.state.status.code = 'full';
 	}
 
