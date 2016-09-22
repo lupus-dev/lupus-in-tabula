@@ -39,6 +39,7 @@ module.exports = class Engine {
 		fs.readdirSync(__dirname + '/engine-events/').forEach((file) => {
 			if (file.match(/\.js$/) !== null) {
 				var name = file.replace('.js', '');
+				console.log('Loaded event ' + name);
 				this.events.on(name, require('./engine-events/' + name).bind(this));
 			}
 		});
