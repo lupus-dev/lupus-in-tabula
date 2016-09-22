@@ -22,6 +22,7 @@ import { NewGameComponent } from './new-game/new-game.component';
 
 import { GameStateDraftComponent } from './game/game-states/game-state-draft.component';
 import { GameStateOpenComponent } from './game/game-states/game-state-open.component';
+import { GameStateClosedComponent } from './game/game-states/game-state-closed.component';
 
 import { HttpClient } from './shared/http-client.service';
 import { AuthGuard } from './shared/auth-guard.service';
@@ -55,7 +56,8 @@ import { routing } from './app.routing';
 		NewGameComponent,
 
 		GameStateDraftComponent,
-		GameStateOpenComponent
+		GameStateOpenComponent,
+		GameStateClosedComponent
 	],
 	providers: [
 		SlimLoadingBarService,

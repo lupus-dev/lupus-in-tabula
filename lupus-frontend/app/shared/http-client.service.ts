@@ -28,8 +28,8 @@ export class HttpClient {
 			.toPromise();
 	}
 
-	post(url, data) {
-		return this.http.post(url, JSON.stringify(data), { headers: this.getHeaders() })
+	post(url, data = null) {
+		return this.http.post(url, data ? JSON.stringify(data) : null, { headers: this.getHeaders() })
 			.map(res => res.json())
 			.toPromise();
 	}

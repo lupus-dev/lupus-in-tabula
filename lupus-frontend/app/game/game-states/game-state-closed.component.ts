@@ -5,11 +5,11 @@ import { GameService } from '../game.service';
 import { Game } from '../game.model';
 
 @Component({
-	selector: 'lupus-game-state-draft',
-	templateUrl: 'app/game/game-states/game-state-draft.component.html',
+	selector: 'lupus-game-state-closed',
+	templateUrl: 'app/game/game-states/game-state-closed.component.html',
 	providers: [GameService]
 })
-export class GameStateDraftComponent {
+export class GameStateClosedComponent {
 
 	constructor(private gameService: GameService) { }
 

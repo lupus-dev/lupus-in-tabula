@@ -1,6 +1,9 @@
 <lupus-loading *ngIf="!game"></lupus-loading>
 <div *ngIf="game">
 	<h1>
+		<div class="badge pull-right">
+			{{game.state.status.code}}
+		</div>
 		{{game.name}}
 		<small>by <lupus-user-badge [user]="game.owner"></lupus-user-badge></small>
 	</h1>
@@ -13,4 +16,6 @@
 		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-draft>
 	<lupus-game-state-open *ngIf="game.state.status.code == 'open'"
 		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-open>
+	<lupus-game-state-closed *ngIf="game.state.status.code == 'closed'"
+		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-closed>
 </div>

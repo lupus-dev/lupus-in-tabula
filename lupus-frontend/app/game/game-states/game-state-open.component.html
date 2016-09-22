@@ -1,2 +1,6 @@
 <h1>The game is in open state</h1>
-<strong *ngIf="isAdmin">You are the admin!</strong>
+<div *ngIf="isAdmin">
+	<h2>You are the admin!</h2>
+
+	<button class="btn btn-warning" (click)="closeGame()">Close the game</button>
+</div>
