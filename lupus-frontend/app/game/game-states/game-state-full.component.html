@@ -1,13 +1,8 @@
-<h1>The game is in open state</h1>
+<h1>The game is in full state :(</h1>
 <div *ngIf="isAdmin">
 	<h2>You are the admin!</h2>
-
-	<button class="btn btn-warning" (click)="closeGame()">Close the game</button>
 </div>
 <div *ngIf="isMember">
 	<h2>You are a member of this game</h2>
 	<button *ngIf="!isAdmin" class="btn btn-warning" (click)="leaveGame()">Leave the game</button>
-</div>
-<div *ngIf="!isMember">
-	<button class="btn btn-success" (click)="joinGame()">Join the game</button>
 </div>

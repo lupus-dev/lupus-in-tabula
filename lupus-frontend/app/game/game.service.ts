@@ -32,6 +32,14 @@ export class GameService {
 		return this.http.post('/api/game/' + game_id + '/close');
 	}
 
+	leaveGame(game_id) {
+		return this.http.delete('/api/game/' + game_id + '/leave');
+	}
+
+	joinGame(game_id) {
+		return this.http.post('/api/game/' + game_id + '/join');
+	}
+
 	fillUsers(games: Game[]): Promise<Game[]> {
 		return new Promise<Game[]>((resolve, reject) => {
 			let user_ids = {};

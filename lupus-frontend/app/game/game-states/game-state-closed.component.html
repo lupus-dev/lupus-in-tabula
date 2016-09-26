@@ -3,3 +3,10 @@
 
 	<button class="btn btn-success" (click)="openGame()">Open this game</button>
 </div>
+<div *ngIf="isMember">
+	<h2>You are a member of this game</h2>
+	<div *ngIf="!isAdmin">
+		<p><strong>Warning!</strong> If you leave this game now you can join again only when it will be reopened</p>
+		<button class="btn btn-danger" (click)="leaveGame()">Leave the game</button>
+	</div>
+</div>

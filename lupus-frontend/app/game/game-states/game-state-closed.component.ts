@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 import { GameService } from '../game.service';
+import { SessionService } from '../../shared/session.service';
+
+import { GameManager } from '../game-manager';
 
 import { Game } from '../game.model';
 
@@ -11,12 +14,21 @@ import { Game } from '../game.model';
 })
 export class GameStateClosedComponent {
 
-	constructor(private gameService: GameService) { }
+	constructor(private gameService: GameService) {
+		this.gameManager = new GameManager(this);
+	}
+
+	private gameManager: GameManager;
 
 	@Input() game: Game;
 	@Input() isAdmin: boolean;
+	@Input() isMember: boolean;
 
 	openGame() {
-		this.gameService.openGame(this.game.game_id);
+		this.gameManager.openGame();
+	}
+
+	leaveGame() {
+		this.gameManager.leaveGame();
 	}
 }

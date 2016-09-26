@@ -15,7 +15,9 @@
 	<lupus-game-state-draft *ngIf="game.state.status.code == 'draft'"
 		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-draft>
 	<lupus-game-state-open *ngIf="game.state.status.code == 'open'"
-		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-open>
+		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-open>
 	<lupus-game-state-closed *ngIf="game.state.status.code == 'closed'"
-		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-closed>
+		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-closed>
+	<lupus-game-state-full *ngIf="game.state.status.code == 'full'"
+		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-full>
 </div>

@@ -24,6 +24,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
 	game: Game;
 	isAdmin: boolean = false;
+	isMember: boolean = false;
 	socket: any;
 
 	ngOnInit() {
@@ -72,7 +73,14 @@ export class GameComponent implements OnInit, OnDestroy {
 			this.gameService.fillUsers([game])
 				.then(games => {
 					this.game = games[0];
-					this.isAdmin = this.game.owner_id == this.sessionService.user.user_id;
+
+					var user_id = this.sessionService.user.user_id;
+					this.isAdmin = this.game.owner_id == user_id;
+					this.isMember = false;
+					for (let member of game.members)
+						if (member.user_id == user_id)
+							this.isMember = true;
+
 					resolve(this.game);
 				});
 		});

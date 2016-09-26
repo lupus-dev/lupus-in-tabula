@@ -8,11 +8,11 @@ import { GameManager } from '../game-manager';
 import { Game } from '../game.model';
 
 @Component({
-	selector: 'lupus-game-state-open',
-	templateUrl: 'app/game/game-states/game-state-open.component.html',
+	selector: 'lupus-game-state-full',
+	templateUrl: 'app/game/game-states/game-state-full.component.html',
 	providers: [GameService]
 })
-export class GameStateOpenComponent {
+export class GameStateFullComponent {
 
 	constructor(private gameService: GameService) {
 		this.gameManager = new GameManager(this);
@@ -24,15 +24,7 @@ export class GameStateOpenComponent {
 	@Input() isAdmin: boolean;
 	@Input() isMember: boolean;
 
-	closeGame() {
-		this.gameManager.closeGame();
-	}
-
 	leaveGame() {
 		this.gameManager.leaveGame();
-	}
-
-	joinGame() {
-		this.gameManager.joinGame();
 	}
 }

@@ -29,8 +29,8 @@ module.exports = function(data, callback) {
 
 	if (game.members.length >= game.gen_info.max_players) {
 		debug('The game ' + game.game_id + ' became full');
-		this.updateQueue.enqueueStatusChange({ code: 'full' });
 		game.state.status.code = 'full';
+		this.updateQueue.enqueueStatusChange({ code: 'full' });
 	}
 
 	game.save()
