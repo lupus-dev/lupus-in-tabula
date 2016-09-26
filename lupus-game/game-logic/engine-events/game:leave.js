@@ -18,17 +18,17 @@ module.exports = function(data, callback) {
 		game.state.status.code !== 'full')
 		return callback({ error: 'You currently cannot leave this game', code: 400 });
 
-	if (game.members.length == game.gen_info.max_players) {
+	game.members.splice(index, 1);
+	debug(`The user ${data.user_id} left the game ${game.game_id}`);
+	this.updateQueue.enqueueLeaveMember(data.user_id);
+
+	if (game.state.status.code == 'full' && game.members.length < game.gen_info.max_players) {
 		debug(`Game ${game.game_id} auto-changed state to open`);
 		game.state.status.code = 'open';
 		game.save().then(() => {
 			this.updateQueue.enqueueStatusChange({ code: 'open' });
 		});
 	}
-
-	game.members.splice(index, 1);
-	debug(`The user ${data.user_id} left the game ${game.game_id}`);
-	this.updateQueue.enqueueLeaveMember(data.user_id);
 
 	game.save()
 		.then(game => {

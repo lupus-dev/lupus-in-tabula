@@ -49,10 +49,12 @@ Feature:
 		And  response code should be 200
 
 		Then The game:update event should be
-		| type         | "LEAVE_MEMBER"      |
+		| type         | "LEAVE_MEMBER"     |
 		| data.user_id | "`logged_user_id`" |
 		| game.members.length | 1           |
+		| game.state.status.code | "full"   |
 
 		And  The game:update event should be
 		| type         | "GAME_STATUS_CHANGED" |
 		| data.status.code | "open"            |
+		| game.state.status.code | "open"      |

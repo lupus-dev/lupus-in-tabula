@@ -25,4 +25,5 @@ Feature:
 
 		And  The game:update event should be
 		| type         | "GAME_STATUS_CHANGED" |
-		| data.status.code | "closed" |
+		| data.status.code | "closed"          |
+		| game.state.status.code | "closed"      |

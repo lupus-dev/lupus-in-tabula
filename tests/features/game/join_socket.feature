@@ -49,7 +49,9 @@ Feature:
 		| type         | "JOIN_MEMBER"      |
 		| data.user_id | "`logged_user_id`" |
 		| game.members.length | 2           |
+		| game.state.status.code | "open"   |
 
 		And  The game:update event should be
 		| type         | "GAME_STATUS_CHANGED" |
 		| data.status.code | "full"            |
+		| game.state.status.code | "full"      |
