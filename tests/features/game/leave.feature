@@ -73,3 +73,16 @@ Feature:
 		And  I GET /api/history/games/`game_id`
 		And  The game at index `game_id` should be
 		| state.status.code | "open" |
+
+	@clean
+	Scenario: The owner tries to leave
+		Given I am logged as
+		| username | "edomora97" |
+		Given There was a game in the database game_id
+		| name     | "Wow!!"     |
+		| owner_id | "`logged_user_id`" |
+		| members  | ["`logged_user_id`", "`FAKEID`"] |
+		When I set Authorization header to token `logged_token`
+		And  I DELETE /api/game/`game_id`/leave
+		Then response code should be 400
+		And  response body should be valid json

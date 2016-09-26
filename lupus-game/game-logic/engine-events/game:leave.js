@@ -10,6 +10,9 @@ module.exports = function(data, callback) {
 	if (index === -1)
 		return callback({ error: 'You are not in the game', code: 400 });
 
+	if (game.owner_id == data.user_id)
+		return callback({ error: 'The owner cannot leave the game', code: 400 });
+
 	if (game.state.status.code !== 'open' &&
 		game.state.status.code !== 'closed' &&
 		game.state.status.code !== 'full')
