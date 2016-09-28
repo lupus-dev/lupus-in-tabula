@@ -31,4 +31,8 @@ export class GameStateClosedComponent {
 	leaveGame() {
 		this.gameManager.leaveGame();
 	}
+
+	startGame() {
+		this.gameManager.startGame();
+	}
 }

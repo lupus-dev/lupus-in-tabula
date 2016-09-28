@@ -9,6 +9,10 @@ export class GameManager {
 		this.component.gameService.openGame(this.component.game.game_id);
 	}
 
+	startGame() {
+		this.component.gameService.startGame(this.component.game.game_id);
+	}
+
 	leaveGame() {
 		this.component.gameService.leaveGame(this.component.game.game_id)
 			.then(() => this.component.isMember = false)

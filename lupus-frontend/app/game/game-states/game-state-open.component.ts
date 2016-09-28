@@ -35,4 +35,8 @@ export class GameStateOpenComponent {
 	joinGame() {
 		this.gameManager.joinGame();
 	}
+
+	startGame() {
+		this.gameManager.startGame();
+	}
 }

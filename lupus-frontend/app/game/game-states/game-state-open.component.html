@@ -3,6 +3,10 @@
 	<h2>You are the admin!</h2>
 
 	<button class="btn btn-warning" (click)="closeGame()">Close the game</button>
+	<button class="btn btn-success" (click)="startGame()"
+		[disabled]="game.members.length < game.gen_info.min_players">
+		Start the game!
+	</button>
 </div>
 <div *ngIf="isMember">
 	<h2>You are a member of this game</h2>

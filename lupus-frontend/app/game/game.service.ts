@@ -32,6 +32,10 @@ export class GameService {
 		return this.http.post('/api/game/' + game_id + '/close');
 	}
 
+	startGame(game_id) {
+		return this.http.post('/api/game/' + game_id + '/start');
+	}
+
 	leaveGame(game_id) {
 		return this.http.delete('/api/game/' + game_id + '/leave');
 	}

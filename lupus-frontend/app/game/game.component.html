@@ -7,7 +7,10 @@
 		{{game.name}}
 		<small>by <lupus-user-badge [user]="game.owner"></lupus-user-badge></small>
 	</h1>
-	<h2>In the game</h2>
+	<h2>
+		In the game
+		<small>{{game.members.length}} out of {{game.gen_info.min_players}} players (max {{game.gen_info.max_players}})</small>
+	</h2>
 	<span *ngFor="let member of game.members">
 		<lupus-user-badge [user]="member"></lupus-user-badge>
 	</span>

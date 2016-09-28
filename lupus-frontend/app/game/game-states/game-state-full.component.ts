@@ -27,4 +27,8 @@ export class GameStateFullComponent {
 	leaveGame() {
 		this.gameManager.leaveGame();
 	}
+
+	startGame() {
+		this.gameManager.startGame();
+	}
 }
