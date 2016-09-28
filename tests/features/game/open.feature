@@ -47,8 +47,6 @@ Feature:
 	Scenario: The user is not logged in
 		Given There was a game in the database game_id
 		| name     | "Wow!!"     |
-		| owner_id | "`logged_user_id`" |
-		| members  | ["`logged_user_id`"] |
 		And  I POST to /api/game/`game_id`/open
 		Then response code should be 401
 		And  response body should be valid json

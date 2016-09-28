@@ -7,6 +7,7 @@ module.exports = function(debug, data, status, callback) {
 
 	var action = status == 'open'   ? 'open' :
 				 status == 'closed' ? 'close':
+				 status == 'running' ? 'start' :
 				 					  'do stuff with';
 
 	if (data.user_id != game.owner_id)
@@ -18,6 +19,9 @@ module.exports = function(debug, data, status, callback) {
 	if (status == 'closed')
 		if (game.state.status.code !== 'open')
 			return callback({ error: 'You cannot close this game', code: 400 });
+	if (status == 'running')
+		if (game.state.status.code !== 'open' && game.state.status.code !== 'closed' && game.state.status.code !== 'full')
+			return callback({ error: 'You cannot start this game', code: 400 });
 
 	game.state.status.code = status;
 	debug(`The game ${game.game_id} status has been changed to ${status}`);

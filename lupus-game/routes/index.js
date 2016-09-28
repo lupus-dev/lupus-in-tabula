@@ -9,5 +9,6 @@ router.post('/:game_id/join', engine_controller_factory('game:join'));
 router.delete('/:game_id/leave', engine_controller_factory('game:leave'));
 router.post('/:game_id/open', engine_controller_factory('game:open'));
 router.post('/:game_id/close', engine_controller_factory('game:close'));
+router.post('/:game_id/start', engine_controller_factory('game:start'));
 
 module.exports = router;

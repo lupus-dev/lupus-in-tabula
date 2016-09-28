@@ -36,6 +36,20 @@ module.exports = class Engine {
 		return null;
 	}
 
+	startGame() {
+		this.game.state.players = [];
+		for (let member of this.game.members)
+			this.game.state.players.push({
+				user_id: member,
+				role: 'lupus', // TODO generate the roles
+				alive: true,
+				data: {}
+			});
+		this.game.state.votes = [];
+		this.updateQueue.enqueueGameStarted();
+		return this.game.save();
+	}
+
 	registerSocket(socket) {
 		this.sockets[socket.session.user_id] = socket;
 		socket.join(this.game.game_id);

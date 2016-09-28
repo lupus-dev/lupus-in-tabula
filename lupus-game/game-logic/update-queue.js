@@ -33,6 +33,10 @@ class UpdateQueue {
 		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['LEAVE_MEMBER'], { user_id: user_id });
 	}
 
+	enqueueGameStarted() {
+		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['GAME_STARTED'], {});
+	}
+
 	_enqueue(level, targets, type, data) {
 		debug(`New update in queue ${level} ${targets} ${type} ${JSON.stringify(data)}`);
 		var update = {
@@ -50,6 +54,7 @@ UpdateQueue.UPDATE_TYPES = {
 	'GAME_STATUS_CHANGED': 'GAME_STATUS_CHANGED',
 	'JOIN_MEMBER':         'JOIN_MEMBER',
 	'LEAVE_MEMBER':        'LEAVE_MEMBER',
+	'GAME_STARTED':        'GAME_STARTED',
 	'NEXT_DAY':            'NEXT_DAY',
 	'DEATH_BY_OTHER':      'DEATH_BY_OTHER',
 	'PUBLIC_VOTE':         'PUBLIC_VOTE'
