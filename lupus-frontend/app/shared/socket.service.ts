@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import * as io from 'socket.io-client';
 
@@ -11,8 +12,10 @@ export class SocketService {
 
 	sockets = {};
 
-	connect(service: string): Promise<any> {
-		var promise = new Promise((resolve, reject) => {
+	connect(service: string): Observable<any> {
+		if (this.sockets[service]) return this.sockets[service];
+
+		return this.sockets[service] = new Observable(observer => {
 			var socket = io.connect('', { path: '/api/' + service + '/socket.io' });
 
 			socket.on('connect', () => {
@@ -20,26 +23,25 @@ export class SocketService {
 				socket.emit('authentication', { token: this.sessionService.session.token });
 			});
 
-			socket.on('disconnect', (err) => console.log('Disconnected from ' + service + ' socket:', err));
+			socket.on('disconnect', (err) => {
+				console.log('Disconnected from ' + service + ' socket:', err)
+				observer.error(err);
+			});
 
 			socket.on('authenticated', () => {
-				this.sockets[service] = socket;
 				console.log('Authenticated on ' + service + ' socket');
-				resolve(socket);
+				observer.next(socket);
 			});
 
 			socket.on('unauthorized', (error) => {
 				console.error('Authentication failed on ' + service + ' socket', error);
-				reject(error);
+				observer.onError(error);
 			});
+
+			return function() {
+				console.log('Socket ' + service + ' will be disposed');
+				socket.disconnect();
+			}
 		});
-
-		return promise;
-	}
-
-	disconnect(service: string) {
-		if (!this.sockets[service]) return;
-		this.sockets[service].disconnect();
-		this.sockets[service] = null;
 	}
 }

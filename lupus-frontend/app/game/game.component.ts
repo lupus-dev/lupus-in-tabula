@@ -26,6 +26,7 @@ export class GameComponent implements OnInit, OnDestroy {
 	isAdmin: boolean = false;
 	isMember: boolean = false;
 	socket: any;
+	socketSubscription: any;
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
@@ -34,7 +35,7 @@ export class GameComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.socketService.disconnect('game');
+		this.socketSubscription.unsubscribe();
 	}
 
 	loadGame(game_id: string) {
@@ -52,16 +53,19 @@ export class GameComponent implements OnInit, OnDestroy {
 	}
 
 	connectToSocket() {
-		// TODO when the socket reconnects resend the game:select event
-		this.socketService.connect('game')
-			.then((socket) => {
-				this.socket = socket;
-				socket.on('game:update', data => this.gameUpdate(data));
-				socket.emit('game:select',
-					{ game_id: this.game.game_id },
-					(res) => this.fillGame(res.game));
-			})
-			.catch((err) => console.error(err));
+		this.socketSubscription = this.socketService.connect('game').subscribe(
+				socket => {
+					this.socket = socket;
+					socket.on('game:update', data => this.gameUpdate(data));
+					socket.emit('game:select',
+						{ game_id: this.game.game_id },
+						(res) => {
+							this.fillGame(res.game);
+							console.log('Selected game ' + res.game.game_id);
+						});
+				},
+				error => console.error(error)
+			);
 	}
 
 	gameUpdate(data) {
