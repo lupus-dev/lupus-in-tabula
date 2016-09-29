@@ -22,5 +22,5 @@ module.exports = function(req, res, next) {
 		}
 	});
 
-	do_save(game, res, 'toClientProtected');
+	do_save(game, res, 'toClientProtected', [req.session.user_id]);
 };

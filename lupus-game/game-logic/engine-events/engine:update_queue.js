@@ -4,26 +4,27 @@ module.exports = function(data, callback) {
 	if (!callback) callback = function(){};
 
 	var event_data = {
-		game: this.game.toClientProtected(),
 		data: data.data,
 		type: data.type
 	};
 
-	var scopes = [];
+	if (data.level == 'broadcast') {
+		var room_id = this.game.game_id + '';
+		var room = global.socket.sockets.adapter.rooms[room_id];
+		if (!room) { debug('Room ' + room_id + ' not found!'); return callback(); }
 
-	if (data.level == 'broadcast')
-		scopes = [ global.socket.to(this.game.game_id) ];
-	else if (data.level == 'room')
-		for (let target of data.targets)
-			scopes.push(global.socket.to(target));
-	else if (data.level == 'user')
-		for (let target of data.targets)
-			scopes.push(this.sockets[target]);
+		let targetCount = 0;
 
-	for (let scope of scopes)
-		scope.emit('game:update', event_data);
-
-	debug('Update emitted to ' + scopes.length + ' destination/s');
+		for (let socket_id in room.sockets) {
+			let socket = global.socket.sockets.connected[socket_id];
+			if (!socket) continue;
+			let payload = event_data;
+			payload.game = this.game.toClientProtected(socket.session.user_id);
+			socket.emit('game:update', payload);
+			targetCount++;
+		}
+		debug('Broadcast event sent to ' + targetCount + ' sockets');
+	}
 
 	callback(null, null);
 };

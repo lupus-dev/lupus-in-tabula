@@ -1,3 +1,5 @@
+var gameToClientProtected = require('../game-to-client-protected');
+
 module.exports = function(mongoose, connection) {
 	if (mongoose.models.Game) return mongoose.models.Game;
 
@@ -56,17 +58,8 @@ module.exports = function(mongoose, connection) {
 		};
 	}
 
-	GameSchema.methods.toClientProtected = function() {
-		return {
-			game_id: this._id,
-			owner_id: this.owner_id,
-			name: this.name,
-			members: this.members,
-			state: {
-				status: this.state.status
-			},
-			gen_info: this.gen_info
-		};
+	GameSchema.methods.toClientProtected = function(user_id) {
+		return gameToClientProtected(this, user_id);
 	}
 
 	GameSchema.virtual('game_id')

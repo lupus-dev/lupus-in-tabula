@@ -20,7 +20,10 @@ Feature:
 		And  response body should be valid json
 		And  I GET /api/history/games/`game_id`
 		And  The game at index `game_id` should be
-		| state.status.code | "running" |
+		| state.status.code                    | "running" |
+		| state.players.`logged_user_id`.alive | true      |
+		| state.players.`FAKEID`.alive         | true      |
+		| state.day                            | 1         |
 
 	@clean
 	Scenario: The user tries to start a missing game

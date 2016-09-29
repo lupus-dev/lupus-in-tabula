@@ -37,6 +37,7 @@ module.exports = class Engine {
 	}
 
 	startGame() {
+		this.game.state.day = 1;
 		this.game.state.players = [];
 		for (let member of this.game.members)
 			this.game.state.players.push({
