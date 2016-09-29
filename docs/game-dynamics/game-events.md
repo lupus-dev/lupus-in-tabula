@@ -11,6 +11,7 @@ The information sent are:
     - `GAME_STATUS_CHANGED` The status of the game (draft, running...) has changed
 	- `JOIN_MEMBER` A new member has joined the game
 	- `LEAVE_MEMBER` A member of the game has left
+	- `GAME_STARTED` The owner has started the game
 	- `NEXT_DAY` The game day has gone forward, maybe some players are dead
 	- `DEATH_BY_OTHER` A player was killed by something odd like a kick, a ban or by the admin
 	- `PUBLIC_VOTE` A public votation has been done
