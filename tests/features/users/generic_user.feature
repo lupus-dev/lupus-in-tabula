@@ -63,7 +63,7 @@ Feature:
 		And  response body path `FAKEID` should be undefined
 
 	@clean
-	Scenario: Return 404 if no users were found
+	Scenario: Return 200 if no users were found
 		When I GET /api/users/`FAKEID`
-		Then response code should be 404
+		Then response code should be 200
 		And  response body should be valid json

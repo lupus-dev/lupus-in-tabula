@@ -38,7 +38,7 @@ Feature:
 		| name           | "Yo! Yo!"     |
 
 	@clean
-	Scenario: Return 404 if no games were found
+	Scenario: Return 200 if no games were found
 		When I GET /api/history/games/`FAKEID`
-		Then response code should be 404
+		Then response code should be 200
 		And  response body should be valid json
