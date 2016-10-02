@@ -1,0 +1,19 @@
+<h2>In the game</h2>
+<table>
+	<tr>
+		<td>Alive:</td>
+		<td>
+			<span *ngFor="let player of alive">
+				<lupus-user-badge [user]="player"></lupus-user-badge>
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td>Dead:</td>
+		<td>
+			<span *ngFor="let player of dead">
+				<lupus-user-badge [user]="player"></lupus-user-badge>
+			</span>
+		</td>
+	</tr>
+</table>

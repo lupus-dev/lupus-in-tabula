@@ -7,13 +7,9 @@
 		{{game.name}}
 		<small>by <lupus-user-badge [user]="game.owner"></lupus-user-badge></small>
 	</h1>
-	<h2>
-		In the game
-		<small>{{game.members.length}} out of {{game.gen_info.min_players}} players (max {{game.gen_info.max_players}})</small>
-	</h2>
-	<span *ngFor="let member of game.members">
-		<lupus-user-badge [user]="member"></lupus-user-badge>
-	</span>
+	<div *ngIf="['running', 'ended', 'stopped'].indexOf(game.state.status.code) == -1">
+		<lupus-members-list [game]="game"></lupus-members-list>
+	</div>
 
 	<lupus-game-state-draft *ngIf="game.state.status.code == 'draft'"
 		[game]="game" [isAdmin]="isAdmin"></lupus-game-state-draft>
@@ -23,4 +19,6 @@
 		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-closed>
 	<lupus-game-state-full *ngIf="game.state.status.code == 'full'"
 		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-full>
+	<lupus-game-state-running *ngIf="game.state.status.code == 'running'"
+		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-running>
 </div>

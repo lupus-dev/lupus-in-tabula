@@ -1,0 +1,9 @@
+<div *ngIf="isAdmin">
+	<h2>You are the admin of this game</h2>
+</div>
+
+<lupus-players-list [game]="game"></lupus-players-list>
+
+<div *ngIf="isMember">
+	<lupus-game-splash [game]="game"></lupus-game-splash>
+</div>
