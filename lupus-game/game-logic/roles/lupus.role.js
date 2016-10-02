@@ -6,7 +6,10 @@ class Lupus extends Role {
 	}
 
 	needVote() {
-		return this._needVoteDay();
+		let res = this._needVoteDay();
+		if (this.engine.isNight())
+			res.message = 'Vote who tear to pieces!';
+		return res;
 	}
 };
 

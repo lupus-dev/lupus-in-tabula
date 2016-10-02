@@ -16,7 +16,12 @@ class Role {
 	/**
 	 * This methods returns false if the user should not vote, otherwise a list
 	 * of objects with all the allowed votes:
-	 *     { value: 'ID_OF_THE_USER', text: 'USERNAME_OF_THE_USER' }
+	 *     {
+	 *         message: 'Vote who burn!'
+	 *         votables: [
+	 *             { value: 'ID_OF_THE_USER', text: 'USERNAME_OF_THE_USER' }
+	 *         ]
+	 *     }
 	 */
 	needVote() {
 		return false;
@@ -26,12 +31,15 @@ class Role {
 		if (!this.player.alive) return false;
 		if (this.getLastVote()) return false;
 
-		let votable = [];
+		let votables = [];
 		for (let player of this.engine.game.state.players)
 			if (player.alive && player.user_id != this.user_id)
-				votable.push({ value: player.user_id });
+				votables.push({ value: player.user_id });
 
-		return votable;
+		return {
+			message: 'Vote who burn!',
+			votables: votables
+		};
 	}
 
 	/**

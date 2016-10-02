@@ -4,7 +4,7 @@ import { SessionService } from '../shared/session.service';
 
 @Component({
 	selector: 'lupus-game-splash',
-	template: '<div>{{splash}}</div>'
+	template: '<h3>{{splash}}</h3>'
 })
 export class GameSplashComponent {
 

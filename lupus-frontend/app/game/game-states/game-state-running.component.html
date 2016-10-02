@@ -6,4 +6,20 @@
 
 <div *ngIf="isMember">
 	<lupus-game-splash [game]="game"></lupus-game-splash>
+
+	<div class="row">
+		<div *ngIf="player.extra && player.extra.needVote" class="col-md-4">
+			{{player.extra.needVote.message}}
+
+			<div class="form-group">
+				<select class="form-control">
+					<option *ngFor="let votable of votables" [value]="votable.value">
+						{{ votable.text }}
+					</option>
+				</select>
+			</div>
+
+			<button class="btn btn-success">Vote</button>
+		</div>
+	</div>
 </div>
