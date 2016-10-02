@@ -32,6 +32,9 @@ module.exports = class Engine {
 		});
 	}
 
+	isDay() { return this.game.state.day % 2 == 0; }
+	isNight() { return this.game.state.day % 2 == 1; }
+
 	checkProgess() {
 		return null;
 	}
@@ -42,7 +45,7 @@ module.exports = class Engine {
 		for (let member of this.game.members)
 			this.game.state.players.push({
 				user_id: member,
-				role: 'lupus', // TODO generate the roles
+				role: Math.random() < 0.5 ? 'lupus' : 'farmer', // TODO generate the roles
 				alive: true,
 				data: {}
 			});

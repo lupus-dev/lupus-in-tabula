@@ -18,7 +18,10 @@ class Role {
 	}
 
 	isVoteValid(vote) {
-		return false;
+		if (vote == this.user_id) return false;
+		var player = this.engine.state.players[user_id];
+		if (!player) return false;
+		return !!player.alive;
 	}
 
 	get data() {

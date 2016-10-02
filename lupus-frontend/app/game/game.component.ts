@@ -82,7 +82,7 @@ export class GameComponent implements OnInit, OnDestroy {
 					this.isAdmin = this.game.owner_id == user_id;
 					this.isMember = false;
 					for (let member of game.members)
-						if (member.user_id == user_id)
+						if (member && member.user_id == user_id)
 							this.isMember = true;
 
 					resolve(this.game);
