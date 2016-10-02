@@ -61,7 +61,7 @@ export class GameComponent implements OnInit, OnDestroy {
 						{ game_id: this.game.game_id },
 						(res) => {
 							this.fillGame(res.game);
-							console.log('Selected game ' + res.game.game_id);
+							console.log('Selected game ' + res.game.game_id, res.game);
 						});
 				},
 				error => console.error(error)

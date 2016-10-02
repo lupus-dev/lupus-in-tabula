@@ -29,7 +29,7 @@ module.exports = function(debug, data, status, callback) {
 
 	game.save()
 		.then(game => {
-			callback(null, { data: game.toClientProtected(data.user_id), code: 200 });
+			callback(null, { data: game.toClientProtected(data.user_id, this.roles[data.user_id]), code: 200 });
 		})
 		.catch(err => callback({ error: err, code: 500 }));
 };

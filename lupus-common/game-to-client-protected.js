@@ -1,4 +1,4 @@
-module.exports = function(game, user_id) {
+module.exports = function(game, user_id, role) {
 	var game_status = game.state.status.code;
 
 	if (game_status == 'ended' || game_status == 'stopped')
@@ -20,14 +20,23 @@ module.exports = function(game, user_id) {
 
 		ret.state.players = {};
 		for (let player of game.state.players)
-			if (player.user_id == user_id)
+			if (player.user_id == user_id) {
 				ret.state.players[player.user_id] = {
 					user_id: player.user_id,
 					alive: player.alive,
 					role: player.role,
 					data: player.data
 				};
-			else
+				if (role)
+					ret.state.players[player.user_id].extra = {
+						splash: role.splash(),
+						needVote: role.needVote(),
+						role_id: role.constructor.role_id,
+						role_name: role.constructor.role_name,
+						team_id: role.constructor.team_id,
+						mana: role.constructor.mana
+					};
+			} else
 				ret.state.players[player.user_id] = {
 					user_id: player.user_id,
 					alive: player.alive

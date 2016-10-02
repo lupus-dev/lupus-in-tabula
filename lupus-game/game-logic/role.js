@@ -2,7 +2,7 @@ class Role {
 	constructor(engine, user_id) {
 		this.engine = engine;
 		this.user_id = user_id;
-		this.player = engine.state.players[user_id];
+		this.player = engine.game.state.players[user_id];
 	}
 
 	splash() {
@@ -19,7 +19,7 @@ class Role {
 
 	isVoteValid(vote) {
 		if (vote == this.user_id) return false;
-		var player = this.engine.state.players[user_id];
+		var player = this.engine.game.state.players[user_id];
 		if (!player) return false;
 		return !!player.alive;
 	}
@@ -33,8 +33,8 @@ class Role {
 	}
 
 	getLastVote() {
-		return this.engine.state.votes.find((vote) => {
-			return vote.user_id == this.user_id && vote.day == this.engine.state.day;
+		return this.engine.game.state.votes.find((vote) => {
+			return vote.user_id == this.user_id && vote.day == this.engine.game.state.day;
 		});
 	}
 

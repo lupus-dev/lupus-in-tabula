@@ -70,9 +70,10 @@ module.exports = class Engine {
 	}
 
 	_setupRoles() {
+		this.roles = {};
+
 		if (this.game.state.status.code != 'running') return;
 
-		this.roles = {};
 		for (let player of this.game.state.players) {
 			var role_class = global.roles[player.role];
 			if (!role_class) {

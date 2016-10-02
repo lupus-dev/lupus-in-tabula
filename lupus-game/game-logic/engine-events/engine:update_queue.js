@@ -18,8 +18,11 @@ module.exports = function(data, callback) {
 		for (let socket_id in room.sockets) {
 			let socket = global.socket.sockets.connected[socket_id];
 			if (!socket) continue;
+
 			let payload = event_data;
-			payload.game = this.game.toClientProtected(socket.session.user_id);
+			let user_id = socket.session.user_id;
+			payload.game = this.game.toClientProtected(user_id, this.roles[user_id]);
+
 			socket.emit('game:update', payload);
 			targetCount++;
 		}

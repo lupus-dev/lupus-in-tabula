@@ -58,8 +58,8 @@ module.exports = function(mongoose, connection) {
 		};
 	}
 
-	GameSchema.methods.toClientProtected = function(user_id) {
-		return gameToClientProtected(this, user_id);
+	GameSchema.methods.toClientProtected = function(user_id, role) {
+		return gameToClientProtected(this, user_id, role);
 	}
 
 	GameSchema.virtual('game_id')
