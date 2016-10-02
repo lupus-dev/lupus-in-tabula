@@ -7,7 +7,7 @@ class Farmer extends Role {
 
 	needVote() {
 		if (this.engine.isNight()) return false;
-		return !this.getLastVote();
+		return this._needVoteDay();
 	}
 }
 

@@ -50,6 +50,7 @@ module.exports = class Engine {
 				data: {}
 			});
 		this.game.state.votes = [];
+		this._setupRoles();
 		this.updateQueue.enqueueGameStarted();
 		return this.game.save();
 	}

@@ -77,7 +77,7 @@ export class GameComponent implements OnInit, OnDestroy {
 			this.gameService.fillUsers([game])
 				.then(games => {
 					this.game = games[0];
-
+					
 					var user_id = this.sessionService.user.user_id;
 					this.isAdmin = this.game.owner_id == user_id;
 					this.isMember = false;

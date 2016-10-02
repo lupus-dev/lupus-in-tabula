@@ -6,8 +6,7 @@ class Lupus extends Role {
 	}
 
 	needVote() {
-		if (this.getLastVote()) return false;
-		return true;
+		return this._needVoteDay();
 	}
 };
 

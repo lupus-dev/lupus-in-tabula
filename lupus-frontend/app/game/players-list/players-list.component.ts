@@ -14,7 +14,8 @@ export class PlayersListComponent {
 	get alive() {
 		let members = [];
 		for (let member of this.game.members)
-			if (this.game.state.players[member.user_id].alive)
+			if (this.game.state.players[member.user_id] &&
+				this.game.state.players[member.user_id].alive)
 				members.push(member);
 		return members;
 	}
@@ -22,7 +23,8 @@ export class PlayersListComponent {
 	get dead() {
 		let members = [];
 		for (let member of this.game.members)
-			if (!this.game.state.players[member.user_id].alive)
+			if (this.game.state.players[member.user_id] &&
+				!this.game.state.players[member.user_id].alive)
 				members.push(member);
 		return members;
 	}
