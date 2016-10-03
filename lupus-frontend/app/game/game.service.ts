@@ -44,6 +44,10 @@ export class GameService {
 		return this.http.post('/api/game/' + game_id + '/join');
 	}
 
+	vote(game_id, vote) {
+		return this.http.post('/api/game/' + game_id + '/vote', vote);
+	}
+
 	fillUsers(games: Game[]): Promise<Game[]> {
 		return new Promise<Game[]>((resolve, reject) => {
 			let user_ids = {};

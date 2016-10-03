@@ -12,14 +12,14 @@
 			{{player.extra.needVote.message}}
 
 			<div class="form-group">
-				<select class="form-control">
+				<select class="form-control" [(ngModel)]="current_vote">
 					<option *ngFor="let votable of votables" [value]="votable.value">
 						{{ votable.text }}
 					</option>
 				</select>
 			</div>
 
-			<button class="btn btn-success">Vote</button>
+			<button class="btn btn-success" (click)="vote()">Vote</button>
 		</div>
 	</div>
 </div>

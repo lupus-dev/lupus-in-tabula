@@ -40,7 +40,6 @@ module.exports = function(data, callback) {
 	for (let target of targets) {
 		let payload = event_data;
 		payload.game = this.game.toClientProtected(target.user_id, this.roles[target.user_id]);
-
 		target.socket.emit('game:update', payload);
 	}
 

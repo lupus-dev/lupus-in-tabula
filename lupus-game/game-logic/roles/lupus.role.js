@@ -7,6 +7,7 @@ class Lupus extends Role {
 
 	needVote() {
 		let res = this._needVoteDay();
+		if (!res) return false;
 		if (this.engine.isNight())
 			res.message = 'Vote who tear to pieces!';
 		return res;

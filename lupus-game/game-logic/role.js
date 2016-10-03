@@ -78,7 +78,8 @@ class Role {
 	 */
 	getLastVote() {
 		return this.engine.game.state.votes.find((vote) => {
-			return vote.user_id == this.user_id && vote.day == this.engine.game.state.day;
+			return vote.user_id+'' == this.user_id+'' &&
+				vote.day == this.engine.game.state.day;
 		});
 	}
 
