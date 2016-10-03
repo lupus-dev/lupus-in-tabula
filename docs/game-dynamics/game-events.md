@@ -15,6 +15,7 @@ The information sent are:
 	- `NEXT_DAY` The game day has gone forward, maybe some players are dead
 	- `DEATH_BY_OTHER` A player was killed by something odd like a kick, a ban or by the admin
 	- `PUBLIC_VOTE` A public votation has been done
+	- `PRIVATE_VOTE` The user is informed by a private votation
 
 ## -game:select
 

@@ -18,9 +18,9 @@ module.exports = function(game_info, callback) {
 	});
 
 	for (let i in game_info) {
-		i = this.apickli.replaceVariables(i);
+		real_i = this.apickli.replaceVariables(i);
 		game_info[i] = this.apickli.replaceVariables(game_info[i]);
-		this.set_deep(game, i, JSON.parse(game_info[i]));
+		this.set_deep(game, real_i, JSON.parse(game_info[i]));
 	}
 
 	// beacause of a bug of mongoose (?) $__save is called instead of save

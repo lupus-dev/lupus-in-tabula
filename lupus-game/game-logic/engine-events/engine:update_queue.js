@@ -8,26 +8,43 @@ module.exports = function(data, callback) {
 		type: data.type
 	};
 
+	let targets = [];
+
 	if (data.level == 'broadcast') {
 		var room_id = this.game.game_id + '';
 		var room = global.socket.sockets.adapter.rooms[room_id];
 		if (!room) { debug('Room ' + room_id + ' not found!'); return callback(); }
 
-		let targetCount = 0;
-
 		for (let socket_id in room.sockets) {
 			let socket = global.socket.sockets.connected[socket_id];
 			if (!socket) continue;
 
-			let payload = event_data;
-			let user_id = socket.session.user_id;
-			payload.game = this.game.toClientProtected(user_id, this.roles[user_id]);
-
-			socket.emit('game:update', payload);
-			targetCount++;
+			targets.push({
+				socket: socket,
+				user_id: socket.session.user_id
+			});
 		}
-		debug('Broadcast event sent to ' + targetCount + ' sockets');
+	}
+	else if (data.level == 'user') {
+		for (let user_id of data.targets) {
+			let socket = this.sockets[user_id];
+			if (!socket) continue;
+
+			targets.push({
+				socket: socket,
+				user_id: user_id
+			});
+		}
 	}
 
-	callback(null, null);
+	for (let target of targets) {
+		let payload = event_data;
+		payload.game = this.game.toClientProtected(target.user_id, this.roles[target.user_id]);
+
+		target.socket.emit('game:update', payload);
+	}
+
+	debug('Event emitted to ' + targets.length + ' sockets');
+
+	callback();
 };

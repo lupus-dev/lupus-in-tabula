@@ -55,7 +55,7 @@ class Role {
 	 */
 	isVoteValid(vote) {
 		if (vote == this.user_id) return false;
-		var player = this.engine.game.state.players[user_id];
+		var player = this.engine.game.state.players.find(p => p.user_id == vote);
 		if (!player) return false;
 		return !!player.alive;
 	}

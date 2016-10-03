@@ -10,5 +10,6 @@ router.delete('/:game_id/leave', engine_controller_factory('game:leave'));
 router.post('/:game_id/open', engine_controller_factory('game:open'));
 router.post('/:game_id/close', engine_controller_factory('game:close'));
 router.post('/:game_id/start', engine_controller_factory('game:start'));
+router.post('/:game_id/vote', engine_controller_factory('game:vote'));
 
 module.exports = router;

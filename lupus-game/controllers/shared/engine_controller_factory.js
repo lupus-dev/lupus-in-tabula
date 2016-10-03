@@ -5,6 +5,11 @@ module.exports = function(event) {
 	return function(req, res, next) {
 		if (!check_login(req, res)) return;
 
-		send_to_engine(req.params.game_id, event, { user_id: req.session.user_id }, res);
+		let data = {
+			user_id: req.session.user_id,
+			data: req.body
+		};
+
+		send_to_engine(req.params.game_id, event, data, res);
 	}
 };

@@ -37,6 +37,10 @@ class UpdateQueue {
 		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['GAME_STARTED'], {});
 	}
 
+	enqueueVote(user_id, vote) {
+		this.enqueueUser(user_id, UpdateQueue.UPDATE_TYPES['PRIVATE_VOTE'], { vote: vote });
+	}
+
 	_enqueue(level, targets, type, data) {
 		debug(`New update in queue ${level} ${targets} ${type} ${JSON.stringify(data)}`);
 		var update = {
@@ -57,7 +61,8 @@ UpdateQueue.UPDATE_TYPES = {
 	'GAME_STARTED':        'GAME_STARTED',
 	'NEXT_DAY':            'NEXT_DAY',
 	'DEATH_BY_OTHER':      'DEATH_BY_OTHER',
-	'PUBLIC_VOTE':         'PUBLIC_VOTE'
+	'PUBLIC_VOTE':         'PUBLIC_VOTE',
+	'PRIVATE_VOTE':	       'PRIVATE_VOTE'
 };
 
 module.exports = UpdateQueue;
