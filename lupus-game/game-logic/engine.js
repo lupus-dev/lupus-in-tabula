@@ -1,7 +1,10 @@
 var debug = require('debug')('lupus-game:engine');
 var EventEmitter = require('events');
+var Random = require('random-js');
 var fs = require('fs');
+
 var UpdateQueue = require('./update-queue');
+var RoleAssigner = require('./role-assigner');
 
 var Game = global.Game;
 
@@ -42,13 +45,20 @@ module.exports = class Engine {
 	startGame() {
 		this.game.state.day = 1;
 		this.game.state.players = [];
+
+		let roles = RoleAssigner.assign(this.game.members, {
+			lupus: 20,
+			farmer: 20
+		}, Random.engines.mt19937().autoSeed());
+
 		for (let member of this.game.members)
 			this.game.state.players.push({
 				user_id: member,
-				role: Math.random() < 0.5 ? 'lupus' : 'farmer', // TODO generate the roles
+				role: roles[member],
 				alive: true,
 				data: {}
 			});
+
 		this.game.state.votes = [];
 		this._setupRoles();
 		this.updateQueue.enqueueGameStarted();
