@@ -46,10 +46,13 @@ module.exports = class Engine {
 		this.game.state.day = 1;
 		this.game.state.players = [];
 
+		let seed = Random.generateEntropyArray();
+		let engine = Random.engines.mt19937().seedWithArray(seed);
+
 		let roles = RoleAssigner.assign(this.game.members, {
 			lupus: 20,
 			farmer: 20
-		}, Random.engines.mt19937().autoSeed());
+		}, engine);
 
 		for (let member of this.game.members)
 			this.game.state.players.push({
@@ -62,6 +65,11 @@ module.exports = class Engine {
 		this.game.state.votes = [];
 		this._setupRoles();
 		this.updateQueue.enqueueGameStarted();
+
+		this.game.gen_info.random = {
+			seed: seed,
+			useCount: engine.getUseCount()
+		};
 		return this.game.save();
 	}
 

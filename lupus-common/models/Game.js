@@ -38,8 +38,9 @@ module.exports = function(mongoose, connection) {
 		gen_info: {
 			min_players: { type: Number, required: true },
 			max_players: { type: Number, required: true },
-			roles: { type: Schema.Types.Mixed }
-		}
+			roles: { type: Schema.Types.Mixed },
+			random: { type: Schema.Types.Mixed }
+		},
 	}, {
 		timestamps: {
 			createdAt: 'created_at',
