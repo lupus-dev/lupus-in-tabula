@@ -30,7 +30,7 @@ fi
 
 token=$(login user1 pass1)
 
-res=$(post $HISTORY_API/games $token "{\"name\":\"Game\",\"gen_info\":{\"min_players\":5,\"max_players\":10}}")
+res=$(post $HISTORY_API/games $token "{\"name\":\"Game\",\"gen_info\":{\"min_players\":1,\"max_players\":$N}}")
 game_id=$(echo $res | cut -d'"' -f 4)
 echo "Game created: $game_id"
 

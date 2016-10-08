@@ -4,6 +4,7 @@ var Random = require('random-js');
 var fs = require('fs');
 
 var UpdateQueue = require('./update-queue');
+var RoleGenerator = require('./role-generator');
 var RoleAssigner = require('./role-assigner');
 
 var Game = global.Game;
@@ -46,13 +47,10 @@ module.exports = class Engine {
 		this.game.state.day = 1;
 		this.game.state.players = [];
 
-		let seed = Random.generateEntropyArray();
-		let engine = Random.engines.mt19937().seedWithArray(seed);
+		let engine = this._newRandomEngine();
 
-		let roles = RoleAssigner.assign(this.game.members, {
-			lupus: 20,
-			farmer: 20
-		}, engine);
+		let roleFrequencies = RoleGenerator.generate(this, engine);
+		let roles = RoleAssigner.assign(this.game.members, roleFrequencies, engine);
 
 		for (let member of this.game.members)
 			this.game.state.players.push({
@@ -66,10 +64,8 @@ module.exports = class Engine {
 		this._setupRoles();
 		this.updateQueue.enqueueGameStarted();
 
-		this.game.gen_info.random = {
-			seed: seed,
-			useCount: engine.getUseCount()
-		};
+		// update the random state from the engine
+		this.game.gen_info.random.useCount = engine.getUseCount();
 		return this.game.save();
 	}
 
@@ -77,6 +73,28 @@ module.exports = class Engine {
 		this.sockets[socket.session.user_id] = socket;
 		socket.join(this.game.game_id);
 		socket.on('disconnect', () => debug('Socket ' + socket.id + ' disconnected'));
+	}
+
+	_newRandomEngine() {
+		let seed = Random.generateEntropyArray();
+		let engine = Random.engines.mt19937().seedWithArray(seed);
+		this.game.gen_info.random = {
+			seed: seed,
+			useCount: engine.getUseCount()
+		};
+		return engine;
+	}
+
+	_storeRandomEngine(engine) {
+		this.game.gen_info.random.useCount = engine.getUseCount();
+		return this.game.save();
+	}
+
+	_restoreRandomEngine() {
+		let seed = this.game.gen_info.random.seed;
+		let engine = Random.engines.mt19937().seedWithArray(seed);
+		engine.discard(this.game.gen_info.random.useCount);
+		return engine;
 	}
 
 	_bindEvents() {

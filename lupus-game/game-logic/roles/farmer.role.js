@@ -17,5 +17,9 @@ Farmer.team_id = 'villagers';
 Farmer.mana = 'white';
 Farmer.priority_night = 0;
 Farmer.priority_day = 1;
+Farmer.generation = {
+	probability: 1,
+	group: 1
+};
 
 module.exports = Farmer;

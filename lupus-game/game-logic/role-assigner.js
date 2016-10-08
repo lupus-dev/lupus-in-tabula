@@ -1,4 +1,5 @@
 var Random = require('random-js');
+var debug = require('debug')('lupus-game:role-assigner');
 
 module.exports = class RoleAssigner {
 	/**
@@ -19,6 +20,7 @@ module.exports = class RoleAssigner {
 		for (let user_id of user_ids)
 			res[user_id] = unpacked_roles[count++];
 
+		debug('Assiged roles', res);
 		return res;
 	}
 };

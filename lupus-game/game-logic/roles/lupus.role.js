@@ -20,5 +20,9 @@ Lupus.team_id = 'lupuses';
 Lupus.mana = 'black';
 Lupus.priority_night = 1;
 Lupus.priority_day = 1;
+Lupus.generation = {
+	probability: 0,    // the lupuses are generated indipendently
+	group: 0
+};
 
 module.exports = Lupus;

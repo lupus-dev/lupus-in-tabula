@@ -112,11 +112,15 @@ class Role {
 	}
 };
 
-Role.role_id = null;
-Role.role_name = null;
-Role.team_id = null;
-Role.mana = 'white';
-Role.priority_night = 1;
-Role.priority_day = 1;
+Role.role_id = null;          // unique role identifier
+Role.role_name = null;        // full name of the role
+Role.team_id = null;          // identifier of the team
+Role.mana = 'white';          // 'white' or 'black'
+Role.priority_night = 1;      // relative priority of execution in night
+Role.priority_day = 1;        // relative priority of execution in night
+Role.generation = {           // generation information
+	probability: 0,               // relative probability to be generated (not needed to be [0, 1))
+	group: 0                      // copy of the same role to be generated at once
+};
 
 module.exports = Role;
