@@ -21,4 +21,6 @@
 		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-full>
 	<lupus-game-state-running *ngIf="game.state.status.code == 'running'"
 		[game]="game" [isAdmin]="isAdmin" [isMember]="isMember"></lupus-game-state-running>
+	<lupus-game-state-ended *ngIf="game.state.status.code == 'ended'"
+		[game]="game" ></lupus-game-state-ended>
 </div>

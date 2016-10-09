@@ -13,8 +13,22 @@ module.exports = class GameManager {
 
 		this._doActions();
 
-		this.engine.game.state.day++;
-		this.engine.updateQueue.enqueueNextDay(this.engine.game.state.day);
+		let end = this._checkEnd();
+		if (end) {
+			let team_name = end === true ? 'nobody' : end.team_name;
+
+			this.engine.game.state.status.code = 'ended';
+			this.engine.game.state.status.winner = team_name;
+
+			this.engine.updateQueue.enqueueStatusChange('ended');
+			this.engine.updateQueue.enqueueGameEnded(team_name);
+
+			debug('Game ended! Winner:', team_name);
+		} else {
+			this.engine.game.state.day++;
+			this.engine.updateQueue.enqueueNextDay(this.engine.game.state.day);
+			debug('Next day:', this.engine.game.state.day);
+		}
 		return this.engine.game.save();
 	}
 
@@ -43,5 +57,23 @@ module.exports = class GameManager {
 			player.performAction();
 
 		this.engine._storeRandomEngine(random);
+	}
+
+	_checkEnd() {
+		if (this._checkDeadEnd()) return true;
+
+		let teams = _.uniq(_.map(this.engine.roles, x => x.constructor.team_id)).map(x => global.teams[x]);
+
+		teams.sort((a, b) => b.priority - a.priority);
+
+		for (let team of teams)
+			if (team.checkWin(this.engine))
+				return team;
+		return false;
+	}
+
+	_checkDeadEnd() {
+		let alive = this.engine.game.state.players.filter(p => p.alive);
+		return alive.length == 0;
 	}
 };

@@ -5,7 +5,7 @@
 <div *ngIf="isMember">
 	<h2>You are a member of this game</h2>
 	<button *ngIf="!isAdmin" class="btn btn-warning" (click)="leaveGame()">Leave the game</button>
-	<button class="btn btn-success" (click)="startGame()"
+	<button *ngIf="isAdmin" class="btn btn-success" (click)="startGame()"
 		[disabled]="game.members.length < game.gen_info.min_players">
 		Start the game!
 	</button>

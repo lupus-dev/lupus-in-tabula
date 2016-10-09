@@ -24,13 +24,15 @@ module.exports = class Engine {
 					this.events = new EventEmitter();
 					this._bindEvents();
 
-					this.gameManager = new GameManager(this);
-
 					this.updateQueue = new UpdateQueue(this);
 
 					this.sockets = {};
 
 					this._setupRoles();
+
+					this.gameManager = new GameManager(this);
+					if (this.game.state.status == 'running')
+						this.gameManager.checkProgess();
 
 					debug(`Engine for game ${game_id} ready`);
 					resolve();

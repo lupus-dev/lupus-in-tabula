@@ -28,6 +28,7 @@ import { GameStateOpenComponent } from './game/game-states/game-state-open.compo
 import { GameStateClosedComponent } from './game/game-states/game-state-closed.component';
 import { GameStateFullComponent } from './game/game-states/game-state-full.component';
 import { GameStateRunningComponent } from './game/game-states/game-state-running.component';
+import { GameStateEndedComponent } from './game/game-states/game-state-ended.component';
 
 import { HttpClient } from './shared/http-client.service';
 import { AuthGuard } from './shared/auth-guard.service';
@@ -67,7 +68,8 @@ import { routing } from './app.routing';
 		GameStateOpenComponent,
 		GameStateClosedComponent,
 		GameStateFullComponent,
-		GameStateRunningComponent
+		GameStateRunningComponent,
+		GameStateEndedComponent
 	],
 	providers: [
 		SlimLoadingBarService,

@@ -37,6 +37,10 @@ class UpdateQueue {
 		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['GAME_STARTED'], {});
 	}
 
+	enqueueGameEnded(winner) {
+		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['GAME_ENDED'], { winner: winner });
+	}
+
 	enqueueVote(user_id, vote) {
 		this.enqueueUser(user_id, UpdateQueue.UPDATE_TYPES['PRIVATE_VOTE'], { vote: vote });
 	}
@@ -63,6 +67,7 @@ UpdateQueue.UPDATE_TYPES = {
 	'JOIN_MEMBER':         'JOIN_MEMBER',
 	'LEAVE_MEMBER':        'LEAVE_MEMBER',
 	'GAME_STARTED':        'GAME_STARTED',
+	'GAME_ENDED':          'GAME_ENDED',
 	'NEXT_DAY':            'NEXT_DAY',
 	'DEATH_BY_OTHER':      'DEATH_BY_OTHER',
 	'PUBLIC_VOTE':         'PUBLIC_VOTE',

@@ -49,14 +49,36 @@ module.exports = function(mongoose, connection) {
 	});
 
 	GameSchema.methods.toClient = function() {
-		return {
+		let game = {
 			game_id: this._id,
 			owner_id: this.owner_id,
 			name: this.name,
 			members: this.members,
-			state: this.state,
-			gen_info: this.gen_info
-		};
+			state: {
+				status: this.state.status,
+				day: this.state.day,
+				players: {},
+				votes: []
+			},
+			gen_info: {
+				min_players: this.gen_info.min_players,
+				max_players: this.gen_info.max_players
+			}
+		}
+		for (let player of this.state.players)
+			game.state.players[player.user_id] = {
+				user_id: player.user_id,
+				role: player.role,
+				alive: player.alive
+			};
+		for (let vote of this.state.votes)
+			game.state.votes.push({
+				user_id: vote.user_id,
+				vote: vote.vote,
+				day: vote.day
+			});
+
+		return game;
 	}
 
 	GameSchema.methods.toClientProtected = function(user_id, role) {
