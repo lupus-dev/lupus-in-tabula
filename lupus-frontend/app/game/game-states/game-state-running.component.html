@@ -1,3 +1,9 @@
+<span class="badge pull-right">
+	<span *ngIf="game.state.day % 2 == 0">Day</span>
+	<span *ngIf="game.state.day % 2 == 1">Night</span>
+	{{game.state.day}}
+</span>
+
 <div *ngIf="isAdmin">
 	<h2>You are the admin of this game</h2>
 </div>

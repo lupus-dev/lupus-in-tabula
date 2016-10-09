@@ -3,6 +3,7 @@ var EventEmitter = require('events');
 var Random = require('random-js');
 var fs = require('fs');
 
+var GameManager = require('./game-manager');
 var UpdateQueue = require('./update-queue');
 var RoleGenerator = require('./role-generator');
 var RoleAssigner = require('./role-assigner');
@@ -23,6 +24,8 @@ module.exports = class Engine {
 					this.events = new EventEmitter();
 					this._bindEvents();
 
+					this.gameManager = new GameManager(this);
+
 					this.updateQueue = new UpdateQueue(this);
 
 					this.sockets = {};
@@ -40,7 +43,7 @@ module.exports = class Engine {
 	isNight() { return this.game.state.day % 2 == 1; }
 
 	checkProgess() {
-		return null;
+		this.gameManager.checkProgess();
 	}
 
 	startGame() {

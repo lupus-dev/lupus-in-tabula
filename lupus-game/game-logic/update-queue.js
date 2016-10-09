@@ -41,6 +41,10 @@ class UpdateQueue {
 		this.enqueueUser(user_id, UpdateQueue.UPDATE_TYPES['PRIVATE_VOTE'], { vote: vote });
 	}
 
+	enqueueNextDay(day) {
+		this.enqueueBroadcast(UpdateQueue.UPDATE_TYPES['NEXT_DAY'], { day: day });
+	}
+
 	_enqueue(level, targets, type, data) {
 		debug(`New update in queue ${level} ${targets} ${type} ${JSON.stringify(data)}`);
 		var update = {

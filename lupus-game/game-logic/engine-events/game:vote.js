@@ -21,7 +21,8 @@ module.exports = function(data, callback) {
 	this.updateQueue.enqueueVote(data.user_id, vote);
 	this.game.save()
 		.then(game => {
+			this.events.emit('engine:voted', vote);
 			callback(null, { data: this.game.toClientProtected(data.user_id, this.roles[data.user_id]), code: 200 });
 		})
-		.catch(err => callback({ error: err, code: 500 }));
+		.catch(err => { console.error(err); callback({ error: err, code: 500 }) });
 };
