@@ -96,6 +96,8 @@ module.exports = class Engine {
 	}
 
 	_restoreRandomEngine() {
+		if (!this.game.gen_info.random) return this._newRandomEngine();
+
 		let seed = this.game.gen_info.random.seed;
 		let engine = Random.engines.mt19937().seedWithArray(seed);
 		engine.discard(this.game.gen_info.random.useCount);

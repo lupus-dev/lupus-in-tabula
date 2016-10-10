@@ -1,3 +1,5 @@
+var debug = require('debug')('lupus-game:role');
+
 class Role {
 	constructor(engine, user_id) {
 		this.engine = engine;
@@ -23,9 +25,7 @@ class Role {
 	 *         ]
 	 *     }
 	 */
-	needVote() {
-		return false;
-	}
+	needVote() {}
 
 	_needVoteDay() {
 		if (!this.player.alive) return false;
@@ -45,9 +45,31 @@ class Role {
 	/**
 	 * Once a day this function is called and the role should execute its actions.
 	 * For example the lupus will kill, the guard will protect etc..
+	 * @param players List of Role instances sorted by execution time
 	 */
-	performAction() {
-		return false;
+	performAction(players) {
+		if (this.engine.isDay())
+			this._performActionDay(players);
+	}
+
+	_performActionDay(players) {
+		for (let user_id in players) {
+			let player = players[user_id];
+			if (player.user_id == this.user_id)
+				if (player.alive)   break;
+				else 				return;
+			else if (player.alive)  return;
+		}
+
+		debug('The user ' + this.user_id + ' is choosen to make the bonfire');
+
+		let votes = this.engine.game.state.votes.filter(v => v.day == this.engine.game.state.day);
+		let voted = this._selectFromVotation(votes, votes.length/2|0+1);
+
+		if (voted) {
+			this.kill(voted);
+			debug('The user ' + this.user_id + ' has burned ' + voted);
+		}
 	}
 
 	/**
@@ -87,7 +109,8 @@ class Role {
 	 * Kill a user by the current player. This checks if the kill is possible or not
 	 */
 	kill(user_id) {
-		throw new Error('Not implemented');
+		this.engine.roles[user_id].player.alive = false;
+		debug('Killed!!');
 	}
 
 	/**
@@ -109,6 +132,27 @@ class Role {
 	 */
 	isProtected(user_id) {
 		throw new Error('Not implemented');
+	}
+
+	_selectFromVotation(votes, quorum) {
+		let candidates = {};
+		let most_voted = null;
+		for (let vote of votes) {
+			if (candidates[vote.vote])
+				candidates[vote.vote]++;
+			else
+				candidates[vote.vote] = 1;
+
+			if (!candidates[most_voted] || candidates[most_voted] < candidates[vote.vote])
+				most_voted = vote.vote;
+		}
+
+		if (candidates[most_voted] < quorum) {
+			debug('Quorum not reached: ', candidates[most_voted], ' < ', quorum);
+			return false;
+		}
+
+		return most_voted;
 	}
 };
 

@@ -53,8 +53,12 @@ module.exports = class GameManager {
 
 		players.sort(cmp);
 
+		// make a copy of the state of the player
 		for (let player of players)
-			player.performAction();
+			player.alive = player.player.alive;
+
+		for (let player of players)
+			player.performAction(players);
 
 		this.engine._storeRandomEngine(random);
 	}
