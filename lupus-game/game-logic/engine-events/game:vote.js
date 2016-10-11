@@ -1,4 +1,5 @@
 var debug = require('debug')('lupus-game:engine_game_vote');
+var save_game = require('lupus-common').save_game;
 var change_game_status = require('./shared/change_game_status');
 
 module.exports = function(data, callback) {
@@ -19,10 +20,6 @@ module.exports = function(data, callback) {
 	debug(`The user ${data.user_id} has voted ${data.data.vote} in game ${this.game.game_id}`);
 
 	this.updateQueue.enqueueVote(data.user_id, vote);
-	this.game.save()
-		.then(game => {
-			this.events.emit('engine:voted', vote);
-			callback(null, { data: this.game.toClientProtected(data.user_id, this.roles[data.user_id]), code: 200 });
-		})
-		.catch(err => { console.error(err); callback({ error: err, code: 500 }) });
+	this.events.emit('engine:voted', vote);
+	save_game(this, data.user_id, callback);
 };

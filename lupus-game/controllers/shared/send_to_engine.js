@@ -12,5 +12,8 @@ module.exports = function(game_id, event, data, res) {
 				res.status(data.code).json(data.data);
 			});
 		})
-		.catch(err => res.status(404).json({ error: err.message }));
+		.catch(err => {
+			console.error(err);
+			res.status(404).json({ error: err.message });
+		});
 };

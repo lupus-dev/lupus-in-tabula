@@ -1,4 +1,5 @@
 var debug = require('debug')('lupus-game:engine_game_leave');
+var save_game = require('lupus-common').save_game;
 
 var UPDATE_TYPES = require('../update-queue').UPDATE_TYPES;
 
@@ -30,9 +31,5 @@ module.exports = function(data, callback) {
 		});
 	}
 
-	game.save()
-		.then(game => {
-			callback(null, { data: game.toClientProtected(data.user_id, this.roles[data.user_id]), code: 200 });
-		})
-		.catch(err => callback({ error: err, code: 500 }));
+	save_game(this, data.user_id, callback);
 }

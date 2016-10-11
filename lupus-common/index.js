@@ -7,6 +7,7 @@ exports.generic_get = require('./generic-get');
 exports.do_save = require('./do-save');
 exports.gracefulShutdown = require('./graceful-shutdown');
 exports.gameToClientProtected = require('./game-to-client-protected');
+exports.save_game = require('./save-game');
 
 exports.models = {};
 
