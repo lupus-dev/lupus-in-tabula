@@ -69,7 +69,8 @@ export class GameComponent implements OnInit, OnDestroy {
 	}
 
 	gameUpdate(data) {
-		this.fillGame(data.game);
+		this.fillGame(data.game)
+			.then(game => console.log('game:update', data, this.game));
 	}
 
 	fillGame(game) {
@@ -77,7 +78,6 @@ export class GameComponent implements OnInit, OnDestroy {
 			this.gameService.fillUsers([game])
 				.then(games => {
 					this.game = games[0];
-					console.log('game:update', this.game);
 
 					var user_id = this.sessionService.user.user_id;
 					this.isAdmin = this.game.owner_id == user_id;

@@ -77,6 +77,13 @@ module.exports = class Engine {
 	registerSocket(socket) {
 		this.sockets[socket.session.user_id] = socket;
 		socket.join(this.game.game_id);
+
+		if (this.roles[socket.session.user_id]) {
+			let player = this.roles[socket.session.user_id];
+			if (player.constructor.socket_room_suffix)
+				socket.join(this.game.game_id + player.constructor.socket_room_suffix);
+		}
+
 		socket.on('disconnect', () => debug('Socket ' + socket.id + ' disconnected'));
 	}
 
@@ -126,6 +133,11 @@ module.exports = class Engine {
 			}
 
 			this.roles[player.user_id] = new role_class(this, player.user_id);
+			if (this.sockets[player.user_id]) {
+				let socket = this.sockets[player.user_id];
+				if (role_class.socket_room_suffix)
+					socket.join(this.game.game_id + role_class.socket_room_suffix);
+			}
 		}
 	}
 };

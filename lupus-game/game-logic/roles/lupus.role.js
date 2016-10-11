@@ -1,10 +1,19 @@
 var debug = require('debug')('lupus-game:role-lupus');
 
 var Role = require('../role');
+var UpdateQueue = require('../update-queue');
 
 class Lupus extends Role {
 	constructor(engine, user_id) {
 		super(engine, user_id);
+
+		engine.events.on('engine:voted', (vote) => {
+			if (vote.user_id == user_id)
+				engine.updateQueue.enqueueRoom(
+					engine.game.game_id+Lupus.socket_room_suffix,
+					UpdateQueue.UPDATE_TYPES['PUBLIC_VOTE'],
+					vote);
+		});
 	}
 
 	needVote() {
@@ -54,6 +63,7 @@ Lupus.team_id = 'lupuses';
 Lupus.mana = 'black';
 Lupus.priority_night = 1;
 Lupus.priority_day = 1;
+Lupus.socket_room_suffix = ':lupuses';
 Lupus.generation = {
 	probability: 0,    // the lupuses are generated indipendently
 	group: 0
