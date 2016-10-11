@@ -64,7 +64,7 @@ class Role {
 		debug('The user ' + this.user_id + ' is choosen to make the bonfire');
 
 		let votes = this.engine.game.state.votes.filter(v => v.day == this.engine.game.state.day);
-		let voted = this._selectFromVotation(votes, votes.length/2|0+1);
+		let voted = this._selectFromVotation(votes, ((votes.length/2)|0)+1);
 
 		if (voted) {
 			this.kill(voted);

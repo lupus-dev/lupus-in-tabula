@@ -31,7 +31,7 @@ class Lupus extends Role {
 		let votes = this.engine.game.state.votes.filter(v => {
 			return v.day == this.engine.game.state.day && this.engine.roles[v.user_id].constructor.role_id == 'lupus'
 		});
-		let voted = this._selectFromVotation(votes, votes.length/2|0+1);
+		let voted = this._selectFromVotation(votes, ((votes.length/2)|0)+1);
 
 		if (voted) {
 			this.kill(voted);
