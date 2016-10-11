@@ -1,7 +1,5 @@
 class Team {
-	static checkWin(engine) {
-		return false;
-	}
+	static checkWin(engine) {}
 };
 
 Team.team_id = '';
