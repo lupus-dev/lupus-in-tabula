@@ -12,7 +12,15 @@ class Lupus extends Role {
 		if (!res) return false;
 		if (this.engine.isNight())
 			res.message = 'Vote who tear to pieces!';
+		res.votables.push({ value: this.user_id });
 		return res;
+	}
+
+	isVoteValid(vote) {
+		if (this.engine.isDay() && vote == this.user_id) return false;
+		var player = this.engine.game.state.players.find(p => p.user_id == vote);
+		if (!player) return false;
+		return !!player.alive;
 	}
 
 	performAction(players) {

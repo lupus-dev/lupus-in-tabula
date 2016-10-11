@@ -57,8 +57,10 @@ module.exports = class GameManager {
 		for (let player of players)
 			player.alive = player.player.alive;
 
-		for (let player of players)
+		for (let player of players) {
+			debug('==== Action of ' + player.user_id + ' (' + player.constructor.role_id + ')');
 			player.performAction(players);
+		}
 
 		this.engine._storeRandomEngine(random);
 	}

@@ -33,7 +33,8 @@ module.exports = function(mongoose, connection) {
 					vote: { type: Schema.Types.Mixed },
 					day: { type: Number, required: true }
 				}
-			]
+			],
+			protection: { type: Schema.Types.Mixed, default: {} }
 		},
 		gen_info: {
 			min_players: { type: Number, required: true },

@@ -109,8 +109,12 @@ class Role {
 	 * Kill a user by the current player. This checks if the kill is possible or not
 	 */
 	kill(user_id) {
+		if (this.isProtected(this, this.engine.roles[user_id])) {
+			debug('The user ' + this.user_id + ' didnt kill ' + user_id + ' beacuse he was protected');
+			return;
+		}
 		this.engine.roles[user_id].player.alive = false;
-		debug('Killed!!');
+		debug('The user ' + this.user_id + ' killed ' + user_id);
 	}
 
 	/**
@@ -120,18 +124,44 @@ class Role {
 		throw new Error('Not implemented');
 	}
 
-	/**
-	 * Protect a user for being killed. The interface of this method will be changed!
-	 */
-	protect(user_id) {
-		throw new Error('Not implemented');
+	//protectUserFromUser(victim, killer) { this._protect('@'+killer, '@'+victim); }
+
+	protectUserFromRole(victim, killer) { this._protect('#'+killer, '@'+victim); }
+	//protectRoleFromUser(victim, killer) { this._protect('@'+killer, '#'+victim); }
+
+	//protectUserFromAll(victim) { this._protect('*', '@'+victim); }
+	//protectAllFromUser(killer) { this._protect('@'+killer, '*'); }
+
+	//protectRoleFromAll(victim) { this._protect('*', '#'+victim); }
+	//protectAllFromRole(killer) { this._protect('#'+killer, '*'); }
+
+	_protect(killer, victim) {
+		let protection = this.engine.game.state.protection;
+		if (!protection[victim])
+			protection[victim] = [];
+		protection[victim].push(killer);
 	}
 
-	/**
-	 * Check if the user is protected by being killed by the current user
-	 */
-	isProtected(user_id) {
-		throw new Error('Not implemented');
+	isProtected(killer, victim) {
+		let id_killer = '@' + killer.user_id;
+		let id_victim = '@' + victim.user_id;
+
+		let role_killer = '#' + killer.constructor.role_id;
+		let role_victim = '#' + victim.constructor.role_id;
+
+		let protection = this.engine.game.state.protection;
+
+		let scopes = [
+			protection[id_victim],
+			protection[role_victim],
+			protection['*']
+		];
+
+		for (let scope of scopes)
+			if (scope)
+				if (scope.indexOf(id_killer) >= 0 || scope.indexOf(role_killer) >= 0 || scope.indexOf('*') >= 0)
+					return true;
+		return false;
 	}
 
 	_selectFromVotation(votes, quorum) {
