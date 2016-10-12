@@ -2,40 +2,16 @@
 Feature:
 
 	One simple game with 6 players: 2 lupues and 4 farmers
-	Players:
-		- user1: lupus
-		- user2: lupus
-		- user3: farmer
-		- user4: farmer
-		- user5: farmer
-		- user6: farmer
 
 	@clean
 	Scenario: Simulation 1
-		Given There was a registered user user1_id
-		| username | "user1" |
-		Given There was a registered user user2_id
-		| username | "user2" |
-		Given There was a registered user user3_id
-		| username | "user3" |
-		Given There was a registered user user4_id
-		| username | "user4" |
-		Given There was a registered user user5_id
-		| username | "user5" |
-		Given There was a registered user user6_id
-		| username | "user6" |
-
-		Given Store in players
-		"""
-			[
-				{ "user_id": "`user1_id`", "role": "lupus", "alive": true },
-				{ "user_id": "`user2_id`", "role": "lupus", "alive": true },
-				{ "user_id": "`user3_id`", "role": "farmer", "alive": true },
-				{ "user_id": "`user4_id`", "role": "farmer", "alive": true },
-				{ "user_id": "`user5_id`", "role": "farmer", "alive": true },
-				{ "user_id": "`user6_id`", "role": "farmer", "alive": true }
-			]
-		"""
+		Given There are the players
+		| user1 | lupus |
+		| user2 | lupus |
+		| user3 | farmer |
+		| user4 | farmer |
+		| user5 | farmer |
+		| user6 | farmer |
 
 		Given There was a game in the database game_id
 		| name 				| "The Game" |

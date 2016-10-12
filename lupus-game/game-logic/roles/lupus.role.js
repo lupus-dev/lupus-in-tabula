@@ -32,6 +32,14 @@ class Lupus extends Role {
 		return !!player.alive;
 	}
 
+	visibleVotes(votes) {
+		return votes.filter(vote => {
+			if (vote.user_id+'' == this.user_id) return true;
+			if (this.engine.roles[vote.user_id].constructor.role_id == 'lupus') return true;
+			return false;
+		});
+	}
+
 	performAction(players) {
 		if (this.engine.isDay()) return this._performActionDay(players);
 

@@ -42,9 +42,10 @@ module.exports = function(game, user_id, role) {
 					alive: player.alive
 				};
 
-		ret.state.votes = game.state.votes.filter((vote) => {
-			return vote.user_id == user_id;
-		});
+		if (role)
+			ret.state.votes = role.visibleVotes(game.state.votes);
+		else
+			ret.state.votes = game.state.votes.filter(vote => vote.user_id+'' == user_id+'');
 	}
 
 	return ret;

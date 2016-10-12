@@ -82,6 +82,13 @@ class Role {
 		return !!player.alive;
 	}
 
+	/**
+	 * Returns a subset of the visible votes
+	 */
+	visibleVotes(votes) {
+		return votes.filter(v => v.user_id+'' == this.user_id);
+	}
+
 	get data() {
 		return this.player.data;
 	}
