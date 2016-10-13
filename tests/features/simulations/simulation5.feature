@@ -1,14 +1,14 @@
 @simulation
 Feature:
 
-	One simple game with 6 players: 2 lupues, 3 farmers and a guard
+	One simple game with 6 players: 2 lupues, 3 farmers and a seer
 
 	@clean
-	Scenario: Simulation 3
+	Scenario: Simulation 5
 		Given There are the players
 		| user1 | lupus |
 		| user2 | lupus |
-		| user3 | guard |
+		| user3 | seer |
 		| user4 | farmer |
 		| user5 | farmer |
 		| user6 | farmer |
@@ -31,15 +31,20 @@ Feature:
 		# lupuses
 		When Player user1 voted `user6_id` in game `game_id`
 		When Player user2 voted `user6_id` in game `game_id`
-		# guard
-		When Player user3 voted `user6_id` in game `game_id`
+		# seer
+		When Player user3 voted `user1_id` in game `game_id`
 
 		Then Wait 100 ms
 
 		And  I GET /api/history/games/`game_id`
 		And  The game at index `game_id` should be
 		| state.day 			| 2 |
-		| state.players.`user6_id`.alive | true |
+		| state.players.`user6_id`.alive | false |
+
+		And The Game with id `game_id` should be
+		| state.players.2.data.seen.0.player | "`user1_id`" |
+		| state.players.2.data.seen.0.mana | "black" |
+		| state.players.2.data.seen.0.day | 1 |
 
 
 		# DAY 2: the villagers kill user1
@@ -49,7 +54,6 @@ Feature:
 		When Player user3 voted `user1_id` in game `game_id`
 		When Player user4 voted `user1_id` in game `game_id`
 		When Player user5 voted `user1_id` in game `game_id`
-		When Player user6 voted `user1_id` in game `game_id`
 
 		Then Wait 100 ms
 
@@ -59,9 +63,9 @@ Feature:
 		| state.players.`user1_id`.alive | false |
 
 
-		# NIGHT 3: the lupus kills user3
+		# NIGHT 3: the lupus kills user4
 
-		When Player user2 voted `user3_id` in game `game_id`
+		When Player user2 voted `user4_id` in game `game_id`
 
 		When Player user3 voted `user4_id` in game `game_id`
 
@@ -70,15 +74,18 @@ Feature:
 		And  I GET /api/history/games/`game_id`
 		And  The game at index `game_id` should be
 		| state.day 			| 4 |
-		| state.players.`user3_id`.alive | false |
+		| state.players.`user4_id`.alive | false |
 
+		And The Game with id `game_id` should be
+		| state.players.2.data.seen.1.player | "`user4_id`" |
+		| state.players.2.data.seen.1.mana | "white" |
+		| state.players.2.data.seen.1.day | 3 |
 
 		# DAY 4: the villagers kill the last lupus
 
 		When Player user2 voted `user5_id` in game `game_id`
-		When Player user4 voted `user2_id` in game `game_id`
+		When Player user3 voted `user2_id` in game `game_id`
 		When Player user5 voted `user2_id` in game `game_id`
-		When Player user6 voted `user2_id` in game `game_id`
 
 		Then Wait 100 ms
 

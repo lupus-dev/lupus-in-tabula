@@ -4,7 +4,7 @@ Feature:
 	One simple game with 6 players: 2 lupues and 4 farmers
 
 	@clean
-	Scenario: Simulation 1
+	Scenario: Simulation 2
 		Given There are the players
 		| user1 | lupus |
 		| user2 | lupus |

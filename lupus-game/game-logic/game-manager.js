@@ -58,7 +58,10 @@ module.exports = class GameManager {
 			player.alive = player.player.alive;
 
 		for (let player of players) {
-			debug('==== Action of ' + player.user_id + ' (' + player.constructor.role_id + ')');
+			let player_info = player.constructor.role_id;
+			if (!player.player.alive) player_info += ', dead'
+
+			debug(`==== Action of ${player.user_id} (${player_info})`);
 			player.performAction(players);
 		}
 

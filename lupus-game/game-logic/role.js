@@ -97,19 +97,6 @@ class Role {
 		return votes.filter(v => v.user_id+'' == this.user_id);
 	}
 
-	get data() {
-		return this.player.data;
-	}
-
-	set data(data) {
-		// TODO implement set data
-		// maybe like this?
-		//
-		// this.player.data = data;
-		// this.game.save().exec();
-		throw new Error('Not implemented');
-	}
-
 	/**
 	 * Returns the vote of the player in the current day
 	 */
