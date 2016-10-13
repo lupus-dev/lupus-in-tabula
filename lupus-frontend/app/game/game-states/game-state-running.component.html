@@ -15,6 +15,8 @@
 
 	<div class="row" *ngIf="player.extra">
 		<div *ngIf="player.extra.needVote" class="col-md-4">
+			<lupus-templater *ngIf="player.extra.extraMessage" [rawTemplate]="player.extra.extraMessage"></lupus-templater>
+
 			{{player.extra.needVote.message}}
 
 			<div class="form-group">

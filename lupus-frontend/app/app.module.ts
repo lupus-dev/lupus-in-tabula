@@ -22,6 +22,7 @@ import { NewGameComponent } from './new-game/new-game.component';
 import { GameSplashComponent } from './game/game-splash.component';
 import { MembersListComponent } from './game/members-list/members-list.component';
 import { PlayersListComponent } from './game/players-list/players-list.component';
+import { TemplaterComponent } from './templater/templater.component';
 
 import { GameStateDraftComponent } from './game/game-states/game-state-draft.component';
 import { GameStateOpenComponent } from './game/game-states/game-state-open.component';
@@ -63,6 +64,7 @@ import { routing } from './app.routing';
 		GameSplashComponent,
 		MembersListComponent,
 		PlayersListComponent,
+		TemplaterComponent,
 
 		GameStateDraftComponent,
 		GameStateOpenComponent,

@@ -16,6 +16,14 @@ class Role {
 	}
 
 	/**
+	 * An extra message displayed to the player near the votation box. It could
+	 * contain HTML tags for styling
+	 */
+	extraMessage() {
+		return null;
+	}
+
+	/**
 	 * This methods returns false if the user should not vote, otherwise a list
 	 * of objects with all the allowed votes:
 	 *     {

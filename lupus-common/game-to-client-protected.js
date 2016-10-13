@@ -30,6 +30,7 @@ module.exports = function(game, user_id, role) {
 				if (role)
 					ret.state.players[player.user_id].extra = {
 						splash: role.splash(),
+						extraMessage: role.extraMessage(),
 						needVote: role.needVote(),
 						role_id: role.constructor.role_id,
 						role_name: role.constructor.role_name,

@@ -1,0 +1,13 @@
+<span *ngFor="let chunk of template">
+	<span *ngIf="chunk.type == 'text'">{{chunk.data}}</span>
+	<strong *ngIf="chunk.type == 'strong'">{{chunk.data}}</strong>
+	<em *ngIf="chunk.type == 'em'">{{chunk.data}}</em>
+
+	<ul *ngIf="chunk.type == 'ul'">
+		<lupus-templater [rawTemplate]="chunk.data"></lupus-templater>
+	</ul>
+	<li *ngIf="chunk.type == 'li'">
+		<lupus-templater [rawTemplate]="chunk.data"></lupus-templater>
+	</li>
+	<lupus-user-badge *ngIf="chunk.type == 'user'" [user]="chunk.extraData"></lupus-user-badge>
+</span>

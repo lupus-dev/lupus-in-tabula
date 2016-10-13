@@ -16,6 +16,35 @@ class Lupus extends Role {
 		});
 	}
 
+	extraMessage() {
+		let otherLupusesVotes = this.engine.game.state.votes.filter(vote => {
+			return vote.day == this.engine.game.state.day &&
+				vote.user_id+'' != this.user_id &&
+				this.engine.roles[vote.user_id].constructor.role_id == 'lupus';
+		});
+
+		if (otherLupusesVotes.length == 0) return null;
+
+		let elements = [];
+		for (let vote of otherLupusesVotes)
+			elements.push({
+				type: 'li',
+				data: [
+					{ type: 'user', data: vote.user_id },
+					{ type: 'text', data: ' voted ' },
+					{ type: 'user', data: vote.vote }
+				]
+			});
+
+		let res = [
+			{ type: 'text', data: 'Other lupuses voted:' },
+			{ type: 'ul', data: elements }
+		];
+
+		debug(res);
+		return res;
+	}
+
 	needVote() {
 		let res = this._needVoteDay();
 		if (!res) return false;
