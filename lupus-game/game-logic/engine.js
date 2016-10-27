@@ -96,6 +96,7 @@ module.exports = class Engine {
 		setTimeout(() => {
 			Game.findOne({ _id: game_id })
 				.then(game => {
+					console.log('#########' + require('util').inspect(game, { depth: null }));
 					if (game.members[0]+'' != game.state.players[0].user_id+'' ||
 						game.members[1]+'' != game.state.players[1].user_id+'')
 						console.error("--------------- ERROR #5", require('util').inspect(game, { depth: null }));
