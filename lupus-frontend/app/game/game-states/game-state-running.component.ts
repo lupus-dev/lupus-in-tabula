@@ -30,7 +30,7 @@ export class GameStateRunningComponent implements OnChanges {
 	}
 
 	getVotables() {
-		if (!this.player.extra || !this.player.extra.needVote) return;
+		if (!this.player || !this.player.extra || !this.player.extra.needVote) return;
 		let votables_list = this.player.extra.needVote.votables;
 
 		let users = [];

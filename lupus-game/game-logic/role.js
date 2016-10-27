@@ -138,7 +138,13 @@ class Role {
 	//protectAllFromRole(killer) { this._protect('#'+killer, '*'); }
 
 	_protect(killer, victim) {
-		let protection = this.engine.game.state.protection;
+		let day = this.engine.game.state.day;
+
+		// set the initial structure of protection state
+		if (!this.engine.game.state.protection) this.engine.game.state.protection = {};
+		if (!this.engine.game.state.protection[day]) this.engine.game.state.protection[day] = [];
+
+		let protection = this.engine.game.state.protection[day];
 		if (!protection[victim])
 			protection[victim] = [];
 		protection[victim].push(killer);
@@ -151,7 +157,9 @@ class Role {
 		let role_killer = '#' + killer.constructor.role_id;
 		let role_victim = '#' + victim.constructor.role_id;
 
-		let protection = this.engine.game.state.protection;
+		let day = this.engine.game.state.day;
+		let protection = this.engine.game.state.protection[day];
+		if (!protection) protection = {};
 
 		let scopes = [
 			protection[id_victim],

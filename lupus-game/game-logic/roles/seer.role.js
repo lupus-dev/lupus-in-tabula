@@ -7,6 +7,17 @@ class Seer extends Role {
 		super(engine, user_id);
 	}
 
+	extraMessage() {
+		let seen = ((this.player.data || {}).seen || []).find(seen => seen.day == this.engine.game.state.day - 2);
+		if (!seen) return null;
+
+		return [
+			{ type: 'text', data: 'Last night you watched ' },
+			{ type: 'user', data: seen.player },
+			{ type: 'text', data: ' and he\'s mana was ' + seen.mana }
+		];
+	}
+
 	needVote() {
 		let res = this._needVoteDay();
 		if (!res) return false;

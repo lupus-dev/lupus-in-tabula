@@ -4,7 +4,7 @@ Feature:
 	One simple game with 6 players: 2 lupues, 2 farmers, a guard and a seer
 
 	@clean
-	Scenario: Simulation 5
+	Scenario: Simulation 6
 		Given There are the players
 		| user1 | lupus |
 		| user2 | lupus |
