@@ -19,12 +19,12 @@ class Seer extends Role {
 	}
 
 	needVote() {
-		let res = this._needVoteDay();
-		if (!res) return false;
-		if (this.engine.isNight())
-			res.message = 'Vote who look at!';
-		res.votables.push({ value: 'nobody', text: 'nobody' });
-		return res;
+		if (this.engine.isDay()) return this._needVoteDay();
+		return this._genVotableResult(
+			'Vote who look at!',
+			null,
+			[{ value: 'nobody', text: 'nobody' }]
+		);
 	}
 
 	isVoteValid(vote) {
@@ -39,20 +39,20 @@ class Seer extends Role {
 	performAction(players) {
 		if (this.engine.isDay()) return this._performActionDay(players);
 		if (!this.player.alive) {
-			debug('The seer didnt act because he died');
+			debug('The ' + this.constructor.role_id + ' didnt act because he died');
 			return;
 		}
 
 		let vote = this.getLastVote();
 
 		if (vote.vote == 'nobody') {
-			debug('The seer ' + this.user_id + ' didn\'t look at anyone');
+			debug('The ' + this.constructor.role_id + ' ' + this.user_id + ' didn\'t look at anyone');
 			return;
 		}
 
 		let otherPlayer = this.engine.roles[vote.vote];
 		let mana = otherPlayer.constructor.mana;
-		debug('The seer has looked at ' + otherPlayer.user_id + ' and he is ' + mana);
+		debug('The ' + this.constructor.role_id + ' has looked at ' + otherPlayer.user_id + ' and he is ' + mana);
 
 		if (!this.player.data)      this.player.data = {};
 		if (!this.player.data.seen) this.player.data.seen = [];

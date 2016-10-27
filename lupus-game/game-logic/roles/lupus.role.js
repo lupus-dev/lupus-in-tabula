@@ -46,12 +46,12 @@ class Lupus extends Role {
 	}
 
 	needVote() {
-		let res = this._needVoteDay();
-		if (!res) return false;
-		if (this.engine.isNight())
-			res.message = 'Vote who tear to pieces!';
-		res.votables.push({ value: this.user_id });
-		return res;
+		if (this.engine.isDay()) return this._needVoteDay();
+		return this._genVotableResult(
+			'Vote who tear to pieces!',
+			null,
+			[{ value: this.user_id }]
+		);
 	}
 
 	isVoteValid(vote) {

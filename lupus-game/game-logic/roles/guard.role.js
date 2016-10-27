@@ -8,12 +8,8 @@ class Guard extends Role {
 	}
 
 	needVote() {
-		let res = this._needVoteDay();
-		if (!res) return false;
-		if (this.engine.isNight())
-			res.message = 'Vote who protect!';
-		res.votables.push({ value: 'nobody', text: 'nobody' });
-		return res;
+		if (this.engine.isDay()) return this._needVoteDay();
+		return this._genVotableResult('Vote who protect!', null, [{ value: 'nobody', text: 'nobody' }]);
 	}
 
 	isVoteValid(vote) {

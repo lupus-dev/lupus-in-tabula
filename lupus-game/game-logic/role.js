@@ -36,16 +36,24 @@ class Role {
 	needVote() {}
 
 	_needVoteDay() {
+		return this._genVotableResult('Vote who burn!');
+	}
+
+	_genVotableResult(message, filter, extra) {
 		if (!this.player.alive) return false;
 		if (this.getLastVote()) return false;
 
+		if (!extra) extra = [];
+		if (!filter) filter = p => p.alive && p.user_id != this.user_id;
+
 		let votables = [];
 		for (let player of this.engine.game.state.players)
-			if (player.alive && player.user_id != this.user_id)
+			if (filter(player))
 				votables.push({ value: player.user_id });
-
+		for (let ex of extra)
+			votables.push(ex);
 		return {
-			message: 'Vote who burn!',
+			message: message,
 			votables: votables
 		};
 	}
