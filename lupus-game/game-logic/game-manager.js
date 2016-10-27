@@ -5,7 +5,7 @@ var _ = require('underscore');
 module.exports = class GameManager {
 	constructor(engine) {
 		this.engine = engine;
-		engine.events.on('engine:voted', (vote) => this.checkProgess());
+		engine.events.on('engine:voted', (vote) => this.checkProgess().then(() => console.log('######################## DEBUG: game-manager finished saving')));
 	}
 
 	checkProgess() {
@@ -29,6 +29,7 @@ module.exports = class GameManager {
 			this.engine.updateQueue.enqueueNextDay(this.engine.game.state.day);
 			debug('Next day:', this.engine.game.state.day);
 		}
+		console.log('######################## DEBUG: game_manager start saving');
 		return this.engine.game.save();
 	}
 

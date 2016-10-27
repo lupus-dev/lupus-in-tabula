@@ -72,9 +72,7 @@ module.exports = class Engine {
 		// update the random state from the engine
 		this.game.gen_info.random.useCount = engine.getUseCount();
 
-		this.checkProgess();
-
-		return this.game.save();
+		return this.checkProgess();
 	}
 
 	registerSocket(socket) {

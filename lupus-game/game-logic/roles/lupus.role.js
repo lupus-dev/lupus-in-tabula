@@ -41,7 +41,6 @@ class Lupus extends Role {
 			{ type: 'ul', data: elements }
 		];
 
-		debug(res);
 		return res;
 	}
 
