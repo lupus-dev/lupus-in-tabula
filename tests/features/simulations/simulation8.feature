@@ -25,6 +25,13 @@ Feature:
 		| state.players 	| `players` |
 		| state.votes 		| [] |
 
+		And The Game with id `game_id` should be
+		| state.players.0.user_id | "`user1_id`" |
+		| state.players.1.user_id | "`user2_id`" |
+		| state.players.2.user_id | "`user3_id`" |
+		| state.players.3.user_id | "`user4_id`" |
+		| state.players.4.user_id | "`user5_id`" |
+
 		# NIGHT 1: the lupus kill user5
 
 		# lupus
