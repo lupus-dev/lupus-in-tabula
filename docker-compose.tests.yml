@@ -22,6 +22,8 @@ services:
         build: ./lupus-game
         volumes:
             - ./lupus-game:/app
+        environment:
+            DEBUG: lupus-game:*
         command: npm run start-coverage
         depends_on:
             - mongo

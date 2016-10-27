@@ -16,4 +16,4 @@ after_success:
     - ./build-coverage.sh --send
 
 after_failure:
-    - docker-compose logs
+    - docker-compose logs lupus-users lupus-history lupus-game
