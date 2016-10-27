@@ -65,14 +65,26 @@ module.exports = class Engine {
 				data: {}
 			});
 
+		if (this.game.members[0]+'' != this.game.state.players[0].user_id+'' ||
+			this.game.members[1]+'' != this.game.state.players[1].user_id+'')
+			console.error("--------------- ERROR #1", require('util').inspect(this.game, { depth: null }));
+
 		this.game.state.votes = [];
 		this._setupRoles();
 		this.updateQueue.enqueueGameStarted();
+
+		if (this.game.members[0]+'' != this.game.state.players[0].user_id+'' ||
+			this.game.members[1]+'' != this.game.state.players[1].user_id+'')
+			console.error("--------------- ERROR #2", require('util').inspect(this.game, { depth: null }));
 
 		// update the random state from the engine
 		this.game.gen_info.random.useCount = engine.getUseCount();
 
 		this.checkProgess();
+
+		if (this.game.members[0]+'' != this.game.state.players[0].user_id+'' ||
+			this.game.members[1]+'' != this.game.state.players[1].user_id+'')
+			console.error("--------------- ERROR #3", require('util').inspect(this.game, { depth: null }));
 
 		return this.game.save();
 	}

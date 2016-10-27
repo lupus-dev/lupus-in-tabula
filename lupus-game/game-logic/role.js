@@ -150,7 +150,7 @@ class Role {
 
 		// set the initial structure of protection state
 		if (!this.engine.game.state.protection) this.engine.game.state.protection = {};
-		if (!this.engine.game.state.protection[day]) this.engine.game.state.protection[day] = [];
+		if (!this.engine.game.state.protection[day]) this.engine.game.state.protection[day] = {};
 
 		let protection = this.engine.game.state.protection[day];
 		if (!protection[victim])
