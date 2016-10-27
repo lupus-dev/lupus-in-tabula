@@ -86,7 +86,21 @@ module.exports = class Engine {
 			this.game.members[1]+'' != this.game.state.players[1].user_id+'')
 			console.error("--------------- ERROR #3", require('util').inspect(this.game, { depth: null }));
 
-		return this.game.save();
+		return this.game.save()
+			.then(game => {
+				if (game.members[0]+'' != game.state.players[0].user_id+'' ||
+					game.members[1]+'' != game.state.players[1].user_id+'')
+					console.error("--------------- ERROR #4", require('util').inspect(game, { depth: null }));
+			});
+
+		setTimeout(() => {
+			Game.findOne({ _id: game_id })
+				.then(game => {
+					if (game.members[0]+'' != game.state.players[0].user_id+'' ||
+						game.members[1]+'' != game.state.players[1].user_id+'')
+						console.error("--------------- ERROR #5", require('util').inspect(game, { depth: null }));
+				});
+		}, 1000);
 	}
 
 	registerSocket(socket) {
