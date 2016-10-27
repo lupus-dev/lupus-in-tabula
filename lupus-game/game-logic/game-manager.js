@@ -29,12 +29,7 @@ module.exports = class GameManager {
 			this.engine.updateQueue.enqueueNextDay(this.engine.game.state.day);
 			debug('Next day:', this.engine.game.state.day);
 		}
-		console.log('######################## DEBUG: game_manager start saving');
-		return this.engine.game.save()
-			.then((game) => {
-				console.log('######################## DEBUG: game-manager finished saving')
-				console.log(require('util').inspect(game.state.players, { depth: null }));
-			});
+		return this.engine.game.save();
 	}
 
 	_needVote() {

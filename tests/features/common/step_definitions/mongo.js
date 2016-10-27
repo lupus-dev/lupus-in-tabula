@@ -9,7 +9,11 @@ module.exports = function () {
 			.then(res => {
 				if (!res) return callback(new Error(model + ' with id ' + model_id + ' not found'));
 
-				this.check_props(res, table.rowsHash(), model, callback);
+				this.check_props(res, table.rowsHash(), model, (err) => {
+					if (err)
+						console.log(require('util').inspect(res, { depth: null }));
+					callback(err);
+				});
 			})
 			.catch(error => callback(new Error(error)));
 	});
